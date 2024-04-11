@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="ranking")
-public class Entity_Ranking {
+public class RankingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
@@ -27,7 +27,7 @@ public class Entity_Ranking {
     @Column(nullable = false, length = 100)
     private String tarea_ranking;
 
-    public Entity_Ranking(Long Id_ranking, Long Id_tarea, Long Id_voluntario, Integer nivel_ranking, String tarea_ranking){
+    public RankingEntity(Long Id_ranking, Long Id_tarea, Long Id_voluntario, Integer nivel_ranking, String tarea_ranking){
         super();
         this.Id_ranking = Id_ranking;
         this.Id_tarea = Id_tarea;
@@ -36,7 +36,7 @@ public class Entity_Ranking {
         this.tarea_ranking = tarea_ranking;
     }
 
-    public Entity_Ranking(){
+    public RankingEntity(){
         super();
     }
 
