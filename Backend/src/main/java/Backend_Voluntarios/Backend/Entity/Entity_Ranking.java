@@ -39,4 +39,44 @@ public class Entity_Ranking {
     public Entity_Ranking(){
         super();
     }
+
+    public Long getId_ranking() {
+        return Id_ranking;
+    }
+
+    public String getTarea_ranking() {
+        return tarea_ranking;
+    }
+
+    public void setTarea_ranking(String tarea_ranking) {
+        this.tarea_ranking = tarea_ranking;
+    }
+
+    public Integer getNivel_ranking() {
+        return nivel_ranking;
+    }
+
+    public void setNivel_ranking(Integer nivel_ranking) {
+        this.nivel_ranking = nivel_ranking;
+    }
+
+    public Long getId_voluntario() {
+        return Id_voluntario;
+    }
+
+    public void setId_voluntario(Long id_voluntario) {
+        Id_voluntario = id_voluntario;
+    }
+
+    public Long getId_tarea() {
+        return Id_tarea;
+    }
+
+    public void setId_tarea(Long id_tarea) {
+        Id_tarea = id_tarea;
+    }
+
+    public void setId_ranking(Long id_ranking) {
+        Id_ranking = id_ranking;
+    }
 }
