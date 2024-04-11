@@ -11,15 +11,19 @@ public class Service_Emergencia {
     private Repository_Emergencia repository_emergencia;
 
     public void getEmergenciaById(Long id) {
-        repository_emergencia.findById(id);
+        repository_emergencia.findEmergenciaById(id);
     }
 
     public void getAllEmergencias() {
-        repository_emergencia.findAll();
+        repository_emergencia.findAllEmergencias();
     }
 
     public void addEmergencia(Entity_Emergencia emergencia) {
-        repository_emergencia.save(emergencia);
+        repository_emergencia.saveEmergencia(emergencia.getTipo_emergencia(),
+                emergencia.getZona_emergencia(),
+                emergencia.getCondicion_fisica(),
+                emergencia.getCantidad_voluntarios_minimo(),
+                emergencia.getCantidad_voluntarios_maximo());
     }
 
 }
