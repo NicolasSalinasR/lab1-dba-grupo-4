@@ -20,10 +20,9 @@ public class Entity_Emergencia {
     private String cantidad_voluntarios_maximo;
 
     // Constructor all
-    public Entity_Emergencia(Long Id_Emergencia, String tipo_emergencia, String zona_emergencia,
+    public Entity_Emergencia(String tipo_emergencia, String zona_emergencia,
             String condicion_fisica, String cantidad_voluntarios_minimo, String cantidad_voluntarios_maximo) {
         super();
-        this.Id_Emergencia = Id_Emergencia;
         this.tipo_emergencia = tipo_emergencia;
         this.zona_emergencia = zona_emergencia;
         this.condicion_fisica = condicion_fisica;
