@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface Interface_Ranking extends JpaRepository <Entity_Ranking, Long> {
+public interface Repository_Ranking extends JpaRepository <Entity_Ranking, Long> {
     @Query("SELECT palabra FROM Entity_Ranking palabra WHERE"
             + " CONCAT(palabra.Id_ranking, palabra.Id_tarea, palabra.Id_voluntario, palabra.nivel_ranking, palabra.tarea_ranking)"
             + " LIKE %?1%")
