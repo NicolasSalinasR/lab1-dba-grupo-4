@@ -50,4 +50,14 @@ public class EmeHabilidadEntity {
         return idEmergencia;
     }
 
+    //Setters
+
+    public void setIdHabilidad(Long idHabilidad){
+        this.idHabilidad = idHabilidad;
+    }
+
+    public void setIdEmergencia(Long idEmergencia){
+        this.idEmergencia= idEmergencia;
+    }
+
 }

@@ -46,9 +46,11 @@ public class InstitucionEntity {
     }
 
     //Setters
-
-    public void setNombreInstitucion(String nombre_Institucion){
-        this.nombreInstitucion= nombre_Institucion;
+    public void setIdEmergencia(Long idEmergencia){
+        this.idEmergencia= idEmergencia;
+    }
+    public void setNombreInstitucion(String nombreInstitucion){
+        this.nombreInstitucion= nombreInstitucion;
     }
 
     }
