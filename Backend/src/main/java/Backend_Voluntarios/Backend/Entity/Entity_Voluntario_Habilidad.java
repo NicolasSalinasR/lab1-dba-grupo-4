@@ -17,8 +17,8 @@ public class Entity_Voluntario_Habilidad {
 
     private Long Id_habilidad;
 
-    public Entity_Voluntario_Habilidad(Long Id_Voluntario_Habilidad, Long Id_voluntario, Long Id_habilidad) {
-        this.Id_Voluntario_Habilidad = Id_Voluntario_Habilidad;
+    public Entity_Voluntario_Habilidad(Long Id_voluntario, Long Id_habilidad) {
+        super();
         this.Id_voluntario = Id_voluntario;
         this.Id_habilidad = Id_habilidad;
     }

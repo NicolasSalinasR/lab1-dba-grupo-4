@@ -18,6 +18,6 @@ public interface Repository_Voluntario_Habilidad {
 
     // save
     @Query("INSERT INTO Entity_Voluntario_Habilidad (Id_voluntario, Id_habilidad) VALUES (:Id_voluntario, :Id_habilidad)")
-    void saveVoluntarioHabilidad(@Param("Id_voluntario") Long Id_voluntario,
+    Entity_Voluntario_Habilidad saveVoluntarioHabilidad(@Param("Id_voluntario") Long Id_voluntario,
             @Param("Id_habilidad") Long Id_habilidad);
 }
