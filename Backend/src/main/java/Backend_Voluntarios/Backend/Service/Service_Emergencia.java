@@ -1,5 +1,7 @@
 package Backend_Voluntarios.Backend.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Backend_Voluntarios.Backend.Repository.Repository_Emergencia;
@@ -10,16 +12,17 @@ public class Service_Emergencia {
     @Autowired
     private Repository_Emergencia repository_emergencia;
 
-    public void getEmergenciaById(Long id) {
-        repository_emergencia.findEmergenciaById(id);
+    public Entity_Emergencia getEmergenciaById(Long id) {
+        return repository_emergencia.findEmergenciaById(id);
     }
 
-    public void getAllEmergencias() {
-        repository_emergencia.findAllEmergencias();
+    public List<Entity_Emergencia> getAllEmergencias() {
+        return repository_emergencia.findAllEmergencias();
     }
 
-    public void addEmergencia(Entity_Emergencia emergencia) {
-        repository_emergencia.saveEmergencia(emergencia.getTipo_emergencia(),
+    public Entity_Emergencia addEmergencia(Entity_Emergencia emergencia) {
+        return repository_emergencia.saveEmergencia(emergencia.getId_Emergencia(),
+                emergencia.getTipo_emergencia(),
                 emergencia.getZona_emergencia(),
                 emergencia.getCondicion_fisica(),
                 emergencia.getCantidad_voluntarios_minimo(),

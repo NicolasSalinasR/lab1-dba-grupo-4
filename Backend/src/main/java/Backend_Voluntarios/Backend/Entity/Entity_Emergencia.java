@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 public class Entity_Emergencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id_Emergencia;
+    private Long id_emergencia;
 
     private String tipo_emergencia;
     private String zona_emergencia;
@@ -38,50 +38,50 @@ public class Entity_Emergencia {
     // Getters and Setters
 
     public Long getId_Emergencia() {
-        return Id_Emergencia;
+        return id_emergencia;
     }
 
     public void setId_Emergencia(Long id_Emergencia) {
-        Id_Emergencia = id_Emergencia;
+        id_emergencia = id_Emergencia;
     }
 
-    public String getTipo_emergencia() {
+    public String getTipo_Emergencia() {
         return tipo_emergencia;
     }
 
-    public void setTipo_emergencia(String tipo_emergencia) {
+    public void setTipo_Emergencia(String tipo_emergencia) {
         this.tipo_emergencia = tipo_emergencia;
     }
 
-    public String getZona_emergencia() {
+    public String getZona_Emergencia() {
         return zona_emergencia;
     }
 
-    public void setZona_emergencia(String zona_emergencia) {
+    public void setZona_Emergencia(String zona_emergencia) {
         this.zona_emergencia = zona_emergencia;
     }
 
-    public String getCondicion_fisica() {
+    public String getCondicion_Fisica() {
         return condicion_fisica;
     }
 
-    public void setCondicion_fisica(String condicion_fisica) {
+    public void setCondicion_Fisica(String condicion_fisica) {
         this.condicion_fisica = condicion_fisica;
     }
 
-    public String getCantidad_voluntarios_minimo() {
+    public String getCantidad_Voluntarios_Minimo() {
         return cantidad_voluntarios_minimo;
     }
 
-    public void setCantidad_voluntarios_minimo(String cantidad_voluntarios_minimo) {
+    public void setCantidad_Voluntarios_Minimo(String cantidad_voluntarios_minimo) {
         this.cantidad_voluntarios_minimo = cantidad_voluntarios_minimo;
     }
 
-    public String getCantidad_voluntarios_maximo() {
+    public String getCantidad_Voluntarios_Maximo() {
         return cantidad_voluntarios_maximo;
     }
 
-    public void setCantidad_voluntarios_maximo(String cantidad_voluntarios_maximo) {
+    public void setCantidad_Voluntarios_Maximo(String cantidad_voluntarios_maximo) {
         this.cantidad_voluntarios_maximo = cantidad_voluntarios_maximo;
     }
 

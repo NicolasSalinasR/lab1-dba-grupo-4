@@ -1,5 +1,6 @@
 package Backend_Voluntarios.Backend.Controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,14 @@ public class Controller_Emergencia {
     private Service_Emergencia service_emergencia;
 
     @GetMapping("/{id}")
-    public void getEmergenciaById(@PathVariable Long id) {
-        service_emergencia.getEmergenciaById(id);
+    public Entity_Emergencia getEmergenciaById(@PathVariable Long id) {
+        return service_emergencia.getEmergenciaById(id);
+
     }
 
     @GetMapping("/all")
-    public void getAllEmergencias() {
-        service_emergencia.getAllEmergencias();
+    public List<Entity_Emergencia> getAllEmergencias() {
+        return service_emergencia.getAllEmergencias();
     }
 
     @PostMapping("/add")
