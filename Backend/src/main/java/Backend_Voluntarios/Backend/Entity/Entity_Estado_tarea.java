@@ -20,4 +20,31 @@ public class Entity_Estado_tarea {
         this.Id_tarea = Id_tarea;
         this.estado_tarea = estado_tarea;
     }
+    // getters
+
+    public Long getId_Estado_tarea() {
+        return Id_Estado_tarea;
+    }
+
+    public Long getId_tarea() {
+        return Id_tarea;
+    }
+
+    public boolean isEstado_tarea() {
+        return estado_tarea;
+    }
+
+    //seters
+
+    public void setEstado_tarea(boolean estado_tarea) {
+        this.estado_tarea = estado_tarea;
+    }
+
+    public void setId_Estado_tarea(Long id_Estado_tarea) {
+        Id_Estado_tarea = id_Estado_tarea;
+    }
+
+    public void setId_tarea(Long id_tarea) {
+        Id_tarea = id_tarea;
+    }
 }
