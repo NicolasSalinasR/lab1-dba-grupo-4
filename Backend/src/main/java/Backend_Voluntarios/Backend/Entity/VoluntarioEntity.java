@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "voluntario")
-public class Entity_Voluntario {
+public class VoluntarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
@@ -24,7 +24,7 @@ public class Entity_Voluntario {
     private String equipamiento_voluntario;
 
 
-    public Entity_Voluntario(Long Id_voluntario, String condicion_voluntario, boolean disponibilidad_voluntario, String zona_vivienda_voluntario, String equipamiento_voluntario){
+    public VoluntarioEntity(Long Id_voluntario, String condicion_voluntario, boolean disponibilidad_voluntario, String zona_vivienda_voluntario, String equipamiento_voluntario){
         super();
         this.Id_voluntario = Id_voluntario;
         this.condicion_voluntario = condicion_voluntario;
@@ -32,7 +32,7 @@ public class Entity_Voluntario {
         this.equipamiento_voluntario = equipamiento_voluntario;
         this.zona_vivienda_voluntario = zona_vivienda_voluntario;
     }
-    public Entity_Voluntario(){
+    public VoluntarioEntity(){
         super();
     }
 
