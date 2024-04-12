@@ -10,18 +10,18 @@ import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
 @Service
 public class EmergenciaService {
     @Autowired
-    private EmergenciaRepository repositoryEmergencia;
+    private EmergenciaRepository emergenciaRepository;
 
     public EmergenciaEntity getEmergenciaById(Long id) {
-        return repositoryEmergencia.findEmergenciaById(id);
+        return emergenciaRepository.findEmergenciaById(id);
     }
 
     public List<EmergenciaEntity> getAllEmergencias() {
-        return repositoryEmergencia.findAllEmergencias();
+        return emergenciaRepository.findAllEmergencias();
     }
 
     public EmergenciaEntity addEmergencia(EmergenciaEntity emergencia) {
-        return repositoryEmergencia.saveEmergencia(emergencia.getIdEmergencia(),
+        return emergenciaRepository.saveEmergencia(emergencia.getIdEmergencia(),
                 emergencia.getTipoEmergencia(),
                 emergencia.getZonaEmergencia(),
                 emergencia.getCondicionFisica(),

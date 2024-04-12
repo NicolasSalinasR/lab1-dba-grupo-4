@@ -10,15 +10,15 @@ import java.util.List;
 @Repository
 public interface EmergenciaRepository extends JpaRepository<EmergenciaEntity, Long> {
     // findById
-    @Query("SELECT e FROM Entity_Emergencia e WHERE e.Id_Emergencia = :id")
+    @Query("SELECT e FROM EmergenciaEntity e WHERE e.idEmergencia = :id")
     EmergenciaEntity findEmergenciaById(@Param("id") Long id);
 
     // findAll
-    @Query("SELECT e FROM Entity_Emergencia e")
+    @Query("SELECT e FROM EmergenciaEntity e")
     List<EmergenciaEntity> findAllEmergencias();
 
     // save
-    @Query("INSERT INTO Entity_Emergencia (IdEmergencia, TipoEmergencia, ZonaEmergencia, CondicionFisica, CantidadVoluntariosMinimo, CantidadVoluntariosMaximo) VALUES (:idEmergencia, :tipoEmergencia, :zonaEmergencia, :condicionFisica, :cantidadVoluntariosMinimo, :cantidadVoluntariosMaximo)")
+    @Query("INSERT INTO EmergenciaEntity (idEmergencia, tipoEmergencia, zonaEmergencia, condicionFisica, cantidadVoluntariosMinimo, cantidadVoluntariosMaximo) VALUES (:idEmergencia, :tipoEmergencia, :zonaEmergencia, :condicionFisica, :cantidadVoluntariosMinimo, :cantidadVoluntariosMaximo)")
     EmergenciaEntity saveEmergencia(@Param("idEmergencia") Long idEmergencia,
             @Param("tipoEmergencia") String tipoEmergencia,
             @Param("zonaEmergencia") String zonaEmergencia,

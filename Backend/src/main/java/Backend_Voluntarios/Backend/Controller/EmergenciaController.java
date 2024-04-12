@@ -27,12 +27,12 @@ public class EmergenciaController {
 
     }
 
-    @GetMapping("/all")
+    @GetMapping("/todos")
     public List<EmergenciaEntity> getAllEmergencias() {
         return emergenciaService.getAllEmergencias();
     }
 
-    @PostMapping("/add")
+    @PostMapping("/agregar")
     public EmergenciaEntity addEmergencia(@RequestBody Map<String, String> body) {
         String tipoEmergencia = body.get("tipoEmergencia");
         String zonaEmergencia = body.get("zonaEmergencia");
