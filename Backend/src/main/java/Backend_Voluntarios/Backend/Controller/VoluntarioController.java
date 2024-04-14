@@ -15,48 +15,48 @@ public class VoluntarioController {
     private VoluntarioService serviceVoluntario;
 
     @GetMapping()
-    public String Conectado(){
+    public String conectado(){
         return "CONECTADO";
     }
 
-    @GetMapping("/All")
-    public List<VoluntarioEntity> Tabla(){
-        return serviceVoluntario.Tabla_completa();
+    @GetMapping("/all")
+    public List<VoluntarioEntity> tabla(){
+        return serviceVoluntario.tablaCompleta();
     }
 
-    @GetMapping("/{PalabraClave}")
-    public ResponseEntity<List<VoluntarioEntity>> Buscar_Voluntarios(@PathVariable String PalabraClave){
-        List<VoluntarioEntity> voluntarios_encontrados =  serviceVoluntario.Lista_filtro(PalabraClave);
-        if (voluntarios_encontrados.isEmpty()) {
+    @GetMapping("/{palabraClave}")
+    public ResponseEntity<List<VoluntarioEntity>> buscarVoluntarios(@PathVariable String palabraClave){
+        List<VoluntarioEntity> voluntariosEncontrados =  serviceVoluntario.listaFiltro(palabraClave);
+        if (voluntariosEncontrados.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(voluntarios_encontrados);
+        return ResponseEntity.ok(voluntariosEncontrados);
     }
 
-    @GetMapping("/{Id_voluntario}")
-    public ResponseEntity<List<VoluntarioEntity>> Buscar_Id(@PathVariable Long Id_voluntario) {
-        if (Id_voluntario == null) {
+    @GetMapping("/{idVoluntario}")
+    public ResponseEntity<List<VoluntarioEntity>> buscarId(@PathVariable Long idVoluntario) {
+        if (idVoluntario == null) {
             return ResponseEntity.badRequest().build();
         }
-        List<VoluntarioEntity> Id_voluntarios_encontrados = serviceVoluntario.Tabla_Id(Id_voluntario);
-        if (Id_voluntarios_encontrados.isEmpty()) {
+        List<VoluntarioEntity> idVoluntariosEncontrados = serviceVoluntario.tablaId(idVoluntario);
+        if (idVoluntariosEncontrados.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(Id_voluntarios_encontrados);
+        return ResponseEntity.ok(idVoluntariosEncontrados);
     }
 
-    @PostMapping("/Guardar")
-    public ResponseEntity<VoluntarioEntity> Crear_voluntario(@PathVariable VoluntarioEntity voluntario) {
-        if (voluntario.getId_voluntario() != null) {
+    @PostMapping("/guardar")
+    public ResponseEntity<VoluntarioEntity> crearVoluntario(@PathVariable VoluntarioEntity voluntarioEntity) {
+        if (voluntarioEntity.getIdVoluntario() != null) {
             return ResponseEntity.badRequest().build();
         }
-        serviceVoluntario.Nuevo_voluntario(voluntario);
-        return ResponseEntity.ok(voluntario);
+        serviceVoluntario.nuevoVoluntario(voluntarioEntity);
+        return ResponseEntity.ok(voluntarioEntity);
     }
 
-    @DeleteMapping("/Delete/{Id_voluntario}")
-    public void Eliminar(@PathVariable Long Id_voluntario){
-        VoluntarioEntity Voluntario_Borrado = serviceVoluntario.Buscar_Id(Id_voluntario);
-        serviceVoluntario.Borrar_voluntario(Voluntario_Borrado);
+    @DeleteMapping("/delete/{idVoluntario}")
+    public void eliminar(@PathVariable Long idVoluntario){
+        VoluntarioEntity voluntarioBorrado = serviceVoluntario.buscarId(idVoluntario);
+        serviceVoluntario.borrarVoluntario(voluntarioBorrado);
     }
 }

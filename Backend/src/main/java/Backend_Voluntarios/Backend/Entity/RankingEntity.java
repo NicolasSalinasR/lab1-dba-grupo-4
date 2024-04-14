@@ -9,74 +9,74 @@ public class RankingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long Id_ranking;
+    private Long idRanking;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long Id_tarea;
+    private Long idTarea;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long Id_voluntario;
+    private Long idVoluntario;
 
     @Column(nullable = false)
-    private Integer nivel_ranking;
+    private Integer nivelRanking;
 
     @Column(nullable = false, length = 100)
-    private String tarea_ranking;
+    private String tareaRanking;
 
-    public RankingEntity(Long Id_ranking, Long Id_tarea, Long Id_voluntario, Integer nivel_ranking, String tarea_ranking){
+    public RankingEntity(Long idRanking, Long idTarea, Long idVoluntario, Integer nivelRanking, String tareaRanking){
         super();
-        this.Id_ranking = Id_ranking;
-        this.Id_tarea = Id_tarea;
-        this.Id_voluntario = Id_voluntario;
-        this.nivel_ranking = nivel_ranking;
-        this.tarea_ranking = tarea_ranking;
+        this.idRanking = idRanking;
+        this.idTarea = idTarea;
+        this.idVoluntario = idVoluntario;
+        this.nivelRanking = nivelRanking;
+        this.tareaRanking = tareaRanking;
     }
 
     public RankingEntity(){
         super();
     }
 
-    public Long getId_ranking() {
-        return Id_ranking;
+    public Long getIdRanking() {
+        return idRanking;
     }
 
-    public String getTarea_ranking() {
-        return tarea_ranking;
+    public String getTareaRanking() {
+        return tareaRanking;
     }
 
-    public void setTarea_ranking(String tarea_ranking) {
-        this.tarea_ranking = tarea_ranking;
+    public void setTareaRanking(String tarea_ranking) {
+        this.tareaRanking = tarea_ranking;
     }
 
-    public Integer getNivel_ranking() {
-        return nivel_ranking;
+    public Integer getNivelRanking() {
+        return nivelRanking;
     }
 
-    public void setNivel_ranking(Integer nivel_ranking) {
-        this.nivel_ranking = nivel_ranking;
+    public void setNivelRanking(Integer nivel_ranking) {
+        this.nivelRanking = nivel_ranking;
     }
 
-    public Long getId_voluntario() {
-        return Id_voluntario;
+    public Long getIdVoluntario() {
+        return idVoluntario;
     }
 
-    public void setId_voluntario(Long id_voluntario) {
-        Id_voluntario = id_voluntario;
+    public void setIdVoluntario(Long idVoluntario) {
+        this.idVoluntario = idVoluntario;
     }
 
-    public Long getId_tarea() {
-        return Id_tarea;
+    public Long getIdTarea() {
+        return idTarea;
     }
 
-    public void setId_tarea(Long id_tarea) {
-        Id_tarea = id_tarea;
+    public void setIdTarea(Long idTarea) {
+        this.idTarea = idTarea;
     }
 
-    public void setId_ranking(Long id_ranking) {
-        Id_ranking = id_ranking;
+    public void setIdRanking(Long idRanking) {
+        this.idRanking = idRanking;
     }
 }

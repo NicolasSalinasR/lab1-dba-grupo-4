@@ -13,15 +13,15 @@ public class TareaHabilidadService {
     private TareaHabilidadRepository tareaHabilidadRepository;
 
     public TareaHabilidadEntity getTareaHabilidadById(Long id) {
-        return TareaHabilidadRepository.findTareaHabilidadById(id);
+        return tareaHabilidadRepository.findTareaHabilidadById(id);
     }
 
     public List<TareaHabilidadEntity> getAllTareaHabilidades() {
-        return TareaHabilidadRepository.findAllTareaHabilidad();
+        return tareaHabilidadRepository.findAllTareaHabilidad();
     }
 
     public TareaHabilidadEntity addTareaHabilidad(TareaHabilidadEntity tareaHabilidad) {
-        return TareaHabilidadRepository.saveTareaHabilidad(tareaHabilidad.getIdTareaHabilidad(),
+        return tareaHabilidadRepository.saveTareaHabilidad(tareaHabilidad.getIdTareaHabilidad(),
                 tareaHabilidad.getIdTarea(),
                 tareaHabilidad.getIdHabilidad(),
                 tareaHabilidad.getHabilidadRequerida());

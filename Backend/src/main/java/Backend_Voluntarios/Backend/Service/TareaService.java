@@ -13,15 +13,15 @@ public class TareaService {
     private TareaRepository tareaRepository;
 
     public TareaEntity getTareaById(Long id) {
-        return TareaRepository.findTareaById(id);
+        return tareaRepository.findTareaById(id);
     }
 
     public List<TareaEntity> getAllTareas() {
-        return TareaRepository.findAllTareas();
+        return tareaRepository.findAllTareas();
     }
 
     public TareaEntity addTarea(TareaEntity tarea) {
-        return TareaRepository.saveTarea(tarea.getIdTarea(),
+        return tareaRepository.saveTarea(tarea.getIdTarea(),
                 tarea.getIdEstadoTarea(),
                 tarea.getNombreTarea(),
                 tarea.getDescripcionTarea(),

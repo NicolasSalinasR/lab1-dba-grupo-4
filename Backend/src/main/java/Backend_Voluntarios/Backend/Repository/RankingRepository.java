@@ -10,27 +10,27 @@ import java.util.List;
 @Repository
 public interface RankingRepository {
     @Query("SELECT palabra FROM RankingEntity palabra WHERE"
-        + " CONCAT(palabra.Id_ranking, palabra.Id_tarea, palabra.Id_voluntario, palabra.nivel_ranking, palabra.tarea_ranking)"
+        + " CONCAT(palabra.idRanking, palabra.idTarea, palabra.idVoluntario, palabra.nivelRanking, palabra.tareaRanking)"
         + " LIKE %?1%")
 public List<RankingEntity> findAll(String palabraClave);
 
     @Query("SELECT v FROM RankingEntity v")
-    public List<RankingEntity> ListAll();
+    public List<RankingEntity> listAll();
 
-    @Query("SELECT v FROM RankingEntity v WHERE v.Id_ranking = ?1")
-    public List<RankingEntity> BuscarId_ranking(@Param("v") Long Id_ranking);
+    @Query("SELECT v FROM RankingEntity v WHERE v.idRanking = ?1")
+    public List<RankingEntity> buscarIdRanking(@Param("v") Long idRanking);
 
-    @Query("INSERT INTO Entity_Voluntario (Long Id_ranking, Long Id_tarea, Long Id_voluntario, Integer nivel_ranking, String tarea_ranking) " +
-            "VALUES (:Id, :Id_tarea, :Id_voluntario, :nivel, :tarea)")
-    RankingEntity Crear_ranking(@Param("Id") Long Id_ranking,
-                                @Param("Id_tarea") Long Id_tarea,
-                                @Param("Id_voluntario") Long Id_voluntario,
-                                @Param("nivel") Integer nivel_ranking,
-                                @Param("tarea") String tarea_ranking);
+    @Query("INSERT INTO Entity_Voluntario (Long idRanking, Long idTarea, Long idVoluntario, Integer nivelRanking, String tareaRanking) " +
+            "VALUES (:id, :idTarea, :idVoluntario, :nivel, :tarea)")
+    RankingEntity crearRanking(@Param("id") Long idRanking,
+                               @Param("idTarea") Long idTarea,
+                               @Param("idVoluntario") Long idVoluntario,
+                               @Param("nivel") Integer nivelRanking,
+                               @Param("tarea") String tareaRanking);
 
-    @Query("DELETE FROM RankingEntity WHERE Id_ranking = :id")
-    RankingEntity Borrar_ranking(@Param("id") Long Id_ranking);
+    @Query("DELETE FROM RankingEntity WHERE idRanking = :id")
+    RankingEntity borrarRanking(@Param("id") Long idRanking);
 
-    @Query("SELECT v FROM RankingEntity v WHERE v.Id_ranking = ?1")
-    RankingEntity Id_ranking(@Param("v") Long Id_ranking);
+    @Query("SELECT v FROM RankingEntity v WHERE v.idRanking = ?1")
+    RankingEntity idRanking(@Param("v") Long idRanking);
 }
