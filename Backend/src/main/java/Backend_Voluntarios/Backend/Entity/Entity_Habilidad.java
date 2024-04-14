@@ -2,6 +2,7 @@ package Backend_Voluntarios.Backend.Entity;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name="Habilidad")
 public class Entity_Habilidad {
@@ -16,18 +17,18 @@ public class Entity_Habilidad {
         this.Id_habilidad = id_habilidad;
         this.nombre_habilidad = nombre_habilidad;
     }
-// constructor vacio
+    // constructor vacio
     public Entity_Habilidad(){
         super();
     }
-// geters
+    // geters
     public Long getId_habilidad() {
         return Id_habilidad;
     }
     public String getNombre_habilidad() {
         return nombre_habilidad;
     }
-// seter
+    // seter
     public void setNombre_habilidad(String nombre_habilidad) {
         this.nombre_habilidad = nombre_habilidad;
     }
