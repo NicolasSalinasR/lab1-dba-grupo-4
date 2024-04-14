@@ -14,16 +14,16 @@ public interface TareaHabilidadRepository extends JpaRepository<TareaHabilidadEn
 
     // Encontrar tarea_hablidades por Id
     @Query("SELECT th FROM TareaHabilidadEntity th WHERE th.idTareaHabilidad = :id")
-    TareaEntity findTareaHabilidadById(@Param("id") Long id);
+    TareaHabilidadEntity findTareaHabilidadById(@Param("id") Long id);
 
     // Encontrar todas las tarea_habilidades
     @Query("SELECT th FROM TareaHabilidadEntity th")
-    List<TareaEntity> findAllTareaHabilidad();
+    List<TareaHabilidadEntity> findAllTareaHabilidad();
 
     // Guardar
     @Query("INSERT INTO TareaHabilidadEntity (idTareaHabilidad, idTarea, idHabilidad, habilidadRequerida) VALUES (:idTareaHabilidad , :idTarea, :idEstadoTarea, :habilidadRequerida)")
-    TareaEntity saveTareaHabilidad(@Param("idTareaHabilidad") Long idTareaHabilidad,
+    TareaHabilidadEntity saveTareaHabilidad(@Param("idTareaHabilidad") Long idTareaHabilidad,
                           @Param("idTarea") Long idTarea,
                           @Param("idHabilidad") Long idHabilidad,
-                          @Param("habilidadRequerida") List<String> habilidadRequerida;
+                          @Param("habilidadRequerida") List<String> habilidadRequerida);
 }
