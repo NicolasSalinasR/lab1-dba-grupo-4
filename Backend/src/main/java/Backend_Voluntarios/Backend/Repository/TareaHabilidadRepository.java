@@ -1,7 +1,7 @@
 package Backend_Voluntarios.Backend.Repository;
 
 
-import Backend_Voluntarios.Backend.Entity.TareaEntity;
+import Backend_Voluntarios.Backend.Entity.TareaHabilidadEntity;
 import Backend_Voluntarios.Backend.Entity.TareaHabilidadEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
