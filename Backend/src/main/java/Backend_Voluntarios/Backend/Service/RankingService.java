@@ -12,27 +12,31 @@ public class RankingService {
     @Autowired
     private RankingRepository repositoryRanking;
 
-    public List<RankingEntity> Lista_filtro(String PalabraClave){
-        return repositoryRanking.findAll(PalabraClave);
+    public List<RankingEntity> listaFiltro(String palabraClave){
+        return repositoryRanking.findAll(palabraClave);
     }
 
-    public List<RankingEntity> Tabla_completa(){
-        return repositoryRanking.ListAll();
+    public List<RankingEntity> tablaCompleta(){
+        return repositoryRanking.listAll();
     }
 
-    public List<RankingEntity> Tabla_Id(Long Id_voluntario){
-        return repositoryRanking.BuscarId_ranking(Id_voluntario);
+    public List<RankingEntity> tablaId(Long idVoluntario){
+        return repositoryRanking.buscarIdRanking(idVoluntario);
     }
 
-    public RankingEntity Nuevo_ranking(RankingEntity entity_ranking){
-        return repositoryRanking.Crear_ranking(entity_ranking.getId_ranking(), entity_ranking.getId_tarea(), entity_ranking.getId_voluntario(), entity_ranking.getNivel_ranking(), entity_ranking.getTarea_ranking());
+    public RankingEntity nuevoRanking(RankingEntity rankingEntity){
+        return repositoryRanking.crearRanking(rankingEntity.getIdRanking(),
+                rankingEntity.getIdTarea(),
+                rankingEntity.getIdVoluntario(),
+                rankingEntity.getNivelRanking(),
+                rankingEntity.getTareaRanking());
     }
 
-    public RankingEntity Borrar_ranking(RankingEntity entity_ranking){
-        return repositoryRanking.Borrar_ranking(entity_ranking.getId_ranking());
+    public RankingEntity borrarRanking(RankingEntity rankingEntity){
+        return repositoryRanking.borrarRanking(rankingEntity.getIdRanking());
     }
 
-    public RankingEntity Buscar_Id(Long Id_ranking){
-        return repositoryRanking.Id_ranking(Id_ranking);
+    public RankingEntity buscarId(Long idRanking){
+        return repositoryRanking.idRanking(idRanking);
     }
 }
