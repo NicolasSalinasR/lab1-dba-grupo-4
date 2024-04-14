@@ -15,48 +15,48 @@ public class RankingController {
     private RankingService serviceRanking;
 
     @GetMapping()
-    public String Conectado(){
+    public String conectado(){
         return "CONECTADO";
     }
 
-    @GetMapping("/All")
-    public List<RankingEntity> Tabla(){
-        return serviceRanking.Tabla_completa();
+    @GetMapping("/all")
+    public List<RankingEntity> tabla(){
+        return serviceRanking.tablaCompleta();
     }
 
-    @GetMapping("/{PalabraClave}")
-    public ResponseEntity<List<RankingEntity>> Buscar_rankings(@PathVariable String PalabraClave){
-        List<RankingEntity> rankings_encontrados =  serviceRanking.Lista_filtro(PalabraClave);
-        if (rankings_encontrados.isEmpty()) {
+    @GetMapping("/{palabraClave}")
+    public ResponseEntity<List<RankingEntity>> Buscar_rankings(@PathVariable String palabraClave){
+        List<RankingEntity> rankingsEncontrados =  serviceRanking.listaFiltro(palabraClave);
+        if (rankingsEncontrados.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(rankings_encontrados);
+        return ResponseEntity.ok(rankingsEncontrados);
     }
 
-    @GetMapping("/{Id_ranking}")
-    public ResponseEntity<List<RankingEntity>> Buscar_Id(@PathVariable Long Id_ranking) {
-        if (Id_ranking == null) {
+    @GetMapping("/{idRanking}")
+    public ResponseEntity<List<RankingEntity>> buscarId(@PathVariable Long idRanking) {
+        if (idRanking == null) {
             return ResponseEntity.badRequest().build();
         }
-        List<RankingEntity> Id_rankings_encontrados = serviceRanking.Tabla_Id(Id_ranking);
-        if (Id_rankings_encontrados.isEmpty()) {
+        List<RankingEntity> idRankingsEncontrados = serviceRanking.tablaId(idRanking);
+        if (idRankingsEncontrados.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(Id_rankings_encontrados);
+        return ResponseEntity.ok(idRankingsEncontrados);
     }
 
-    @PostMapping("/Guardar")
-    public ResponseEntity<RankingEntity> Crear_voluntario(@PathVariable RankingEntity ranking) {
-        if (ranking.getId_ranking() != null) {
+    @PostMapping("/guardar")
+    public ResponseEntity<RankingEntity> crearVoluntario(@PathVariable RankingEntity rankingEntity) {
+        if (rankingEntity.getIdRanking() != null) {
             return ResponseEntity.badRequest().build();
         }
-        serviceRanking.Nuevo_ranking(ranking);
-        return ResponseEntity.ok(ranking);
+        serviceRanking.nuevoRanking(rankingEntity);
+        return ResponseEntity.ok(rankingEntity);
     }
 
-    @DeleteMapping("/Delete/{Id_ranking}")
-    public void Eliminar(@PathVariable Long Id_ranking){
-        RankingEntity ranking_Borrado = serviceRanking.Buscar_Id(Id_ranking);
-        serviceRanking.Borrar_ranking(ranking_Borrado);
+    @DeleteMapping("/delete/{idRanking}")
+    public void eliminar(@PathVariable Long idRanking){
+        RankingEntity rankingEntity = serviceRanking.buscarId(idRanking);
+        serviceRanking.borrarRanking(rankingEntity);
     }
 }
