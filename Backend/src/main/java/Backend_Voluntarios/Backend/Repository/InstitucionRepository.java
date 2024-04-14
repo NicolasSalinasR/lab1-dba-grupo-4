@@ -21,14 +21,14 @@ public interface InstitucionRepository {
 
     //save
     @Query("INSERT INTO InstitucionEntity(idInstitucion,idEmergencia,nombreInstitucion)")
-    void saveInstitucion (@Param("idInstitucion") Long idInstitucion,
+    InstitucionEntity saveInstitucion (@Param("idInstitucion") Long idInstitucion,
                           @Param("idEmergencia") Long idEmergencia,
-                          @Param("nombreInstitucion") Long nombreInstitucion);
+                          @Param("nombreInstitucion") String nombreInstitucion);
 
     //delete
+    @Query("DELETE FROM InstitucionEntity WHERE InstitucionEntity.idInstitucion= :id")
+    InstitucionEntity deleteInstitucion(@Param("id") Long id);
 
-
-    //create
 
     //search
     @Query("SELECT palabra FROM InstitucionEntity palabra WHERE"

@@ -20,9 +20,8 @@ public class InstitucionEntity {
 
 
     // Constructor all
-    public InstitucionEntity(Long idInstitucion, Long idEmergencia, String nombreInstitucion){
+    public InstitucionEntity( Long idEmergencia, String nombreInstitucion){
         super();
-        this.idInstitucion = idInstitucion;
         this.idEmergencia = idEmergencia;
         this.nombreInstitucion = nombreInstitucion;
     }
@@ -37,7 +36,7 @@ public class InstitucionEntity {
         return idInstitucion;
     }
 
-    public Long getId_Emergencia() {
+    public Long getIdEmergencia() {
         return idEmergencia;
     }
 
