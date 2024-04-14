@@ -37,7 +37,7 @@ public class InstitucionEntity {
         return idInstitucion;
     }
 
-    public Long getId_Emergencia() {
+    public Long getIdEmergencia() {
         return idEmergencia;
     }
 
