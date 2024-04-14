@@ -28,7 +28,7 @@ public interface EmeHabilidadRepository {
 
     //delete
     @Query("DELETE FROM EmeHabilidadEntity WHERE EmeHabilidadEntity.idEmergenciaHabilidad= :id")
-    void deleteInstitucion(@Param("id") Long id);
+    EmeHabilidadEntity deleteEmeHabilidad(@Param("id") Long id);
 
 
 

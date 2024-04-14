@@ -27,7 +27,7 @@ public interface InstitucionRepository {
 
     //delete
     @Query("DELETE FROM InstitucionEntity WHERE InstitucionEntity.idInstitucion= :id")
-    void deleteInstitucion(@Param("id") Long id);
+    InstitucionEntity deleteInstitucion(@Param("id") Long id);
 
 
     //search

@@ -14,21 +14,23 @@ public class EmeHabilidadEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long idHabilidad;
+    private Long idEmergencia;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long idEmergencia;
+    private Long idHabilidad;
+
+
 
 
     // Constructor all
 
-    public EmeHabilidadEntity(Long idEmergencia_Habilidad, Long idHabilidad, Long idEmergencia){
+    public EmeHabilidadEntity(  Long idEmergencia, Long idHabilidad){
         super();
-        this.idEmergenciaHabilidad = idEmergenciaHabilidad;
-        this.idHabilidad = idHabilidad;
         this.idEmergencia = idEmergencia;
+        this.idHabilidad = idHabilidad;
+
     }
 
     // Constructor empty

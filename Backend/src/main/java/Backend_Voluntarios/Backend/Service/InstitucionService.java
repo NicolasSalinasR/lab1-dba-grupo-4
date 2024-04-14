@@ -30,4 +30,8 @@ public class InstitucionService {
     public List<InstitucionEntity> listaFiltro(String palabraClave){
         return institucionRepository.findAll(palabraClave);
     }
+
+    public InstitucionEntity deleteInstitucion( InstitucionEntity institucion){
+        return institucionRepository.deleteInstitucion(institucion.getIdInstitucion());
+    }
 }

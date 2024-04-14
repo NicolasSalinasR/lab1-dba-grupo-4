@@ -33,5 +33,8 @@ public class EmeHabilidadService {
         return emeHabilidadRepository.findAll(palabraClave);
     }
 
+    public EmeHabilidadEntity deleteEmeHabilidad (EmeHabilidadEntity emeHabilidad){
+        return emeHabilidadRepository.deleteEmeHabilidad(emeHabilidad.getIdEmergenciaHabilidad());
+    }
 
 }
