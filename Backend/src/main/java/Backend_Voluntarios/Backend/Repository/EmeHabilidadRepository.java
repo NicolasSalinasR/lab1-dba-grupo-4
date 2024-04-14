@@ -13,7 +13,7 @@ public interface EmeHabilidadRepository {
 
     //findById
     @Query("SELECT e FROM EmeHabilidadEntity e WHERE e.idEmergenciaHabilidad = :id")
-    InstitucionEntity findEmeHabilidadById(@Param("id")Long id);
+    EmeHabilidadEntity findEmeHabilidadById(@Param("id")Long id);
 
     //findAll
     @Query("SELECT e FROM EmeHabilidadEntity e")
@@ -22,14 +22,16 @@ public interface EmeHabilidadRepository {
     //save
 
     @Query("INSERT INTO EmeHabilidadEntity(idEmergenciaHabilidad,idHabilidad,idEmergencia)")
-    void saveEmeHabilidad(@Param("idEmergenciaHabilidad") Long idEmergenciaHabilidad,
+    EmeHabilidadEntity saveEmeHabilidad(@Param("idEmergenciaHabilidad") Long idEmergenciaHabilidad,
                           @Param("idHabilidad") Long idHabilidad,
                           @Param("idEmergencia")Long idEmergencia);
 
     //delete
+    @Query("DELETE FROM EmeHabilidadEntity WHERE EmeHabilidadEntity.idEmergenciaHabilidad= :id")
+    EmeHabilidadEntity deleteEmeHabilidad(@Param("id") Long id);
 
 
-    //create
+
 
     //search
     @Query("SELECT palabra FROM EmeHabilidadEntity palabra WHERE"
