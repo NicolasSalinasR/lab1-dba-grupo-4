@@ -3,7 +3,6 @@ package Backend_Voluntarios.Backend.Controller;
 import java.util.List;
 import java.util.Map;
 
-import Backend_Voluntarios.Backend.Entity.InstitucionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
