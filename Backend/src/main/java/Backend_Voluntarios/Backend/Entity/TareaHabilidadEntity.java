@@ -4,17 +4,20 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tareaHabilidad")
+@Table(name = "tarea_habilidad")
 
 public class TareaHabilidadEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTareaHabilidad;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTarea;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idHabilidad;
 
     private List<String> habilidadRequerida;
