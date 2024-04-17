@@ -2,7 +2,7 @@ package Backend_Voluntarios.Backend.Service;
 
 import java.util.List;
 
-import Backend_Voluntarios.Backend.Entity.InstitucionEntity;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Backend_Voluntarios.Backend.Repository.EmeHabilidadRepository;
