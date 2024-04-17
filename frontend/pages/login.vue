@@ -1,11 +1,16 @@
 <template>
     <main>
+        <div id="circle">
+            <div class="circle"></div>
+        </div>
+
+        <img src="../images/mundo.svg" alt="mundo">
         <div class="containerLogin">
-            <h1>Login</h1>
+            <h1>Iniciar Sesión</h1>
             <form @submit.prevent="login" class="formLogin">
                 <input type="text" v-model="email" placeholder="Email">
-                <input type="password" v-model="password" placeholder="Password">
-                <button type="submit">Login</button>
+                <input type="password" v-model="password" placeholder="Contraseña">
+                <button type="submit">Ingresar</button>
             </form>
         </div>
     </main>
@@ -13,12 +18,70 @@
 </template>
 
 <script>
+
+export default {
+    data() {
+        return {
+            email: '',
+            password: ''
+        };
+    },
+    // metodo para que cada 5 segundos el circle cambie de posicion sin salirse de la pantalla
+    mounted() {
+        setInterval(() => {
+            // posicion random en x y y dentro de los limites de la pantalla
+            const x = Math.random() * window.innerWidth - 10;
+            const y = Math.random() * window.innerHeight - 10;
+            // crear el circle
+            this.createCircles(x, y);
+        }, 500);
+    },
+    methods: {
+        createCircles(x, y) {
+            const circle = document.createElement('div');
+            circle.classList.add('circle');
+            circle.style.left = x + 'px';
+            circle.style.top = y + 'px';
+            document.getElementById('circle').appendChild(circle);
+            setTimeout(() => {
+                circle.remove();
+            }, 4000);
+
+        },
+        async login() {
+            try {
+                const res = await this.$axios.post('http://localhost:3000/api/auth/login', {
+                    email: this.email,
+                    password: this.password
+                });
+                console.log(res.data);
+                this.$router.push('/dashboard');
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+};
+
 </script>
 
 <style>
 body {
-    background-color: green;
+    background-color: black;
+    color: white;
     margin: 0;
+
+}
+
+img {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: -10;
+    filter: brightness(0.4);
+    object-fit: cover;
+
 }
 
 .containerLogin {
@@ -38,5 +101,64 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
+
+form input {
+    width: 20vh;
+    height: 10px;
+    border: none;
+    border-bottom: 1px solid white;
+    background-color: black;
+    color: white;
+    border-radius: 0px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+form input:focus {
+    outline: none;
+    border-bottom: 1px solid #347355;
+}
+
+::placeholder {
+    color: white;
+}
+
+form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20vh;
+    height: 30px;
+    border: 1px solid #60BF81;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: black;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.3s;
+    color: #60BF81;
+    margin-top: 15px;
+}
+
+form button:hover {
+    background-color: #005C53;
+    border: 1px solid #005C53;
+    color: white;
+}
+
+.circle {
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    filter: blur(6px);
+    transition: all 3s;
 }
 </style>
