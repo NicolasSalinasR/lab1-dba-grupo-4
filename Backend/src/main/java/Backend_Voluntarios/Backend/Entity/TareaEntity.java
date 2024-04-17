@@ -8,11 +8,9 @@ import jakarta.persistence.*;
 public class TareaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTarea;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoTarea;
 
     private String nombreTarea;
