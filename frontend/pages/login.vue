@@ -32,16 +32,19 @@ export default {
             // posicion random en x y y dentro de los limites de la pantalla
             const x = Math.random() * window.innerWidth - 10;
             const y = Math.random() * window.innerHeight - 10;
+            // color random entre las opciones de rojo y naranja
+            const color = Math.random() > 0.5 ? 'red' : 'orange';
             // crear el circle
-            this.createCircles(x, y);
+            this.createCircles(x, y, color);
         }, 500);
     },
     methods: {
-        createCircles(x, y) {
+        createCircles(x, y, color) {
             const circle = document.createElement('div');
             circle.classList.add('circle');
             circle.style.left = x + 'px';
             circle.style.top = y + 'px';
+            circle.style.backgroundColor = color;
             document.getElementById('circle').appendChild(circle);
             setTimeout(() => {
                 circle.remove();
