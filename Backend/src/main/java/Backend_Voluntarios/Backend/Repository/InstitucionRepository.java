@@ -1,7 +1,6 @@
 package Backend_Voluntarios.Backend.Repository;
 
 import Backend_Voluntarios.Backend.Entity.InstitucionEntity;
-import Backend_Voluntarios.Backend.Entity.Entity_Ranking;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
