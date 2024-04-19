@@ -10,7 +10,11 @@
             <form @submit.prevent="login" class="formLogin">
                 <input type="text" v-model="email" placeholder="Email">
                 <input type="password" v-model="password" placeholder="Contraseña">
+                <div class="register"   @click="$router.push(`/register`);" >
+                    <a>Registrarse</a>
+                </div>
                 <button type="submit">Ingresar</button>
+                
             </form>
         </div>
     </main>
@@ -163,5 +167,9 @@ form button:hover {
     z-index: -1;
     filter: blur(6px);
     transition: all 3s;
+}
+
+.register {
+    color: #0281F6
 }
 </style>
