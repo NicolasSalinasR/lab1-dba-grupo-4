@@ -23,7 +23,6 @@ public class RankingController {
     private RankingService rankingService;
     private VoluntarioService voluntarioService;
     private TareaService tareaService;
-    private TareaHabilidadService tareaHabilidadService;
 
     @GetMapping()
     public String conectado(){
@@ -63,7 +62,7 @@ public class RankingController {
 
     @PostMapping("/guardar/{idVoluntario}/{idEmergencia}")
     public void crearRanking(@PathVariable Long idVoluntario,
-                                      @PathVariable Long idEmergencia) {
+                             @PathVariable Long idEmergencia) {
         List<TareaEntity> tareas = tareaService.tablaIds(idEmergencia);
         for (TareaEntity tarea : tareas) {
             Long idTarea = tarea.getIdTarea();
