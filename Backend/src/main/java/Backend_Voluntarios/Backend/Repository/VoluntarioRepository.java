@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface VoluntarioRepository {
     @Query("SELECT palabra FROM VoluntarioEntity palabra WHERE"
-            + " CONCAT(palabra.idVoluntario, palabra.condicionVoluntario, " +
-            "palabra.disponibilidadVoluntario, palabra.equipamientoVoluntario, " +
+            + " CONCAT(palabra.idVoluntario, palabra.nombreVoluntario, palabra.correoVoluntario, " +
+            "palabra.numeroDocumentoVoluntario, palabra.equipamientoVoluntario, " +
             "palabra.zonaViviendaVoluntario)"
             + " LIKE %?1%")
     public List<VoluntarioEntity> findAll(@Param("palabra") String palabraClave);
@@ -22,13 +22,14 @@ public interface VoluntarioRepository {
     @Query("SELECT v FROM VoluntarioEntity v WHERE v.idVoluntario = ?1")
     public List<VoluntarioEntity> buscarIdVoluntario(@Param("v") Long idVoluntario);
 
-    @Query("INSERT INTO Entity_Voluntario (idVoluntario, condicionVoluntario, " +
-            "disponibilidadVoluntario, equipamientoVoluntario, zonaViviendaVoluntario) " +
+    @Query("INSERT INTO Entity_Voluntario (idVoluntario, nombreVoluntario, " +
+            "correoVoluntario, numeroDocumentoVoluntario, equipamientoVoluntario, zonaViviendaVoluntario) " +
             "VALUES (:id, :condicion, :disponibilidad, :equipamiento, :zona)")
     VoluntarioEntity crearVoluntario(@Param("id") Long idVoluntario,
-                                     @Param("condicion") String condicionVoluntario,
-                                     @Param("disponibilidad") Boolean disponibilidadVoluntario,
-                                     @Param("equipamiento") String equipamientoVoluntario,
+                                     @Param("nombre") String nombreVoluntario,
+                                     @Param("correoVoluntario") String correoVoluntario,
+                                     @Param("numero") String numeroDocumentoVoluntario,
+                                     @Param("equipamiento") List<String> equipamientoVoluntario,
                                      @Param("zona") String zonaViviendaVoluntario);
 
     @Query("DELETE FROM VoluntarioEntity WHERE idVoluntario = :id")
