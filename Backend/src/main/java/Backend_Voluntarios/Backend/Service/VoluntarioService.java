@@ -26,8 +26,9 @@ public class VoluntarioService {
 
     public VoluntarioEntity nuevoVoluntario(VoluntarioEntity voluntarioEntity){
         return repositoryVoluntario.crearVoluntario(voluntarioEntity.getIdVoluntario(),
-                voluntarioEntity.getCondicionVoluntario(),
-                voluntarioEntity.isDisponibilidadVoluntario(),
+                voluntarioEntity.getNombreVoluntario(),
+                voluntarioEntity.getCorreoVoluntario(),
+                voluntarioEntity.getNumeroDocumentoVoluntario(),
                 voluntarioEntity.getEquipamientoVoluntario(),
                 voluntarioEntity.getZonaViviendaVoluntario());
     }

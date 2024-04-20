@@ -3,6 +3,8 @@ package Backend_Voluntarios.Backend.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "voluntario")
 public class VoluntarioEntity {
@@ -12,23 +14,24 @@ public class VoluntarioEntity {
     private Long idVoluntario;
 
     @Column(nullable = false, length = 100)
-    private String condicionVoluntario;
+    private String nombreVoluntario;
+
+    @Column(nullable = false, length = 100)
+    private String correoVoluntario;
+
+    @Column(unique = true, nullable = false, length = 100)
+    private String numeroDocumentoVoluntario;
 
     @Column(nullable = false)
-    private boolean disponibilidadVoluntario;
-
-    @Column(nullable = false, length = 100)
     private String zonaViviendaVoluntario;
 
-    @Column(nullable = false, length = 100)
-    private String equipamientoVoluntario;
+    @ElementCollection
+    private List<String> equipamientoVoluntario;
 
-
-    public VoluntarioEntity(Long idVoluntario, String condicionVoluntario, boolean disponibilidadVoluntario, String zonaViviendaVoluntario, String equipamientoVoluntario){
-        super();
-        this.idVoluntario = idVoluntario;
-        this.condicionVoluntario = condicionVoluntario;
-        this.disponibilidadVoluntario = disponibilidadVoluntario;
+    public VoluntarioEntity(String nombreVoluntario, String correoVoluntario, String numeroDocumentoVoluntario, List<String> equipamientoVoluntario, String zonaViviendaVoluntario){
+        this.nombreVoluntario = nombreVoluntario;
+        this.correoVoluntario = correoVoluntario;
+        this.numeroDocumentoVoluntario = numeroDocumentoVoluntario;
         this.equipamientoVoluntario = equipamientoVoluntario;
         this.zonaViviendaVoluntario = zonaViviendaVoluntario;
     }
@@ -40,16 +43,28 @@ public class VoluntarioEntity {
         return idVoluntario;
     }
 
-    public void setCondicionVoluntario(String condicion_voluntario) {
-        this.condicionVoluntario = condicion_voluntario;
+    public String getNombreVoluntario() {
+        return nombreVoluntario;
     }
 
-    public boolean isDisponibilidadVoluntario() {
-        return disponibilidadVoluntario;
+    public void setNombreVoluntario(String nombreVoluntario) {
+        this.nombreVoluntario = nombreVoluntario;
     }
 
-    public void setDisponibilidadVoluntario(boolean disponibilidad_voluntario) {
-        this.disponibilidadVoluntario = disponibilidad_voluntario;
+    public String getCorreoVoluntario() {
+        return correoVoluntario;
+    }
+
+    public String getNumeroDocumentoVoluntario() {
+        return numeroDocumentoVoluntario;
+    }
+
+    public void setNumeroDocumentoVoluntario(String numeroDocumentoVoluntario) {
+        this.numeroDocumentoVoluntario = numeroDocumentoVoluntario;
+    }
+
+    public void setCorreoVoluntario(String correoVoluntario) {
+        this.correoVoluntario = correoVoluntario;
     }
 
     public String getZonaViviendaVoluntario() {
@@ -60,19 +75,15 @@ public class VoluntarioEntity {
         this.zonaViviendaVoluntario = zona_vivienda_voluntario;
     }
 
-    public String getEquipamientoVoluntario() {
+    public List<String> getEquipamientoVoluntario() {
         return equipamientoVoluntario;
     }
 
-    public void setEquipamientoVoluntario(String equipamiento_voluntario) {
+    public void setEquipamientoVoluntario(List<String> equipamiento_voluntario) {
         this.equipamientoVoluntario = equipamiento_voluntario;
     }
 
     public void setIdVoluntario(Long idVoluntario) {
         this.idVoluntario = idVoluntario;
-    }
-
-    public String getCondicionVoluntario() {
-        return condicionVoluntario;
     }
 }

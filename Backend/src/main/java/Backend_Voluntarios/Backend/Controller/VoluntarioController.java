@@ -1,18 +1,21 @@
 package Backend_Voluntarios.Backend.Controller;
 
 import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
+import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
 import Backend_Voluntarios.Backend.Service.VoluntarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/voluntario")
 public class VoluntarioController {
     @Autowired
-    private VoluntarioService serviceVoluntario;
+    private VoluntarioService voluntarioService;
 
     @GetMapping()
     public String conectado(){
@@ -21,12 +24,12 @@ public class VoluntarioController {
 
     @GetMapping("/all")
     public List<VoluntarioEntity> tabla(){
-        return serviceVoluntario.tablaCompleta();
+        return voluntarioService.tablaCompleta();
     }
 
     @GetMapping("/{palabraClave}")
     public ResponseEntity<List<VoluntarioEntity>> buscarVoluntarios(@PathVariable String palabraClave){
-        List<VoluntarioEntity> voluntariosEncontrados =  serviceVoluntario.listaFiltro(palabraClave);
+        List<VoluntarioEntity> voluntariosEncontrados =  voluntarioService.listaFiltro(palabraClave);
         if (voluntariosEncontrados.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -38,7 +41,7 @@ public class VoluntarioController {
         if (idVoluntario == null) {
             return ResponseEntity.badRequest().build();
         }
-        List<VoluntarioEntity> idVoluntariosEncontrados = serviceVoluntario.tablaId(idVoluntario);
+        List<VoluntarioEntity> idVoluntariosEncontrados = voluntarioService.tablaId(idVoluntario);
         if (idVoluntariosEncontrados.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -46,17 +49,22 @@ public class VoluntarioController {
     }
 
     @PostMapping("/guardar")
-    public ResponseEntity<VoluntarioEntity> crearVoluntario(@PathVariable VoluntarioEntity voluntarioEntity) {
-        if (voluntarioEntity.getIdVoluntario() != null) {
-            return ResponseEntity.badRequest().build();
-        }
-        serviceVoluntario.nuevoVoluntario(voluntarioEntity);
-        return ResponseEntity.ok(voluntarioEntity);
+    public VoluntarioEntity crearVoluntario(@RequestBody Map<String, String> body) {
+        String nombreVoluntario = body.get("nombreVoluntario");
+        String correoVoluntario = body.get("correoVoluntario");
+        String numeroDocumentoVoluntario = body.get("numeroDocumentoVoluntario");
+        String equipamientoVoluntario = body.get("equipamientoVoluntario");
+        String zonaViviendaVoluntario = body.get("zonaViviendaVoluntario");
+
+        VoluntarioEntity voluntario = new VoluntarioEntity(nombreVoluntario, correoVoluntario, numeroDocumentoVoluntario, Collections.singletonList(equipamientoVoluntario), zonaViviendaVoluntario);
+        voluntarioService.nuevoVoluntario(voluntario);
+        return voluntario; // ! Se debe cambiar al terminar el front por seguridad de que no devuelva
+        // ! datos, solo debe devolver una respuesta de que se guardo correctamente
     }
 
     @DeleteMapping("/delete/{idVoluntario}")
     public void eliminar(@PathVariable Long idVoluntario){
-        VoluntarioEntity voluntarioBorrado = serviceVoluntario.buscarId(idVoluntario);
-        serviceVoluntario.borrarVoluntario(voluntarioBorrado);
+        VoluntarioEntity voluntarioBorrado = voluntarioService.buscarId(idVoluntario);
+        voluntarioService.borrarVoluntario(voluntarioBorrado);
     }
 }

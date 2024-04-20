@@ -1,6 +1,8 @@
 package Backend_Voluntarios.Backend.Repository;
 
+import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
 import Backend_Voluntarios.Backend.Entity.RankingEntity;
+import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -12,7 +14,12 @@ public interface RankingRepository {
     @Query("SELECT palabra FROM RankingEntity palabra WHERE"
         + " CONCAT(palabra.idRanking, palabra.idTarea, palabra.idVoluntario, palabra.nivelRanking, palabra.tareaRanking)"
         + " LIKE %?1%")
-public List<RankingEntity> findAll(String palabraClave);
+    public List<RankingEntity> findAll(String palabraClave);
+
+    @Query("SELECT r.idRanking, r.nivelRanking " +
+            "FROM RankingEntity r " +
+            "ORDER BY r.nivelRanking DESC")
+    public List<RankingEntity> listRanking();
 
     @Query("SELECT v FROM RankingEntity v")
     public List<RankingEntity> listAll();
@@ -33,4 +40,10 @@ public List<RankingEntity> findAll(String palabraClave);
 
     @Query("SELECT v FROM RankingEntity v WHERE v.idRanking = ?1")
     RankingEntity idRanking(@Param("v") Long idRanking);
+
+    @Query("SELECT v.zonaEmergencia FROM EmergenciaEntity v WHERE v.zonaEmergencia =: zona")
+    public List<EmergenciaEntity> matchZona(String zona);
+
+    @Query("SELECT COUNT(e) FROM TareaHabilidadEntity v JOIN v.habilidadRequerida e WHERE e IN :equipo")
+    public int matchEquipo(List<String> equipo);
 }
