@@ -13,7 +13,7 @@
                 <div class="register"   @click="$router.push(`/register`);" >
                     <a>Registrarse</a>
                 </div>
-                <button type="submit">Ingresar</button>
+                <button @click="$router.push(`/voluntario`);" type="submit">Ingresar</button>
                 
             </form>
         </div>
