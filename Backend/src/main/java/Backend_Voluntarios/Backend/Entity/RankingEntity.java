@@ -27,9 +27,7 @@ public class RankingEntity {
     @Column(nullable = false, length = 100)
     private String tareaRanking;
 
-    public RankingEntity(Long idRanking, Long idTarea, Long idVoluntario, Integer nivelRanking, String tareaRanking){
-        super();
-        this.idRanking = idRanking;
+    public RankingEntity( Long idTarea, Long idVoluntario, Integer nivelRanking, String tareaRanking){
         this.idTarea = idTarea;
         this.idVoluntario = idVoluntario;
         this.nivelRanking = nivelRanking;
