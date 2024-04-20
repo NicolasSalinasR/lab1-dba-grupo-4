@@ -6,14 +6,15 @@
 
         <img src="../images/mundo.svg" alt="mundo">
         <div class="containerLogin">
-            <h1>Iniciar Sesión</h1>
+            <h1>Registro</h1>
             <form @submit.prevent="login" class="formLogin">
+                <input type="text" v-model="nombre" placeholder="Nombre">
+                <input type="text" v-model="zonaVivienda" placeholder="Zona de Vivienda">
+                <input type="text" v-model="numDocumento" placeholder="Número de documento">
                 <input type="text" v-model="email" placeholder="Email">
                 <input type="password" v-model="password" placeholder="Contraseña">
-                <div class="register"   @click="$router.push(`/register`);" >
-                    <a>Registrarse</a>
-                </div>
-                <button @click="$router.push(`/voluntario`);" type="submit">Ingresar</button>
+                <input type="password" v-model="password" placeholder="Repita contraseña">
+                <button type="submit">Registrarse</button>
                 
             </form>
         </div>
@@ -26,8 +27,11 @@
 export default {
     data() {
         return {
-            email: '',
-            password: ''
+        nombre:'',
+        zonaVivienda:'',
+        numDocumento:'',
+        email: '',
+        password: ''
         };
     },
     // metodo para que cada 5 segundos el circle cambie de posicion sin salirse de la pantalla
