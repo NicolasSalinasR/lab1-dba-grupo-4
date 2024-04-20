@@ -14,7 +14,7 @@
           <!-- Submenú desplegable -->
           <ul class="dropdown-content" v-show="isDropdownVisible">
             <li><a href="#">Ranking Voluntario por Tarea</a></li>
-            <li><a href="#">Ranking Voluntario por Emergencia</a></li>
+            <li><nuxt-link to="/voluntario/rankingEmergencia">Ranking Voluntario por Emergencia</nuxt-link></li>
           </ul>
         </li>
         <li><a href="#">Contacto</a></li>

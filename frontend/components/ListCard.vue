@@ -5,7 +5,7 @@
           <div class="card-header">
             {{ title1 }}
           </div>
-          <div class="card-body">
+          <div class="card-body" style="max-height: 400px; overflow: auto;">
             {{ description1 }}
           </div>
         </div>
@@ -15,7 +15,7 @@
           <div class="card-header">
             {{ title2 }}
           </div>
-          <div class="card-body">
+          <div class="card-body" style="max-height: 200px; overflow: auto;">
             {{ description2 }}
           </div>
         </div>
@@ -61,7 +61,7 @@
   
   .card {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
