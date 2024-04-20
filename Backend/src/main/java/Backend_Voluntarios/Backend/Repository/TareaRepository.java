@@ -19,9 +19,10 @@ public interface TareaRepository extends JpaRepository<TareaEntity, Long> {
     List<TareaEntity> findAllTareas();
 
     // Guardar
-    @Query("INSERT INTO TareaEntity (idTarea, idEstadoTarea, nombreTarea, descripcionTarea, tipoTarea) VALUES (:idTarea, :idEstadoTarea, :descripcionTarea, :tipoTarea)")
+    @Query("INSERT INTO TareaEntity (idTarea, idEstadoTarea, idEmergencia,nombreTarea, descripcionTarea, tipoTarea) VALUES (:idTarea, :idEstadoTarea, :idEmergencia, :descripcionTarea, :tipoTarea)")
     TareaEntity saveTarea(@Param("idTarea") Long idTarea,
                           @Param("idEstadoTarea") Long idEstadoTarea,
+                          @Param("idEmergencia") Long idEmergencia,
                           @Param("nombreTarea") String nombreTarea,
                           @Param("descripcionTarea") String descripcionTarea,
                           @Param("tipoTarea") String tipoTarea);

@@ -8,20 +8,22 @@ import jakarta.persistence.*;
 public class TareaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTarea;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstadoTarea;
+
+    @Id
+    private Long idEmergencia;
 
     private String nombreTarea;
     private String descripcionTarea;
     private String tipoTarea;
 
     // Constructor
-    public TareaEntity(Long idEstadoTarea, String nombreTarea, String descripcionTarea, String tipoTarea) {
+    public TareaEntity(Long idEstadoTarea, Long idEmergencia, String nombreTarea, String descripcionTarea, String tipoTarea) {
         this.idEstadoTarea = idEstadoTarea;
+        this.idEmergencia = idEmergencia;
         this.nombreTarea = nombreTarea;
         this.descripcionTarea = descripcionTarea;
         this.tipoTarea = tipoTarea;
@@ -47,6 +49,14 @@ public class TareaEntity {
 
     public void setIdEstadoTarea(Long idEstadoTarea) {
         this.idEstadoTarea = idEstadoTarea;
+    }
+
+    public Long getIdEmergencia() {
+        return idEmergencia;
+    }
+
+    public void setIdEmergencia(Long idEmergencia) {
+        this.idEmergencia = idEmergencia;
     }
 
     public String getNombreTarea() {
