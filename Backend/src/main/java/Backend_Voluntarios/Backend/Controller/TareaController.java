@@ -35,11 +35,12 @@ public class TareaController {
     @PostMapping("/add")
     public TareaEntity addTarea(@RequestBody Map<String, String> body) {
         Long idEstadoTarea = Long.parseLong(body.get("idEstadoTarea"));
+        Long idEmergencia = Long.parseLong(body.get("idEmergencia"));
         String nombreTarea = body.get("nombreTarea");
         String descripcionTarea = body.get("descripcionTarea");
         String tipoTarea = body.get("tipoTarea");
 
-        TareaEntity tarea = new TareaEntity(idEstadoTarea, nombreTarea, descripcionTarea, tipoTarea);
+        TareaEntity tarea = new TareaEntity(idEstadoTarea, idEmergencia, nombreTarea, descripcionTarea, tipoTarea);
 
         tareaService.addTarea(tarea);
 
