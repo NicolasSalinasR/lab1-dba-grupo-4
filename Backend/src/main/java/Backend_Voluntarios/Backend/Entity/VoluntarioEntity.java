@@ -1,6 +1,5 @@
 package Backend_Voluntarios.Backend.Entity;
 
-
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -28,10 +27,15 @@ public class VoluntarioEntity {
     @Column(nullable = false, length = 100)
     private String contrasenaVoluntario;
 
+    // agregar token pero no como atributo de la tabla
+    @Transient
+    private String token;
+
     @ElementCollection
     private List<String> equipamientoVoluntario;
 
-    public VoluntarioEntity(String nombreVoluntario, String contrasenaVoluntario, String correoVoluntario, String numeroDocumentoVoluntario, List<String> equipamientoVoluntario, String zonaViviendaVoluntario){
+    public VoluntarioEntity(String nombreVoluntario, String correoVoluntario, String numeroDocumentoVoluntario,
+            List<String> equipamientoVoluntario, String zonaViviendaVoluntario) {
         this.nombreVoluntario = nombreVoluntario;
         this.contrasenaVoluntario = contrasenaVoluntario;
         this.correoVoluntario = correoVoluntario;
@@ -39,7 +43,8 @@ public class VoluntarioEntity {
         this.equipamientoVoluntario = equipamientoVoluntario;
         this.zonaViviendaVoluntario = zonaViviendaVoluntario;
     }
-    public VoluntarioEntity(){
+
+    public VoluntarioEntity() {
         super();
     }
 
@@ -97,5 +102,13 @@ public class VoluntarioEntity {
 
     public void setIdVoluntario(Long idVoluntario) {
         this.idVoluntario = idVoluntario;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
