@@ -2,16 +2,15 @@ package Backend_Voluntarios.Backend.Controller;
 
 import Backend_Voluntarios.Backend.Entity.RankingEntity;
 import Backend_Voluntarios.Backend.Entity.TareaEntity;
-import Backend_Voluntarios.Backend.Entity.TareaHabilidadEntity;
 import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
-import Backend_Voluntarios.Backend.Service.*;
+import Backend_Voluntarios.Backend.Service.RankingService;
+import Backend_Voluntarios.Backend.Service.TareaService;
+import Backend_Voluntarios.Backend.Service.VoluntarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/ranking")
@@ -25,18 +24,18 @@ public class RankingController {
     private AuditoriaService auditoriaService;
 
     @GetMapping()
-    public String conectado(){
+    public String conectado() {
         return "CONECTADO";
     }
 
     @GetMapping("/all")
-    public List<RankingEntity> tabla(){
+    public List<RankingEntity> tabla() {
         return rankingService.tablaCompleta();
     }
 
     @GetMapping("/{palabraClave}")
-    public ResponseEntity<List<RankingEntity>> buscarRankings(@PathVariable String palabraClave){
-        List<RankingEntity> rankingsEncontrados =  rankingService.listaFiltro(palabraClave);
+    public ResponseEntity<List<RankingEntity>> buscarRankings(@PathVariable String palabraClave) {
+        List<RankingEntity> rankingsEncontrados = rankingService.listaFiltro(palabraClave);
         if (rankingsEncontrados.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -44,7 +43,7 @@ public class RankingController {
     }
 
     @GetMapping("/listaRanking")
-    public List<RankingEntity> listaRanking(){
+    public List<RankingEntity> listaRanking() {
         return rankingService.listaRanking();
     }
 
@@ -62,7 +61,7 @@ public class RankingController {
 
     @PostMapping("/guardar/{idVoluntario}/{idEmergencia}")
     public void crearRanking(@PathVariable Long idVoluntario,
-                             @PathVariable Long idEmergencia) {
+            @PathVariable Long idEmergencia) {
         List<TareaEntity> tareas = tareaService.tablaIds(idEmergencia);
         for (TareaEntity tarea : tareas) {
             Long idTarea = tarea.getIdTarea();
@@ -82,7 +81,7 @@ public class RankingController {
     }
 
     @DeleteMapping("/delete/{idRanking}")
-    public void eliminar(@PathVariable Long idRanking){
+    public void eliminar(@PathVariable Long idRanking) {
         RankingEntity rankingEntity = rankingService.buscarId(idRanking);
         rankingService.borrarRanking(rankingEntity);
 

@@ -2,15 +2,12 @@ package Backend_Voluntarios.Backend.Service;
 
 import java.util.List;
 
-import Backend_Voluntarios.Backend.Entity.RankingEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Backend_Voluntarios.Backend.Repository.TareaRepository;
 import Backend_Voluntarios.Backend.Entity.TareaEntity;
 
 @Service
 public class TareaService {
-
 
     private TareaRepository tareaRepository;
 
@@ -22,11 +19,11 @@ public class TareaService {
         return tareaRepository.findAllTareas();
     }
 
-    public List<TareaEntity> tablaIds(Long idEmergencia){
+    public List<TareaEntity> tablaIds(Long idEmergencia) {
         return tareaRepository.buscarIdEmergencia(idEmergencia);
     }
 
-    public List<TareaEntity> getRankingTarea(String nombreTarea){
+    public List<TareaEntity> getRankingTarea(String nombreTarea) {
         return tareaRepository.listRankingTarea(nombreTarea);
     }
 

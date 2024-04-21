@@ -29,10 +29,6 @@ public class VoluntarioEntity {
     @Column(nullable = false, length = 100)
     private String contrasenaVoluntario;
 
-    // agregar token pero no como atributo de la tabla
-    @Transient
-    private String token;
-
     @ElementCollection
     private List<String> equipamientoVoluntario;
 
@@ -42,7 +38,8 @@ public class VoluntarioEntity {
     @OneToMany(mappedBy = "voluntario")
     private Set<VoluntarioHabilidadEntity> VoluntarioHabilidad= new HashSet<>();
 
-    public VoluntarioEntity(String nombreVoluntario, String correoVoluntario, String numeroDocumentoVoluntario, List<String> equipamientoVoluntario, String zonaViviendaVoluntario){
+    public VoluntarioEntity(String nombreVoluntario, String correoVoluntario, String numeroDocumentoVoluntario,
+            List<String> equipamientoVoluntario, String zonaViviendaVoluntario, String contrasenaVoluntario) {
         this.nombreVoluntario = nombreVoluntario;
         this.contrasenaVoluntario = contrasenaVoluntario;
         this.correoVoluntario = correoVoluntario;
@@ -109,13 +106,5 @@ public class VoluntarioEntity {
 
     public void setIdVoluntario(Long idVoluntario) {
         this.idVoluntario = idVoluntario;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }

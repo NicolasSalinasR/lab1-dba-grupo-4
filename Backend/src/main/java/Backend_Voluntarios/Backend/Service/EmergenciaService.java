@@ -2,7 +2,6 @@ package Backend_Voluntarios.Backend.Service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Backend_Voluntarios.Backend.Repository.EmergenciaRepository;
 import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;

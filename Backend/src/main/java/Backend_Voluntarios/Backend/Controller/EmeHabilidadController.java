@@ -33,18 +33,18 @@ public class EmeHabilidadController {
     private AuditoriaService auditoriaService;
 
     @GetMapping("/{id}")
-    public EmeHabilidadEntity getEmeHabilidadById(@PathVariable Long id){
+    public EmeHabilidadEntity getEmeHabilidadById(@PathVariable Long id) {
         return emeHabilidadService.getEmeHabilidadById(id);
     }
 
     @GetMapping("/All")
-    public List<EmeHabilidadEntity> getAllEmeHabilidades(){
+    public List<EmeHabilidadEntity> getAllEmeHabilidades() {
         return emeHabilidadService.getAllEmeHabilidades();
     }
 
     @GetMapping("/{PalabraClave}")
-    public ResponseEntity<List<EmeHabilidadEntity>> Buscar_rankings(@PathVariable String PalabraClave){
-        List<EmeHabilidadEntity> rankings_encontrados =  emeHabilidadService.listaFiltro(PalabraClave);
+    public ResponseEntity<List<EmeHabilidadEntity>> Buscar_rankings(@PathVariable String PalabraClave) {
+        List<EmeHabilidadEntity> rankings_encontrados = emeHabilidadService.listaFiltro(PalabraClave);
         if (rankings_encontrados.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -52,7 +52,7 @@ public class EmeHabilidadController {
     }
 
     @PostMapping("/add")
-    public EmeHabilidadEntity addEmeHabilidad(@RequestBody Map<String, String> body){
+    public EmeHabilidadEntity addEmeHabilidad(@RequestBody Map<String, String> body) {
         Long idEmergencia = Long.parseLong(body.get("idEmergencia"));
         Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
         EmergenciaEntity emergenciaNew = emergenciaService.getEmergenciaById(idEmergencia);
@@ -67,14 +67,11 @@ public class EmeHabilidadController {
     }
 
     @DeleteMapping("delete/{id}")
-    public void Eliminar(@PathVariable Long id){
+    public void Eliminar(@PathVariable Long id) {
         EmeHabilidadEntity emeHabilidadEliminada = emeHabilidadService.getEmeHabilidadById(id);
         emeHabilidadService.deleteEmeHabilidad(emeHabilidadEliminada);
     //    Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
       //          auditoriaService.registrarCambio(idUsuario, "delete", "borro una emergencia Habilidad");
     }
-
-
-
 
 }
