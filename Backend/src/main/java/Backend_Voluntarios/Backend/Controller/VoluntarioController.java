@@ -3,7 +3,6 @@ package Backend_Voluntarios.Backend.Controller;
 import Backend_Voluntarios.Backend.Entity.AuthenticationResponse;
 import Backend_Voluntarios.Backend.Entity.LoginRequest;
 import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
-import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
 import Backend_Voluntarios.Backend.Service.AuditoriaService;
 import Backend_Voluntarios.Backend.Service.VoluntarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import java.util.Map;
 @RequestMapping("/voluntario")
 public class VoluntarioController {
 
+    @Autowired
     private VoluntarioService voluntarioService;
 
     @Autowired
@@ -68,12 +68,13 @@ public class VoluntarioController {
         String zonaViviendaVoluntario = body.get("zonaViviendaVoluntario");
 
         VoluntarioEntity voluntario = new VoluntarioEntity(nombreVoluntario, correoVoluntario,
-                numeroDocumentoVoluntario, Collections.singletonList(equipamientoVoluntario), zonaViviendaVoluntario,
+                numeroDocumentoVoluntario, equipamientoVoluntario, zonaViviendaVoluntario,
                 contrasenaVoluntario);
         voluntarioService.nuevoVoluntario(voluntario);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio un voluntario");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "Add", "añadio un voluntario");
 
         return voluntario; // ! Se debe cambiar al terminar el front por seguridad de que no devuelva
         // ! datos, solo debe devolver una respuesta de que se guardo correctamente
@@ -84,8 +85,10 @@ public class VoluntarioController {
         VoluntarioEntity voluntarioBorrado = voluntarioService.buscarId(idVoluntario);
         voluntarioService.borrarVoluntario(voluntarioBorrado);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //         auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un voluntario");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un
+        // voluntario");
     }
 
     @PutMapping("/login")

@@ -9,6 +9,7 @@ import Backend_Voluntarios.Backend.Service.VoluntarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import Backend_Voluntarios.Backend.Service.AuditoriaService;
 
 import java.util.List;
 
@@ -69,14 +70,14 @@ public class RankingController {
             String tareaRanking = nombreTarea.getNombreTarea();
             VoluntarioEntity buscarZona = voluntarioService.buscarId(idVoluntario);
             String zona = buscarZona.getZonaViviendaVoluntario();
-            List<String> equipamiento = buscarZona.getEquipamientoVoluntario();
+            String equipamiento = buscarZona.getEquipamientoVoluntario();
             int nivelRanking = rankingService.puntajeRanking(zona, equipamiento);
-
 
             RankingEntity ranking = new RankingEntity(nombreTarea, buscarZona, nivelRanking, tareaRanking);
             rankingService.nuevoRanking(ranking);
-            // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-            //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio un ranking");
+            // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+            // pablo
+            // auditoriaService.registrarCambio(idUsuario, "Add", "añadio un ranking");
         }
     }
 
@@ -85,20 +86,22 @@ public class RankingController {
         RankingEntity rankingEntity = rankingService.buscarId(idRanking);
         rankingService.borrarRanking(rankingEntity);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //         auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un ranking");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un ranking");
     }
 
     @PutMapping("editar/{idVoluntario}")
-    public void actualizar(@PathVariable Long idVoluntario){
+    public void actualizar(@PathVariable Long idVoluntario) {
         VoluntarioEntity update = voluntarioService.buscarId(idVoluntario);
-        List<String> equipo = update.getEquipamientoVoluntario();
+        String equipo = update.getEquipamientoVoluntario();
         String zona = update.getZonaViviendaVoluntario();
         RankingEntity updateUser = rankingService.buscarId(idVoluntario);
         updateUser.setNivelRanking(rankingService.puntajeRanking(zona, equipo));
         rankingService.nuevoRanking(updateUser);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //         auditoriaService.registrarCambio(idUsuario, "update", "modifico un Ranking");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "update", "modifico un Ranking");
     }
 }

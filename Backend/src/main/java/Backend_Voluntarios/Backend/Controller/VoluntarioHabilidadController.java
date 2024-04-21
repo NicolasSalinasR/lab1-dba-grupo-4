@@ -51,14 +51,13 @@ public class VoluntarioHabilidadController {
         HabilidadEntity habilidadNew = habilidadService.findById(idVoluntario);
         VoluntarioEntity voluntarioNew = voluntarioService.buscarId(idHabilidad);
 
-
-
-
         VoluntarioHabilidadEntity voluntario_habilidad = new VoluntarioHabilidadEntity(voluntarioNew, habilidadNew);
         voluntarioHabilidadService.addVoluntarioHabilidad(voluntario_habilidad);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una voluntario Habilidad");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "Add", "añadio una voluntario
+        // Habilidad");
         return voluntario_habilidad;
     }
 }

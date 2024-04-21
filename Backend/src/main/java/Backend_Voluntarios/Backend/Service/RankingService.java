@@ -43,12 +43,14 @@ public class RankingService {
         return repositoryRanking.idRanking(idRanking);
     }
 
-    public int puntajeRanking(String zona, List<String> equipo) {
+    public int puntajeRanking(String zona, String equipo) {
+        // separar el string equipo a una lista de string por ","
+        List<String> listaEquipos = List.of(equipo.split(","));
         int contador = 0;
         if (repositoryRanking.matchZona(zona) != null) {
             contador = contador + 1;
         }
-        contador = contador + repositoryRanking.matchEquipo(equipo);
+        contador = contador + repositoryRanking.matchEquipo(listaEquipos);
         return contador;
     }
 }

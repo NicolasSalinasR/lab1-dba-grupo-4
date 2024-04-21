@@ -29,7 +29,6 @@ public class TareaService {
 
     public TareaEntity addTarea(TareaEntity tarea) {
         return tareaRepository.saveTarea(tarea.getIdTarea(),
-                tarea.getIdEstadoTarea(),
                 tarea.getNombreTarea(),
                 tarea.getDescripcionTarea(),
                 tarea.getTipoTarea());

@@ -20,7 +20,7 @@ public class TareaHabilidadService {
     public TareaHabilidadEntity addTareaHabilidad(TareaHabilidadEntity tareaHabilidad) {
         return tareaHabilidadRepository.saveTareaHabilidad(tareaHabilidad.getIdTareaHabilidad(),
                 tareaHabilidad.getIdTarea(),
-                tareaHabilidad.getIdHabilidad(),
+                tareaHabilidad.getIdEmeHabilidad(),
                 tareaHabilidad.getHabilidadRequerida());
     }
 }

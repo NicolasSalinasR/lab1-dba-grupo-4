@@ -5,9 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import Backend_Voluntarios.Backend.Entity.EmeHabilidadEntity;
 import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
 import Backend_Voluntarios.Backend.Entity.TareaEntity;
 import Backend_Voluntarios.Backend.Service.AuditoriaService;
+import Backend_Voluntarios.Backend.Service.EmeHabilidadService;
 import Backend_Voluntarios.Backend.Service.HabilidadService;
 import Backend_Voluntarios.Backend.Service.TareaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,9 @@ import Backend_Voluntarios.Backend.Entity.TareaHabilidadEntity;
 @CrossOrigin(origins = "*")
 public class TareaHabilidadController {
 
-
     private TareaHabilidadService tareaHabilidadService;
     private TareaService tareaService;
-    private HabilidadService habilidadService;
+    private EmeHabilidadService emeHabilidadService;
 
     @Autowired
     private AuditoriaService auditoriaService;
@@ -48,17 +49,19 @@ public class TareaHabilidadController {
     public TareaHabilidadEntity addTareaHabilidad(@RequestBody Map<String, String> body) {
         Long idTarea = Long.parseLong(body.get("idTarea"));
         Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
-        List <String> habilidadRequerida = Collections.singletonList(body.get("habilidadRequerida"));
+        List<String> habilidadRequerida = Collections.singletonList(body.get("habilidadRequerida"));
 
         TareaEntity tareaNew = tareaService.getTareaById(idTarea);
-        HabilidadEntity habilidadNew = habilidadService.findById(idHabilidad);
+        EmeHabilidadEntity emeHabilidadNew = emeHabilidadService.getEmeHabilidadById(idHabilidad);
 
-        TareaHabilidadEntity tareaHabilidad = new TareaHabilidadEntity(tareaNew, habilidadNew, habilidadRequerida);
+        TareaHabilidadEntity tareaHabilidad = new TareaHabilidadEntity(tareaNew, emeHabilidadNew, habilidadRequerida);
 
         tareaHabilidadService.addTareaHabilidad(tareaHabilidad);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una tarea Habilidad");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "Add", "añadio una tarea
+        // Habilidad");
 
         return tareaHabilidad;
     }

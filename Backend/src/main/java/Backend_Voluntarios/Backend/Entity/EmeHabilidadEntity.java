@@ -1,6 +1,8 @@
 package Backend_Voluntarios.Backend.Entity;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "eme_habilidad")
@@ -13,19 +15,18 @@ public class EmeHabilidadEntity {
 
     @ManyToOne
     @JoinColumn(name = "idEmergencia")
-    private EmergenciaEntity emergencia ;
-
+    private EmergenciaEntity emergencia;
 
     @ManyToOne
     @JoinColumn(name = "idHabilidad")
-    private HabilidadEntity habilidad ;
+    private HabilidadEntity habilidad;
 
-
-
+    @OneToMany(mappedBy = "emeHabilidad")
+    private Set<TareaHabilidadEntity> TareaHabilidad = new HashSet<>();
 
     // Constructor all
 
-    public EmeHabilidadEntity( EmergenciaEntity idEmergencia, HabilidadEntity idHabilidad){
+    public EmeHabilidadEntity(EmergenciaEntity idEmergencia, HabilidadEntity idHabilidad) {
         super();
         this.emergencia = idEmergencia;
         this.habilidad = idHabilidad;
@@ -37,9 +38,8 @@ public class EmeHabilidadEntity {
         super();
     }
 
-
     // Getters
-    public Long getIdEmergenciaHabilidad(){
+    public Long getIdEmergenciaHabilidad() {
         return idEmergenciaHabilidad;
     }
 
@@ -47,18 +47,18 @@ public class EmeHabilidadEntity {
         return habilidad.getIdhabilidad();
     }
 
-    public Long getIdEmergencia(){
+    public Long getIdEmergencia() {
         return emergencia.getIdEmergencia();
     }
 
-    //Setters
+    // Setters
 
-    public void setIdHabilidad(HabilidadEntity idHabilidad){
+    public void setIdHabilidad(HabilidadEntity idHabilidad) {
         this.habilidad = idHabilidad;
     }
 
-    public void setIdEmergencia(EmergenciaEntity idEmergencia){
-        this.emergencia= idEmergencia;
+    public void setIdEmergencia(EmergenciaEntity idEmergencia) {
+        this.emergencia = idEmergencia;
     }
 
 }

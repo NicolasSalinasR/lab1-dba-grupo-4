@@ -22,7 +22,6 @@ public class InstitucionService {
     public InstitucionEntity addInstitucion(InstitucionEntity institucion) {
         return institucionRepository.saveInstitucion(
                 institucion.getIdInstitucion(),
-                institucion.getIdEmergencia(),
                 institucion.getNombreInstitucion());
     }
 

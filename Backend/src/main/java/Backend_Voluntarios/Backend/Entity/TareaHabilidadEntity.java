@@ -18,15 +18,17 @@ public class TareaHabilidadEntity {
     private TareaEntity tarea;
 
     @ManyToOne
-    @JoinColumn(name = "idHabilidad")
-    private HabilidadEntity habilidad;
+    @JoinColumn(name = "idEmeHabilidad")
+    private EmeHabilidadEntity emeHabilidad;
+
     @ElementCollection
     private List<String> habilidadRequerida;
 
     // Constructor
-    public TareaHabilidadEntity(TareaEntity idTarea, HabilidadEntity idHabilidad, List<String> habilidad_requerida) {
+    public TareaHabilidadEntity(TareaEntity idTarea, EmeHabilidadEntity emeHabilidad,
+            List<String> habilidad_requerida) {
         this.tarea = idTarea;
-        this.habilidad = idHabilidad;
+        this.emeHabilidad = emeHabilidad;
         this.habilidadRequerida = habilidad_requerida;
     }
 
@@ -52,12 +54,12 @@ public class TareaHabilidadEntity {
         this.tarea = idTarea;
     }
 
-    public Long getIdHabilidad() {
-        return habilidad.getIdhabilidad();
+    public Long getIdEmeHabilidad() {
+        return emeHabilidad.getIdEmergenciaHabilidad();
     }
 
-    public void setIdHabilidad(HabilidadEntity idHabilidad) {
-        this.habilidad = idHabilidad;
+    public void setIdEmeHabilidad(EmeHabilidadEntity emeHabilidad) {
+        this.emeHabilidad = emeHabilidad;
     }
 
     public List<String> getHabilidadRequerida() {

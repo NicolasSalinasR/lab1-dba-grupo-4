@@ -1,6 +1,5 @@
 package Backend_Voluntarios.Backend.Entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -18,7 +17,7 @@ public class EstadoTareaEntity {
 
     private boolean estadoTarea;
 
-    public EstadoTareaEntity(TareaEntity idTarea, boolean estadoTarea){
+    public EstadoTareaEntity(TareaEntity idTarea, boolean estadoTarea) {
         this.tarea = idTarea;
         this.estadoTarea = estadoTarea;
     }
@@ -36,7 +35,7 @@ public class EstadoTareaEntity {
         return estadoTarea;
     }
 
-    //seters
+    // seters
 
     public void setEstadoTarea(boolean estadoTarea) {
         this.estadoTarea = estadoTarea;

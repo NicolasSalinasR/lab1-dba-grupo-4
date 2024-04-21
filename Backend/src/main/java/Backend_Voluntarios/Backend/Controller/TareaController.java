@@ -21,7 +21,6 @@ import Backend_Voluntarios.Backend.Entity.TareaEntity;
 @CrossOrigin(origins = "*")
 public class TareaController {
 
-
     private TareaService tareaService;
 
     @Autowired
@@ -38,23 +37,23 @@ public class TareaController {
     }
 
     @GetMapping("/{nombreTarea}")
-    public List<TareaEntity> getRankingTarea(@PathVariable String nombreTarea){
+    public List<TareaEntity> getRankingTarea(@PathVariable String nombreTarea) {
         return tareaService.getRankingTarea(nombreTarea);
     }
 
     @PostMapping("/add")
     public TareaEntity addTarea(@RequestBody Map<String, String> body) {
-        Long idEstadoTarea = Long.parseLong(body.get("idEstadoTarea"));
         String nombreTarea = body.get("nombreTarea");
         String descripcionTarea = body.get("descripcionTarea");
         String tipoTarea = body.get("tipoTarea");
 
-        TareaEntity tarea = new TareaEntity(idEstadoTarea, nombreTarea, descripcionTarea, tipoTarea);
+        TareaEntity tarea = new TareaEntity(nombreTarea, descripcionTarea, tipoTarea);
 
         tareaService.addTarea(tarea);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una tarea");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "Add", "añadio una tarea");
         return tarea;
     }
 }

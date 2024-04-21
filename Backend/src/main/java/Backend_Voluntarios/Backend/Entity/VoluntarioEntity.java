@@ -9,9 +9,9 @@ import java.util.Set;
 @Entity
 @Table(name = "voluntario")
 public class VoluntarioEntity {
+    // Se crea el id del voluntario de tipo serial
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long idVoluntario;
 
     @Column(nullable = false, length = 100)
@@ -29,17 +29,17 @@ public class VoluntarioEntity {
     @Column(nullable = false, length = 100)
     private String contrasenaVoluntario;
 
-    @ElementCollection
-    private List<String> equipamientoVoluntario;
+    @Column(nullable = false)
+    private String equipamientoVoluntario;
 
     @OneToMany(mappedBy = "voluntario")
-    private Set<RankingEntity> Ranking= new HashSet<>();
+    private Set<RankingEntity> Ranking = new HashSet<>();
 
     @OneToMany(mappedBy = "voluntario")
-    private Set<VoluntarioHabilidadEntity> VoluntarioHabilidad= new HashSet<>();
+    private Set<VoluntarioHabilidadEntity> VoluntarioHabilidad = new HashSet<>();
 
     public VoluntarioEntity(String nombreVoluntario, String correoVoluntario, String numeroDocumentoVoluntario,
-            List<String> equipamientoVoluntario, String zonaViviendaVoluntario, String contrasenaVoluntario) {
+            String equipamientoVoluntario, String zonaViviendaVoluntario, String contrasenaVoluntario) {
         this.nombreVoluntario = nombreVoluntario;
         this.contrasenaVoluntario = contrasenaVoluntario;
         this.correoVoluntario = correoVoluntario;
@@ -96,11 +96,11 @@ public class VoluntarioEntity {
         this.zonaViviendaVoluntario = zona_vivienda_voluntario;
     }
 
-    public List<String> getEquipamientoVoluntario() {
+    public String getEquipamientoVoluntario() {
         return equipamientoVoluntario;
     }
 
-    public void setEquipamientoVoluntario(List<String> equipamiento_voluntario) {
+    public void setEquipamientoVoluntario(String equipamiento_voluntario) {
         this.equipamientoVoluntario = equipamiento_voluntario;
     }
 

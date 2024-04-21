@@ -10,37 +10,29 @@ import java.util.List;
 @Repository
 public interface EmeHabilidadRepository {
 
-    //findById
+    // findById
     @Query("SELECT e FROM EmeHabilidadEntity e WHERE e.idEmergenciaHabilidad = :id")
-    EmeHabilidadEntity findEmeHabilidadById(@Param("id")Long id);
+    EmeHabilidadEntity findEmeHabilidadById(@Param("id") Long id);
 
-    //findAll
+    // findAll
     @Query("SELECT e FROM EmeHabilidadEntity e")
-    List<EmeHabilidadEntity>findAllEmeHabilidades();
+    List<EmeHabilidadEntity> findAllEmeHabilidades();
 
-    //save
+    // save
 
     @Query("INSERT INTO EmeHabilidadEntity(idEmergenciaHabilidad,idHabilidad,idEmergencia)")
     EmeHabilidadEntity saveEmeHabilidad(@Param("idEmergenciaHabilidad") Long idEmergenciaHabilidad,
-                          @Param("idHabilidad") Long idHabilidad,
-                          @Param("idEmergencia")Long idEmergencia);
+            @Param("idHabilidad") Long idHabilidad,
+            @Param("idEmergencia") Long idEmergencia);
 
-    //delete
+    // delete
     @Query("DELETE FROM EmeHabilidadEntity WHERE EmeHabilidadEntity.idEmergenciaHabilidad= :id")
     EmeHabilidadEntity deleteEmeHabilidad(@Param("id") Long id);
 
-
-
-
-    //search
+    // search
     @Query("SELECT palabra FROM EmeHabilidadEntity palabra WHERE"
             + " CONCAT(palabra.idEmergenciaHabilidad, palabra.idHabilidad, palabra.idEmergencia)"
             + " LIKE %?1%")
     public List<EmeHabilidadEntity> findAll(String palabraClave);
-
-
-
-
-
 
 }

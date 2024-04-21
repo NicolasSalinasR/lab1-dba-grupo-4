@@ -14,41 +14,35 @@ public class TareaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTarea;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEmergencia;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEstadoTarea;
-
     private String nombreTarea;
     private String descripcionTarea;
     private String tipoTarea;
 
     @OneToMany(mappedBy = "tarea")
-    private Set<RankingEntity> Ranking= new HashSet<>();
+    private Set<RankingEntity> Ranking = new HashSet<>();
 
     @OneToMany(mappedBy = "tarea")
-    private Set<TareaHabilidadEntity> TareaHabilidad= new HashSet<>();
+    private Set<TareaHabilidadEntity> TareaHabilidad = new HashSet<>();
 
     @OneToMany(mappedBy = "tarea")
-    private Set<EstadoTareaEntity> EstadoTarea= new HashSet<>();
+    private Set<EstadoTareaEntity> EstadoTarea = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "idEmergencia")
+    private EmergenciaEntity emergencia;
 
     // Constructor
-    public TareaEntity(Long idEstadoTarea, String nombreTarea, String descripcionTarea, String tipoTarea) {
-        this.idEstadoTarea = idEstadoTarea;
+    public TareaEntity(String nombreTarea, String descripcionTarea, String tipoTarea) {
         this.nombreTarea = nombreTarea;
         this.descripcionTarea = descripcionTarea;
         this.tipoTarea = tipoTarea;
     }
 
-    public Long getIdEmergencia() {
-        return idEmergencia;
-    }
-
-    public void setIdEmergencia(Long idEmergencia) {
-        this.idEmergencia = idEmergencia;
+    public TareaEntity(String nombreTarea, String descripcionTarea, String tipoTarea, EmergenciaEntity emergencia) {
+        this.nombreTarea = nombreTarea;
+        this.descripcionTarea = descripcionTarea;
+        this.tipoTarea = tipoTarea;
+        this.emergencia = emergencia;
     }
 
     // Constructor vacio
@@ -63,14 +57,6 @@ public class TareaEntity {
 
     public void setIdTarea(Long idTarea) {
         this.idTarea = idTarea;
-    }
-
-    public Long getIdEstadoTarea() {
-        return idEstadoTarea;
-    }
-
-    public void setIdEstadoTarea(Long idEstadoTarea) {
-        this.idEstadoTarea = idEstadoTarea;
     }
 
     public String getNombreTarea() {
@@ -95,5 +81,13 @@ public class TareaEntity {
 
     public void setTipoTarea(String tipoTarea) {
         this.tipoTarea = tipoTarea;
+    }
+
+    public EmergenciaEntity getEmergencia() {
+        return emergencia;
+    }
+
+    public void setEmergencia(EmergenciaEntity emergencia) {
+        this.emergencia = emergencia;
     }
 }

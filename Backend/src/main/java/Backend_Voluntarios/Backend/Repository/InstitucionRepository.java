@@ -9,27 +9,24 @@ import java.util.List;
 @Repository
 public interface InstitucionRepository {
 
-    //findById
+    // findById
     @Query("SELECT e FROM InstitucionEntity e WHERE e.idInstitucion = :id")
-    InstitucionEntity findInstitucionById(@Param("id")Long id);
+    InstitucionEntity findInstitucionById(@Param("id") Long id);
 
-
-    //findAll
+    // findAll
     @Query("SELECT e FROM InstitucionEntity e")
-    List<InstitucionEntity>findAllInstituciones();
+    List<InstitucionEntity> findAllInstituciones();
 
-    //save
-    @Query("INSERT INTO InstitucionEntity(idInstitucion,idEmergencia,nombreInstitucion)")
-    InstitucionEntity saveInstitucion (@Param("idInstitucion") Long idInstitucion,
-                          @Param("idEmergencia") Long idEmergencia,
-                          @Param("nombreInstitucion") String nombreInstitucion);
+    // save
+    @Query("INSERT INTO InstitucionEntity(idInstitucion,nombreInstitucion) VALUES (:idInstitucion,:nombreInstitucion)")
+    InstitucionEntity saveInstitucion(@Param("idInstitucion") Long idInstitucion,
+            @Param("nombreInstitucion") String nombreInstitucion);
 
-    //delete
+    // delete
     @Query("DELETE FROM InstitucionEntity WHERE InstitucionEntity.idInstitucion= :id")
     InstitucionEntity deleteInstitucion(@Param("id") Long id);
 
-
-    //search
+    // search
     @Query("SELECT palabra FROM InstitucionEntity palabra WHERE"
             + " CONCAT(palabra.idInstitucion, palabra.idEmergencia, palabra.nombreInstitucion)"
             + " LIKE %?1%")

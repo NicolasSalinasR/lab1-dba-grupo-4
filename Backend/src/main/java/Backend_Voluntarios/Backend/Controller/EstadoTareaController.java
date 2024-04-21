@@ -18,8 +18,9 @@ import java.util.Map;
 public class EstadoTareaController {
     private EstadoTareaService estadoTareaService;
 
-    @Autowired
     private AuditoriaService auditoriaService;
+
+    private TareaService tareaService;
 
     @GetMapping("/{id}")
     public EstadoTareaEntity getEstadoTareaById(@PathVariable Long id) {
@@ -46,7 +47,7 @@ public class EstadoTareaController {
     }
 
     @PostMapping("/add")
-    public EstadoTareaEntity addEstadoTarea(@RequestBody Map<String, String> body){
+    public EstadoTareaEntity addEstadoTarea(@RequestBody Map<String, String> body) {
         Long idTarea = Long.parseLong(body.get("idTarea"));
         Boolean estadoTarea = Boolean.parseBoolean(body.get("estadoTarea"));
         TareaEntity tareaNew = tareaService.getTareaById(idTarea);
@@ -55,15 +56,18 @@ public class EstadoTareaController {
         estadoTareaService.guardarEstadoTarea(estadoTareaNew);
         return estadoTareaNew;
 
-       // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-       //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio un estado tarea");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "Add", "añadio un estado tarea");
     }
 
     @DeleteMapping("/delete/{id}")
     public void Eliminar(@PathVariable Long id) {
         estadoTareaService.eliminarEstadoTarea(id);
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //         auditoriaService.registrarCambio(idUsuario, "delete", "elimino un estado tarea");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "delete", "elimino un estado
+        // tarea");
     }
 
 }
