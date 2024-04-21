@@ -12,13 +12,14 @@ public class EstadoTareaEntity {
     @Column(unique = true, nullable = false)
     private Long idEstadoTarea;
 
-    private Long idTarea;
-    // el estado de la tarea deberia ser un String o un booleano?
+    @ManyToOne
+    @JoinColumn(name = "idTarea")
+    private TareaEntity tarea;
+
     private boolean estadoTarea;
 
-    public EstadoTareaEntity(Long idEstadoTarea, Long idTarea, boolean estadoTarea){
-        this.idEstadoTarea = idEstadoTarea;
-        this.idTarea = idTarea;
+    public EstadoTareaEntity(TareaEntity idTarea, boolean estadoTarea){
+        this.tarea = idTarea;
         this.estadoTarea = estadoTarea;
     }
     // getters
@@ -28,7 +29,7 @@ public class EstadoTareaEntity {
     }
 
     public Long getIdTarea() {
-        return idTarea;
+        return tarea.getIdTarea();
     }
 
     public boolean isEstadoTarea() {
@@ -42,10 +43,10 @@ public class EstadoTareaEntity {
     }
 
     public void setIdEstadoTarea(Long idEstadoTarea) {
-        idEstadoTarea = idEstadoTarea;
+        this.idEstadoTarea = idEstadoTarea;
     }
 
-    public void setId_tarea(Long idTarea) {
-        idTarea = idTarea;
+    public void setIdTarea(TareaEntity idTarea) {
+        this.tarea = idTarea;
     }
 }

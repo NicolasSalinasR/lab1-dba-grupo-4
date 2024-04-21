@@ -4,6 +4,7 @@ package Backend_Voluntarios.Backend.Controller;
 import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
 import Backend_Voluntarios.Backend.Entity.InstitucionEntity;
 import Backend_Voluntarios.Backend.Entity.RankingEntity;
+import Backend_Voluntarios.Backend.Service.AuditoriaService;
 import Backend_Voluntarios.Backend.Service.HabilidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ import java.util.Map;
 public class HabilidadController {
 
     private HabilidadService habilidadService;
+
+    @Autowired
+    private AuditoriaService auditoriaService;
 
     @GetMapping("/{id}")
     public HabilidadEntity getHabilidadById(@PathVariable Long id){
@@ -39,17 +43,20 @@ public class HabilidadController {
 
     @PostMapping("/add")
     public HabilidadEntity addHabilidad(@RequestBody Map<String, String> body){
-        Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
         String nombreHabilidad = body.get("nombreHabilidad");
 
-        HabilidadEntity habilidad = new HabilidadEntity(idHabilidad, nombreHabilidad);
+        HabilidadEntity habilidad = new HabilidadEntity(nombreHabilidad);
         habilidadService.crearHabilidad(habilidad);
+        // Long idUsuario = //metodo para obtener id de usuario, esperar a pablo
+        //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una Habilidad");
         return habilidad;
     }
     @DeleteMapping("/delete/{id}")
     public void Eliminar(@PathVariable Long id){
         HabilidadEntity habilidadEliminada = habilidadService.findById(id);
         habilidadService.borrarHabilidad(habilidadEliminada);
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+        //         auditoriaService.registrarCambio(idUsuario, "Delete", "borro una Habilidad");
     }
 
 }

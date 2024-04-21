@@ -3,6 +3,9 @@ package Backend_Voluntarios.Backend.Controller;
 import java.util.List;
 import java.util.Map;
 
+import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
+import Backend_Voluntarios.Backend.Service.AuditoriaService;
+import Backend_Voluntarios.Backend.Service.EmergenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import Backend_Voluntarios.Backend.Service.InstitucionService;
@@ -17,6 +20,12 @@ import org.springframework.http.ResponseEntity;
 public class InstitucionController {
 
     private InstitucionService institucionService;
+
+    @Autowired
+    private EmergenciaService emergenciaService;
+
+    @Autowired
+    private AuditoriaService auditoriaService;
 
     @GetMapping("/{id}")
     public InstitucionEntity getInstitucionById(@PathVariable Long id){
@@ -44,8 +53,15 @@ public class InstitucionController {
         Long idEmergencia = Long.parseLong(body.get("idEmergencia"));
         String nombreInstitucion = body.get("nombreInstitucion");
 
-        InstitucionEntity institucion = new InstitucionEntity(idEmergencia, nombreInstitucion);
+        EmergenciaEntity emergenciaNew = emergenciaService.getEmergenciaById(idEmergencia);
+
+
+
+        InstitucionEntity institucion = new InstitucionEntity(emergenciaNew, nombreInstitucion);
         institucionService.addInstitucion(institucion);
+
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+        //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una institucion");
         return institucion;
     }
 
@@ -53,6 +69,9 @@ public class InstitucionController {
     public void Eliminar(@PathVariable Long id){
         InstitucionEntity institucionEliminada = institucionService.getInstitucionById(id);
         institucionService.deleteInstitucion(institucionEliminada);
+
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+        //         auditoriaService.registrarCambio(idUsuario, "Delete", "eliminio una institucion");
     }
 
 

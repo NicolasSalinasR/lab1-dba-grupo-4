@@ -1,10 +1,9 @@
 package Backend_Voluntarios.Backend.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "emergencia")
@@ -18,6 +17,12 @@ public class EmergenciaEntity {
     private String condicionFisica;
     private String cantidadVoluntariosMinimo;
     private String cantidadVoluntariosMaximo;
+
+    @OneToMany(mappedBy = "emergencia")
+    private Set<EmeHabilidadEntity> EmergenciaHabilidad= new HashSet<>();
+
+    @OneToMany(mappedBy = "emergencia")
+    private Set<InstitucionEntity> Institucion= new HashSet<>();
 
     // Constructor all
     public EmergenciaEntity(String tipoEmergencia, String zonaEmergencia, String condicionFisica,

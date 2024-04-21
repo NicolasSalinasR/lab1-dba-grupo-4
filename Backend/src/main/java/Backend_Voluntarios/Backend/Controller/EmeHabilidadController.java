@@ -3,6 +3,11 @@ package Backend_Voluntarios.Backend.Controller;
 import java.util.List;
 import java.util.Map;
 
+import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
+import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
+import Backend_Voluntarios.Backend.Service.AuditoriaService;
+import Backend_Voluntarios.Backend.Service.EmergenciaService;
+import Backend_Voluntarios.Backend.Service.HabilidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +23,14 @@ public class EmeHabilidadController {
 
 
     private EmeHabilidadService emeHabilidadService;
+    @Autowired
+    private EmergenciaService emergenciaService;
+
+    @Autowired
+    private HabilidadService habilidadService;
+
+    @Autowired
+    private AuditoriaService auditoriaService;
 
     @GetMapping("/{id}")
     public EmeHabilidadEntity getEmeHabilidadById(@PathVariable Long id){
@@ -42,9 +55,14 @@ public class EmeHabilidadController {
     public EmeHabilidadEntity addEmeHabilidad(@RequestBody Map<String, String> body){
         Long idEmergencia = Long.parseLong(body.get("idEmergencia"));
         Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
+        EmergenciaEntity emergenciaNew = emergenciaService.getEmergenciaById(idEmergencia);
+        HabilidadEntity habilidadNew = habilidadService.findById(idHabilidad);
 
-        EmeHabilidadEntity emeHabilidad = new EmeHabilidadEntity(idEmergencia,idHabilidad);
+
+        EmeHabilidadEntity emeHabilidad = new EmeHabilidadEntity(emergenciaNew,habilidadNew);
         emeHabilidadService.addEmeHabilidad(emeHabilidad);
+      //  Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+      //  auditoriaService.registrarCambio(idUsuario, "Add", "añadio una emergencia Habilidad");
         return emeHabilidad;
     }
 
@@ -52,6 +70,8 @@ public class EmeHabilidadController {
     public void Eliminar(@PathVariable Long id){
         EmeHabilidadEntity emeHabilidadEliminada = emeHabilidadService.getEmeHabilidadById(id);
         emeHabilidadService.deleteEmeHabilidad(emeHabilidadEliminada);
+    //    Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+      //          auditoriaService.registrarCambio(idUsuario, "delete", "borro una emergencia Habilidad");
     }
 
 
