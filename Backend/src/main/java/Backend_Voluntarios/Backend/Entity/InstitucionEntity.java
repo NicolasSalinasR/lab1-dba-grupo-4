@@ -18,6 +18,7 @@ public class InstitucionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idInstitucion;
 
+
     @OneToMany(mappedBy = "institucion")
     private Set<EmergenciaEntity> emergencia = new HashSet<>();
 

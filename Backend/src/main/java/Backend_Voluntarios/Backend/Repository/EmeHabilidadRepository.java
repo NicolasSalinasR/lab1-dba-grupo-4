@@ -1,14 +1,17 @@
 package Backend_Voluntarios.Backend.Repository;
 
 import Backend_Voluntarios.Backend.Entity.EmeHabilidadEntity;
-import Backend_Voluntarios.Backend.Entity.InstitucionEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Repository
-public interface EmeHabilidadRepository {
+public interface EmeHabilidadRepository extends JpaRepository<EmeHabilidadEntity, Long> {
 
     // findById
     @Query("SELECT e FROM EmeHabilidadEntity e WHERE e.idEmergenciaHabilidad = :id")
@@ -19,10 +22,10 @@ public interface EmeHabilidadRepository {
     List<EmeHabilidadEntity> findAllEmeHabilidades();
 
     // save
-
-    @Query("INSERT INTO EmeHabilidadEntity(idEmergenciaHabilidad,idHabilidad,idEmergencia)")
-    EmeHabilidadEntity saveEmeHabilidad(@Param("idEmergenciaHabilidad") Long idEmergenciaHabilidad,
-            @Param("idHabilidad") Long idHabilidad,
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO EmeHabilidadEntity (idHabilidad, idEmergencia) VALUES (:idHabilidad, :idEmergencia)")
+    public void saveEmeHabilidad(@Param("idHabilidad") Long idHabilidad,
             @Param("idEmergencia") Long idEmergencia);
 
     // delete
@@ -31,7 +34,7 @@ public interface EmeHabilidadRepository {
 
     // search
     @Query("SELECT palabra FROM EmeHabilidadEntity palabra WHERE"
-            + " CONCAT(palabra.idEmergenciaHabilidad, palabra.idHabilidad, palabra.idEmergencia)"
+            + " CONCAT(palabra.idEmergenciaHabilidad, palabra.habilidad.idHabilidad, palabra.emergencia.idEmergencia)"
             + " LIKE %?1%")
     public List<EmeHabilidadEntity> findAll(String palabraClave);
 

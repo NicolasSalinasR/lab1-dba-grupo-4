@@ -2,6 +2,7 @@ package Backend_Voluntarios.Backend.Service;
 
 import Backend_Voluntarios.Backend.Entity.RankingEntity;
 import Backend_Voluntarios.Backend.Repository.RankingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Service
 public class RankingService {
 
+    @Autowired
     private RankingRepository repositoryRanking;
 
     public List<RankingEntity> listaFiltro(String palabraClave) {
@@ -27,9 +29,8 @@ public class RankingService {
         return repositoryRanking.buscarIdRanking(idVoluntario);
     }
 
-    public RankingEntity nuevoRanking(RankingEntity rankingEntity) {
-        return repositoryRanking.crearRanking(rankingEntity.getIdRanking(),
-                rankingEntity.getIdTarea(),
+    public void nuevoRanking(RankingEntity rankingEntity) {
+         repositoryRanking.crearRanking(rankingEntity.getIdTarea(),
                 rankingEntity.getIdVoluntario(),
                 rankingEntity.getNivelRanking(),
                 rankingEntity.getTareaRanking());
@@ -43,14 +44,12 @@ public class RankingService {
         return repositoryRanking.idRanking(idRanking);
     }
 
-    public int puntajeRanking(String zona, String equipo) {
-        // separar el string equipo a una lista de string por ","
-        List<String> listaEquipos = List.of(equipo.split(","));
+    public int puntajeRanking(String zona, Long idVoluntario, Long idTarea) {
         int contador = 0;
         if (repositoryRanking.matchZona(zona) != null) {
             contador = contador + 1;
         }
-        contador = contador + repositoryRanking.matchEquipo(listaEquipos);
+        contador = contador + repositoryRanking.matchEquipo(idVoluntario, idTarea) + repositoryRanking.matchHabilidad(idVoluntario);
         return contador;
     }
 }

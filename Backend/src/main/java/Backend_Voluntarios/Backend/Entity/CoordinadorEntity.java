@@ -13,14 +13,14 @@ public class CoordinadorEntity {
 
     private String correoCoordinador;
 
-    private String contrasenaCoodinador;
+    private String contrasenaCoordinador;
 
     private String nombre;
 
-    public CoordinadorEntity(String correoCoordinador, String contrasenaCoodinador, String nombre) {
-        this.correoCoordinador = correoCoordinador;
-        this.contrasenaCoodinador = contrasenaCoodinador;
+    public CoordinadorEntity(String nombre, String contrasenaCoordinador, String correoCoordinador) {
         this.nombre = nombre;
+        this.contrasenaCoordinador = contrasenaCoordinador;
+        this.correoCoordinador = correoCoordinador;
     }
 
     public String getCorreoCoordinador() {
@@ -36,11 +36,11 @@ public class CoordinadorEntity {
     }
 
     public String getContrasenaCoodinador() {
-        return contrasenaCoodinador;
+        return contrasenaCoordinador;
     }
 
-    public void setContrasenaCoodinador(String contrasenaCoodinador) {
-        this.contrasenaCoodinador = contrasenaCoodinador;
+    public void setContrasenaCoodinador(String contrasenaCoordinador) {
+        this.contrasenaCoordinador = contrasenaCoordinador;
     }
 
     public void setCorreoCoordinador(String correoCoordinador) {

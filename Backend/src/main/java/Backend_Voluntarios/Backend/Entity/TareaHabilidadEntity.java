@@ -21,12 +21,11 @@ public class TareaHabilidadEntity {
     @JoinColumn(name = "idEmeHabilidad")
     private EmeHabilidadEntity emeHabilidad;
 
-    @ElementCollection
-    private List<String> habilidadRequerida;
+    @Column(nullable = false)
+    private String habilidadRequerida;
 
     // Constructor
-    public TareaHabilidadEntity(TareaEntity idTarea, EmeHabilidadEntity emeHabilidad,
-            List<String> habilidad_requerida) {
+    public TareaHabilidadEntity(TareaEntity idTarea, EmeHabilidadEntity emeHabilidad, String habilidad_requerida) {
         this.tarea = idTarea;
         this.emeHabilidad = emeHabilidad;
         this.habilidadRequerida = habilidad_requerida;
@@ -62,11 +61,11 @@ public class TareaHabilidadEntity {
         this.emeHabilidad = emeHabilidad;
     }
 
-    public List<String> getHabilidadRequerida() {
+    public String getHabilidadRequerida() {
         return habilidadRequerida;
     }
 
-    public void setHabilidadRequerida(List<String> habilidadRequerida) {
+    public void setHabilidadRequerida(String habilidadRequerida) {
         this.habilidadRequerida = habilidadRequerida;
     }
 }

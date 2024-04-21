@@ -2,11 +2,12 @@ package Backend_Voluntarios.Backend.Service;
 
 import Backend_Voluntarios.Backend.Entity.EstadoTareaEntity;
 import Backend_Voluntarios.Backend.Repository.EstadoTareaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class EstadoTareaService {
-
+    @Autowired
     private EstadoTareaRepository estadoTareaRepository;
 
     public List<EstadoTareaEntity> listAll(String palabraClave) {
@@ -20,7 +21,7 @@ public class EstadoTareaService {
     }
 
     public EstadoTareaEntity findById(Long idEstadoTarea) {
-        return estadoTareaRepository.findById(idEstadoTarea);
+        return estadoTareaRepository.encontrarId(idEstadoTarea);
     }
 
     public List<Long> getTareasSinTerminar() {
@@ -36,7 +37,7 @@ public class EstadoTareaService {
     }
 
     public void guardarEstadoTarea(EstadoTareaEntity estadoTarea) {
-        estadoTareaRepository.guardarEstadoTarea(estadoTarea.getIdEstadoTarea(), estadoTarea.getIdTarea(),
+        estadoTareaRepository.guardarEstadoTarea(estadoTarea.getIdTarea(),
                 estadoTarea.isEstadoTarea());
     }
 

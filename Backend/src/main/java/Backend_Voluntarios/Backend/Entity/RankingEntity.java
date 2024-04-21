@@ -11,7 +11,7 @@ public class RankingEntity {
     @Column(unique = true, nullable = false)
     private Long idRanking;
 
-
+    @Id
     @ManyToOne
     @JoinColumn(name = "idTarea")
     private TareaEntity tarea;
@@ -22,15 +22,23 @@ public class RankingEntity {
     @JoinColumn(name = "idVoluntario")
     private VoluntarioEntity voluntario;
 
+    @Column(nullable = false, length = 100)
+    private String nombreVoluntario;
+
+
+    @Column(unique = true, nullable = false, length = 100)
+    private String numeroDocumentoVoluntario;
     @Column(nullable = false)
     private Integer nivelRanking;
 
     @Column(nullable = false, length = 100)
     private String tareaRanking;
 
-    public RankingEntity(TareaEntity idTarea, VoluntarioEntity idVoluntario, Integer nivelRanking, String tareaRanking){
+    public RankingEntity(TareaEntity idTarea, VoluntarioEntity idVoluntario, String nombreVoluntario, String numeroDocumentoVoluntario, Integer nivelRanking, String tareaRanking){
         this.tarea = idTarea;
         this.voluntario = idVoluntario;
+        this.nombreVoluntario = nombreVoluntario;
+        this.numeroDocumentoVoluntario = numeroDocumentoVoluntario;
         this.nivelRanking = nivelRanking;
         this.tareaRanking = tareaRanking;
     }
@@ -41,6 +49,38 @@ public class RankingEntity {
 
     public Long getIdRanking() {
         return idRanking;
+    }
+
+    public VoluntarioEntity getVoluntario() {
+        return voluntario;
+    }
+
+    public String getNumeroDocumentoVoluntario() {
+        return numeroDocumentoVoluntario;
+    }
+
+    public void setNumeroDocumentoVoluntario(String numeroDocumentoVoluntario) {
+        this.numeroDocumentoVoluntario = numeroDocumentoVoluntario;
+    }
+
+    public String getNombreVoluntario() {
+        return nombreVoluntario;
+    }
+
+    public void setNombreVoluntario(String nombreVoluntario) {
+        this.nombreVoluntario = nombreVoluntario;
+    }
+
+    public void setVoluntario(VoluntarioEntity voluntario) {
+        this.voluntario = voluntario;
+    }
+
+    public TareaEntity getTarea() {
+        return tarea;
+    }
+
+    public void setTarea(TareaEntity tarea) {
+        this.tarea = tarea;
     }
 
     public String getTareaRanking() {

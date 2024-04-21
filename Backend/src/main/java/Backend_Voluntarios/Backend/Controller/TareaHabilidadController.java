@@ -49,7 +49,7 @@ public class TareaHabilidadController {
     public TareaHabilidadEntity addTareaHabilidad(@RequestBody Map<String, String> body) {
         Long idTarea = Long.parseLong(body.get("idTarea"));
         Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
-        List<String> habilidadRequerida = Collections.singletonList(body.get("habilidadRequerida"));
+        String habilidadRequerida = body.get("habilidadRequerida");
 
         TareaEntity tareaNew = tareaService.getTareaById(idTarea);
         EmeHabilidadEntity emeHabilidadNew = emeHabilidadService.getEmeHabilidadById(idHabilidad);

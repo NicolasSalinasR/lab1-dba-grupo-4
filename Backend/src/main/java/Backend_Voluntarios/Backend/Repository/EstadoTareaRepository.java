@@ -2,21 +2,24 @@ package Backend_Voluntarios.Backend.Repository;
 
 import Backend_Voluntarios.Backend.Entity.EstadoTareaEntity;
 import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface EstadoTareaRepository {
+public interface EstadoTareaRepository extends JpaRepository<EstadoTareaEntity, Long> {
     @Query("SELECT palabra FROM EstadoTareaEntity palabra WHERE"
-            + " CONCAT(palabra.idEstadoTarea, palabra.idTarea, palabra.estadoTarea)"
+            + " CONCAT(palabra.idEstadoTarea, palabra.estadoTarea)"
             + " LIKE %?1%")
     public List<EstadoTareaEntity> listAll(String palabraClave);
 
-    @Query(value = "SELECT * FROM estadoTarea  WHERE estadoTarea.idEstadoTarea = :idEstadoTarea", nativeQuery = true)
-    EstadoTareaEntity findById(@Param("idEstadoTarea") Long idEstadoTarea);
+    @Query("SELECT v FROM EstadoTareaEntity v WHERE v.idEstadoTarea = :idEstadoTarea")
+    EstadoTareaEntity encontrarId(@Param("idEstadoTarea") Long idEstadoTarea);
 
-    @Query(value = "SELECT * FROM Ent  WHERE Estado_tarea.Id_tarea = :Id_tarea", nativeQuery = true)
+    @Query("SELECT v FROM EstadoTareaEntity v  WHERE v.tarea.idTarea = :idTarea")
     EstadoTareaEntity findByIdTarea(@Param("idTarea") Long idTarea);
 
 
@@ -29,10 +32,11 @@ public interface EstadoTareaRepository {
     @Query(value = "DELETE FROM EstadoTareaEntity WHERE EstadoTareaEntity.idEstadoTarea = :idEstadoTarea", nativeQuery = true)
     EstadoTareaEntity borrarEstadoTarea(@Param("idEstadoTarea") Long idEstadoTarea);
 
-    @Query(value = "INSERT INTO EstadoTareaEntity (idEstadoTarea, idTarea, estadoTarea) " +
-            "VALUES (:idEstadoTarea, :idTarea, :estadoTarea)", nativeQuery = true)
-    EstadoTareaEntity guardarEstadoTarea(@Param("idEstadoTarea") Long idEstadoTarea,
-                                         @Param("idTarea") Long idTarea,
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO EstadoTareaEntity (idTarea, estadoTarea) " +
+            "VALUES (:idTarea, :estadoTarea)", nativeQuery = true)
+    void guardarEstadoTarea(@Param("idTarea") Long idTarea,
                                          @Param("estadoTarea") Boolean estadoTarea);
 
     @Query(value = "SELECT * FROM EstadoTareaEntity", nativeQuery = true)

@@ -1,13 +1,17 @@
 package Backend_Voluntarios.Backend.Repository;
 
 import Backend_Voluntarios.Backend.Entity.TareaEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Repository
-public interface TareaRepository {
+public interface TareaRepository extends JpaRepository<TareaEntity, Long> {
 
         // Encontrar tareas por Id
         @Query("SELECT t FROM TareaEntity t WHERE t.idTarea = :id")
@@ -17,13 +21,14 @@ public interface TareaRepository {
         @Query("SELECT t FROM TareaEntity t")
         List<TareaEntity> findAllTareas();
 
-        @Query("SELECT v FROM TareaEntity v WHERE v.idEmergencia = ?1")
+        @Query("SELECT v FROM TareaEntity v WHERE v.emergencia.idEmergencia = ?1")
         public List<TareaEntity> buscarIdEmergencia(@Param("v") Long idEmergencia);
 
         // Guardar
-        @Query("INSERT INTO TareaEntity (idTarea, nombreTarea, descripcionTarea, tipoTarea) VALUES (:idTarea, :descripcionTarea, :tipoTarea)")
-        TareaEntity saveTarea(@Param("idTarea") Long idTarea,
-                        @Param("nombreTarea") String nombreTarea,
+        @Transactional
+        @Modifying
+        @Query(value = "INSERT INTO TareaEntity (nombreTarea, descripcionTarea, tipoTarea) VALUES (:descripcionTarea, :tipoTarea)")
+        void saveTarea(@Param("nombreTarea") String nombreTarea,
                         @Param("descripcionTarea") String descripcionTarea,
                         @Param("tipoTarea") String tipoTarea);
 
@@ -32,7 +37,7 @@ public interface TareaRepository {
 
         @Query("SELECT t.nombreTarea, v.nombreVoluntario, r.nivelRanking " +
                         "FROM VoluntarioEntity v, TareaEntity t, RankingEntity r " +
-                        "WHERE t.nombreTarea = :nombreTarea AND v.idVoluntario = r.idVoluntario AND t.idTarea = r.idTarea "
+                        "WHERE t.nombreTarea = :nombreTarea AND v.idVoluntario = r.voluntario.idVoluntario AND t.idTarea = r.tarea.idTarea "
                         +
                         "GROUP BY t.nombreTarea, v.nombreVoluntario, r.nivelRanking " +
                         "ORDER BY r.nivelRanking DESC")

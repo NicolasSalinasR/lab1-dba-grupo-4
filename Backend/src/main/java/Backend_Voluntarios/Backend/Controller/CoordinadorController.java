@@ -48,10 +48,10 @@ public class CoordinadorController {
 
     @PostMapping("/guardar")
     public CoordinadorEntity crearCoordinador(@RequestBody Map<String, String> body) {
-        String correoCoordinador = body.get("correoCoordinador");
-        String contrasenaCoordinador = body.get("contrasenaCoordinador");
         String nombre = body.get("nombre");
-        CoordinadorEntity coordinador = new CoordinadorEntity(correoCoordinador, contrasenaCoordinador, nombre);
+        String contrasenaCoordinador = body.get("contrasenaCoordinador");
+        String correoCoordinador = body.get("correoCoordinador");
+        CoordinadorEntity coordinador = new CoordinadorEntity(nombre, contrasenaCoordinador, correoCoordinador);
         coordinadorService.nuevoCoordinador(coordinador);
         return coordinador; // ! Se debe cambiar al terminar el front por seguridad de que no devuelva
         // ! datos, solo debe devolver una respuesta de que se guardo correctamente
@@ -59,7 +59,7 @@ public class CoordinadorController {
 
     @DeleteMapping("/delete/{idCoordinador}")
     public void eliminar(@PathVariable Long idCoordinador) {
-        CoordinadorEntity voluntarioBorrado = coordinadorService.buscarId(idCoordinador);
-        coordinadorService.borrarCoordinador(voluntarioBorrado);
+        CoordinadorEntity coordinadorBorrado = coordinadorService.buscarId(idCoordinador);
+        coordinadorService.borrarCoordinador(coordinadorBorrado);
     }
 }

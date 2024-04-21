@@ -1,5 +1,6 @@
 package Backend_Voluntarios.Backend.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Backend_Voluntarios.Backend.Repository.VoluntarioHabilidadRepository;
 import Backend_Voluntarios.Backend.Entity.VoluntarioHabilidadEntity;
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Service
 public class VoluntarioHabilidadService {
-
+    @Autowired
     private VoluntarioHabilidadRepository voluntarioHabilidadRepository;
 
     public VoluntarioHabilidadEntity getVoluntarioHabilidadById(Long id) {
@@ -18,9 +19,8 @@ public class VoluntarioHabilidadService {
         return voluntarioHabilidadRepository.findAllVoluntarioHabilidades();
     }
 
-    public VoluntarioHabilidadEntity addVoluntarioHabilidad(VoluntarioHabilidadEntity voluntarioHabilidad) {
-        return voluntarioHabilidadRepository.saveVoluntarioHabilidad(voluntarioHabilidad.getIdVoluntarioHabilidad(),
-                voluntarioHabilidad.getIdVoluntario(),
+    public void addVoluntarioHabilidad(VoluntarioHabilidadEntity voluntarioHabilidad) {
+         voluntarioHabilidadRepository.saveVoluntarioHabilidad(voluntarioHabilidad.getIdVoluntario(),
                 voluntarioHabilidad.getIdHabilidad());
     }
 }
