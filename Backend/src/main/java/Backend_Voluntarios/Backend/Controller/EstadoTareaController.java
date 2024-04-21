@@ -16,7 +16,7 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class EstadoTareaController {
 
-    @Autowired
+
     private EstadoTareaService estadoTareaService;
 
     @GetMapping("/{id}")

@@ -11,12 +11,12 @@ import Backend_Voluntarios.Backend.Entity.EmeHabilidadEntity;
 import Backend_Voluntarios.Backend.Service.EmeHabilidadService;
 
 @RestController
-@RequestMapping("/voluntario_habilidad")
+@RequestMapping("/emergenciaHabilidad")
 @CrossOrigin(origins = "*")
 
 public class EmeHabilidadController {
 
-    @Autowired
+
     private EmeHabilidadService emeHabilidadService;
 
     @GetMapping("/{id}")

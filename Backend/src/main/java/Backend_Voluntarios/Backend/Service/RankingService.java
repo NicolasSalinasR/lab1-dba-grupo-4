@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class RankingService {
-    @Autowired
+
     private RankingRepository repositoryRanking;
 
     public List<RankingEntity> listaFiltro(String palabraClave){

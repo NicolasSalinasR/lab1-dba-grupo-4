@@ -4,11 +4,12 @@ package Backend_Voluntarios.Backend.Service;
 import Backend_Voluntarios.Backend.Entity.EstadoTareaEntity;
 import Backend_Voluntarios.Backend.Repository.EstadoTareaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class EstadoTareaService {
-    @Autowired
+
     private EstadoTareaRepository estadoTareaRepository;
 
     public List<EstadoTareaEntity> listAll(String palabraClave){

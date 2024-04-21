@@ -9,7 +9,7 @@ import Backend_Voluntarios.Backend.Entity.TareaHabilidadEntity;
 @Service
 public class TareaHabilidadService {
 
-    @Autowired
+
     private TareaHabilidadRepository tareaHabilidadRepository;
 
     public TareaHabilidadEntity getTareaHabilidadById(Long id) {

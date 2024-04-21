@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class VoluntarioService {
-    @Autowired
+
     private VoluntarioRepository repositoryVoluntario;
 
     public List<VoluntarioEntity> listaFiltro(String palabraClave) {
@@ -53,5 +53,6 @@ public class VoluntarioService {
         if (voluntario.getContrasenaVoluntario().equals(contrasenaVoluntario)) {
             return voluntario;
         }
+        return voluntario;
     }
 }

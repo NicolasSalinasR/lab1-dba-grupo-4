@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TareaHabilidadRepository extends JpaRepository<TareaHabilidadEntity, Long> {
+public interface TareaHabilidadRepository {
 
     // Encontrar tarea_hablidades por Id
     @Query("SELECT th FROM TareaHabilidadEntity th WHERE th.idTareaHabilidad = :id")

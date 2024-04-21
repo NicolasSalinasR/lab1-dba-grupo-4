@@ -16,7 +16,7 @@ import java.util.Map;
 @RequestMapping("/Habilidad")
 @CrossOrigin(origins = "*")
 public class HabilidadController {
-    @Autowired
+
     private HabilidadService habilidadService;
 
     @GetMapping("/{id}")
