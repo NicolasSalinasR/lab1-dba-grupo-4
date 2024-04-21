@@ -3,6 +3,7 @@ package Backend_Voluntarios.Backend.Controller;
 import java.util.List;
 import java.util.Map;
 
+import Backend_Voluntarios.Backend.Service.AuditoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,9 @@ public class TareaController {
 
     @Autowired
     private TareaService tareaService;
+
+    @Autowired
+    private AuditoriaService auditoriaService;
 
     @GetMapping("/{id}")
     public TareaEntity getTareaById(@PathVariable Long id) {
@@ -44,6 +48,8 @@ public class TareaController {
 
         tareaService.addTarea(tarea);
 
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+        //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una tarea");
         return tarea;
     }
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
 import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
+import Backend_Voluntarios.Backend.Service.AuditoriaService;
 import Backend_Voluntarios.Backend.Service.HabilidadService;
 import Backend_Voluntarios.Backend.Service.VoluntarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class VoluntarioHabilidadController {
     @Autowired
     private HabilidadService habilidadService;
 
+    @Autowired
+    private AuditoriaService auditoriaService;
+
     @GetMapping("{id}")
     public VoluntarioHabilidadEntity getVoluntarioHabilidadById(Long id) {
         return voluntarioHabilidadService.getVoluntarioHabilidadById(id);
@@ -52,6 +56,9 @@ public class VoluntarioHabilidadController {
 
         VoluntarioHabilidadEntity voluntario_habilidad = new VoluntarioHabilidadEntity(voluntarioNew, habilidadNew);
         voluntarioHabilidadService.addVoluntarioHabilidad(voluntario_habilidad);
+
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+        //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una voluntario Habilidad");
         return voluntario_habilidad;
     }
 }

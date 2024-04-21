@@ -7,6 +7,7 @@ import java.util.Map;
 
 import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
 import Backend_Voluntarios.Backend.Entity.TareaEntity;
+import Backend_Voluntarios.Backend.Service.AuditoriaService;
 import Backend_Voluntarios.Backend.Service.HabilidadService;
 import Backend_Voluntarios.Backend.Service.TareaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class TareaHabilidadController {
     private TareaService tareaService;
     private HabilidadService habilidadService;
 
+    @Autowired
+    private AuditoriaService auditoriaService;
+
     @GetMapping("/{id}")
     public TareaHabilidadEntity getTareaHabilidadById(@PathVariable Long id) {
         return tareaHabilidadService.getTareaHabilidadById(id);
@@ -52,6 +56,9 @@ public class TareaHabilidadController {
         TareaHabilidadEntity tareaHabilidad = new TareaHabilidadEntity(tareaNew, habilidadNew, habilidadRequerida);
 
         tareaHabilidadService.addTareaHabilidad(tareaHabilidad);
+
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+        //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una tarea Habilidad");
 
         return tareaHabilidad;
     }

@@ -4,10 +4,7 @@ import Backend_Voluntarios.Backend.Entity.RankingEntity;
 import Backend_Voluntarios.Backend.Entity.TareaEntity;
 import Backend_Voluntarios.Backend.Entity.TareaHabilidadEntity;
 import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
-import Backend_Voluntarios.Backend.Service.RankingService;
-import Backend_Voluntarios.Backend.Service.TareaHabilidadService;
-import Backend_Voluntarios.Backend.Service.TareaService;
-import Backend_Voluntarios.Backend.Service.VoluntarioService;
+import Backend_Voluntarios.Backend.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +21,9 @@ public class RankingController {
     private VoluntarioService voluntarioService;
     private TareaService tareaService;
     private TareaHabilidadService tareaHabilidadService;
+
+    @Autowired
+    private AuditoriaService auditoriaService;
 
     @GetMapping()
     public String conectado(){
@@ -77,6 +77,8 @@ public class RankingController {
 
             RankingEntity ranking = new RankingEntity(nombreTarea, buscarZona, nivelRanking, tareaRanking);
             rankingService.nuevoRanking(ranking);
+            // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+            //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio un ranking");
         }
     }
 
@@ -84,6 +86,9 @@ public class RankingController {
     public void eliminar(@PathVariable Long idRanking){
         RankingEntity rankingEntity = rankingService.buscarId(idRanking);
         rankingService.borrarRanking(rankingEntity);
+
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+        //         auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un ranking");
     }
 
     @PutMapping("editar}/{idVoluntario}")
@@ -94,5 +99,8 @@ public class RankingController {
         RankingEntity updateUser = rankingService.buscarId(idVoluntario);
         updateUser.setNivelRanking(rankingService.puntajeRanking(zona, equipo));
         rankingService.nuevoRanking(updateUser);
+
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
+        //         auditoriaService.registrarCambio(idUsuario, "update", "modifico un Ranking");
     }
 }
