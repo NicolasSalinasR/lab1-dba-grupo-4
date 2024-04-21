@@ -1,11 +1,13 @@
 package Backend_Voluntarios.Backend.Controller;
 
-import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
+import Backend_Voluntarios.Backend.Entity.AuthenticationResponse;
+import Backend_Voluntarios.Backend.Entity.LoginRequest;
 import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
 import Backend_Voluntarios.Backend.Service.VoluntarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import Backend_Voluntarios.Backend.Service.AuthService;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +18,9 @@ import java.util.Map;
 public class VoluntarioController {
     @Autowired
     private VoluntarioService voluntarioService;
+
+    @Autowired
+    private AuthService authService;
 
     @GetMapping()
     public String conectado() {
@@ -58,7 +63,8 @@ public class VoluntarioController {
         String zonaViviendaVoluntario = body.get("zonaViviendaVoluntario");
 
         VoluntarioEntity voluntario = new VoluntarioEntity(nombreVoluntario, correoVoluntario,
-                numeroDocumentoVoluntario, Collections.singletonList(equipamientoVoluntario), zonaViviendaVoluntario);
+                numeroDocumentoVoluntario, Collections.singletonList(equipamientoVoluntario), zonaViviendaVoluntario,
+                contrasenaVoluntario);
         voluntarioService.nuevoVoluntario(voluntario);
         return voluntario; // ! Se debe cambiar al terminar el front por seguridad de que no devuelva
         // ! datos, solo debe devolver una respuesta de que se guardo correctamente
@@ -71,11 +77,15 @@ public class VoluntarioController {
     }
 
     @PutMapping("/login")
-    public ResponseEntity<VoluntarioEntity> login(@RequestBody Map<String, String> body){
-        // Se confirma que el usuario y contraseña sean correctos, si lo son se genera un JWT y se devuelve
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody Map<String, String> body) {
+        // Se confirma que el usuario y contraseña sean correctos, si lo son se genera
+        // un JWT y se devuelve
         // Si no son correctos se devuelve un error
         String correoVoluntario = body.get("correoVoluntario");
         String contrasenaVoluntario = body.get("contrasenaVoluntario");
 
-        VoluntarioEntity voluntario = voluntarioService.login(correoVoluntario, contrasenaVoluntario);
+        LoginRequest loginRequest = new LoginRequest(correoVoluntario, contrasenaVoluntario);
+        return ResponseEntity.ok(authService.login(loginRequest));
+
+    }
 }
