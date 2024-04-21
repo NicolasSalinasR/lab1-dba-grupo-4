@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public class CoordinadorService {
-    @Autowired
+
     private CoordinadorRepository coordinadorRepository;
     public List<CoordinadorEntity> listaFiltro(String palabraClave){
         return coordinadorRepository.listaPalabraClave(palabraClave);

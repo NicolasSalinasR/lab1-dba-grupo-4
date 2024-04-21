@@ -21,7 +21,7 @@ import Backend_Voluntarios.Backend.Entity.TareaHabilidadEntity;
 @CrossOrigin(origins = "*")
 public class TareaHabilidadController {
 
-    @Autowired
+
     private TareaHabilidadService tareaHabilidadService;
 
     @GetMapping("/{id}")

@@ -13,7 +13,6 @@ import java.util.Map;
 @RequestMapping("/coordinador")
 public class CoordinadorController {
 
-    @Autowired
     private CoordinadorService coordinadorService;
 
     @GetMapping()

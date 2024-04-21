@@ -20,7 +20,7 @@ import Backend_Voluntarios.Backend.Entity.TareaEntity;
 @CrossOrigin(origins = "*")
 public class TareaController {
 
-    @Autowired
+
     private TareaService tareaService;
 
     @GetMapping("/{id}")

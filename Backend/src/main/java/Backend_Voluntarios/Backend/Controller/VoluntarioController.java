@@ -14,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/voluntario")
 public class VoluntarioController {
-    @Autowired
+
     private VoluntarioService voluntarioService;
 
     @GetMapping()
@@ -71,11 +71,13 @@ public class VoluntarioController {
     }
 
     @PutMapping("/login")
-    public ResponseEntity<VoluntarioEntity> login(@RequestBody Map<String, String> body){
+    public ResponseEntity<VoluntarioEntity> login(@RequestBody Map<String, String> body) {
         // Se confirma que el usuario y contraseña sean correctos, si lo son se genera un JWT y se devuelve
         // Si no son correctos se devuelve un error
         String correoVoluntario = body.get("correoVoluntario");
         String contrasenaVoluntario = body.get("contrasenaVoluntario");
 
         VoluntarioEntity voluntario = voluntarioService.login(correoVoluntario, contrasenaVoluntario);
+        return null;
+    }
 }

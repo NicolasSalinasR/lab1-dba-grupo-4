@@ -11,7 +11,7 @@ import Backend_Voluntarios.Backend.Entity.TareaEntity;
 @Service
 public class TareaService {
 
-    @Autowired
+
     private TareaRepository tareaRepository;
 
     public TareaEntity getTareaById(Long id) {

@@ -19,7 +19,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/ranking")
 public class RankingController {
-    @Autowired
+
     private RankingService rankingService;
     private VoluntarioService voluntarioService;
     private TareaService tareaService;
@@ -83,7 +83,7 @@ public class RankingController {
         rankingService.borrarRanking(rankingEntity);
     }
 
-    @PutMapping("editar}/{idVoluntario}")
+    @PutMapping("editar/{idVoluntario}")
     public void actualizar(@PathVariable Long idVoluntario){
         VoluntarioEntity update = voluntarioService.buscarId(idVoluntario);
         List<String> equipo = update.getEquipamientoVoluntario();

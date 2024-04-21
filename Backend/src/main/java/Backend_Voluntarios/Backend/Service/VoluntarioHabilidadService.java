@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class VoluntarioHabilidadService {
-    @Autowired
+
     private VoluntarioHabilidadRepository voluntarioHabilidadRepository;
 
     public VoluntarioHabilidadEntity getVoluntarioHabilidadById(Long id) {

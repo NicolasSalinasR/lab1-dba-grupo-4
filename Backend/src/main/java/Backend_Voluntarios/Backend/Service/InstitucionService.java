@@ -9,7 +9,7 @@ import Backend_Voluntarios.Backend.Entity.InstitucionEntity;
 
 @Service
 public class InstitucionService {
-    @Autowired
+
     private InstitucionRepository institucionRepository;
 
     public InstitucionEntity getInstitucionById(Long id){

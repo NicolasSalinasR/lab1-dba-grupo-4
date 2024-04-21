@@ -11,7 +11,7 @@ import Backend_Voluntarios.Backend.Entity.EmeHabilidadEntity;
 @Service
 public class EmeHabilidadService {
 
-    @Autowired
+
     private EmeHabilidadRepository emeHabilidadRepository;
 
     public EmeHabilidadEntity getEmeHabilidadById(Long id){
