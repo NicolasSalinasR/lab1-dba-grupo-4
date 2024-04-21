@@ -24,6 +24,9 @@ public class VoluntarioEntity {
     @Column(nullable = false)
     private String zonaViviendaVoluntario;
 
+    @Column(nullable = false, length = 100)
+    private String contrasenaVoluntario;
+
     // agregar token pero no como atributo de la tabla
     @Transient
     private String token;
@@ -34,6 +37,7 @@ public class VoluntarioEntity {
     public VoluntarioEntity(String nombreVoluntario, String correoVoluntario, String numeroDocumentoVoluntario,
             List<String> equipamientoVoluntario, String zonaViviendaVoluntario) {
         this.nombreVoluntario = nombreVoluntario;
+        this.contrasenaVoluntario = contrasenaVoluntario;
         this.correoVoluntario = correoVoluntario;
         this.numeroDocumentoVoluntario = numeroDocumentoVoluntario;
         this.equipamientoVoluntario = equipamientoVoluntario;
@@ -42,6 +46,14 @@ public class VoluntarioEntity {
 
     public VoluntarioEntity() {
         super();
+    }
+
+    public String getContrasenaVoluntario() {
+        return contrasenaVoluntario;
+    }
+
+    public void setContrasenaVoluntario(String contrasenaVoluntario) {
+        this.contrasenaVoluntario = contrasenaVoluntario;
     }
 
     public Long getIdVoluntario() {

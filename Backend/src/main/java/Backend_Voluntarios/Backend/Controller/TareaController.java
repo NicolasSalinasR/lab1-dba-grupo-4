@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,15 +33,19 @@ public class TareaController {
         return tareaService.getAllTareas();
     }
 
+    @GetMapping("/{nombreTarea}")
+    public List<TareaEntity> getRankingTarea(@PathVariable String nombreTarea){
+        return tareaService.getRankingTarea(nombreTarea);
+    }
+
     @PostMapping("/add")
     public TareaEntity addTarea(@RequestBody Map<String, String> body) {
         Long idEstadoTarea = Long.parseLong(body.get("idEstadoTarea"));
-        Long idEmergencia = Long.parseLong(body.get("idEmergencia"));
         String nombreTarea = body.get("nombreTarea");
         String descripcionTarea = body.get("descripcionTarea");
         String tipoTarea = body.get("tipoTarea");
 
-        TareaEntity tarea = new TareaEntity(idEstadoTarea, idEmergencia, nombreTarea, descripcionTarea, tipoTarea);
+        TareaEntity tarea = new TareaEntity(idEstadoTarea, nombreTarea, descripcionTarea, tipoTarea);
 
         tareaService.addTarea(tarea);
 

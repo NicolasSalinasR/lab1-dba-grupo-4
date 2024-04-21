@@ -51,6 +51,7 @@ public class VoluntarioController {
     @PostMapping("/guardar")
     public VoluntarioEntity crearVoluntario(@RequestBody Map<String, String> body) {
         String nombreVoluntario = body.get("nombreVoluntario");
+        String contrasenaVoluntario = body.get("contrasenaVoluntario");
         String correoVoluntario = body.get("correoVoluntario");
         String numeroDocumentoVoluntario = body.get("numeroDocumentoVoluntario");
         String equipamientoVoluntario = body.get("equipamientoVoluntario");

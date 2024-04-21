@@ -2,11 +2,17 @@
 
     <img src="../images/mundo.svg" alt="mundo">
     <Navbar />
+    <div id="app">
+      <side-menu></side-menu>
+      <router-view></router-view>
+    </div>
     <main></main>
 
 </template>
 
 <script>
+
+import SideMenu from '@/components/SideMenu.vue';
 
 
 </script>

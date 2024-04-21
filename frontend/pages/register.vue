@@ -6,14 +6,15 @@
 
         <img src="../images/mundo.svg" alt="mundo">
         <div class="containerLogin">
-            <h1>Iniciar Sesión</h1>
+            <h1>Registro</h1>
             <form @submit.prevent="login" class="formLogin">
+                <input type="text" v-model="nombre" placeholder="Nombre">
+                <input type="text" v-model="zonaVivienda" placeholder="Zona de Vivienda">
+                <input type="text" v-model="numDocumento" placeholder="Número de documento">
                 <input type="text" v-model="email" placeholder="Email">
                 <input type="password" v-model="password" placeholder="Contraseña">
-                <div class="register"   @click="$router.push(`/register`);" >
-                    <a>Registrarse</a>
-                </div>
-                <button @click="$router.push(`/voluntario`);" type="submit">Ingresar</button>
+                <input type="password" v-model="password" placeholder="Repita contraseña">
+                <button type="submit">Registrarse</button>
                 
             </form>
         </div>
@@ -26,8 +27,11 @@
 export default {
     data() {
         return {
-            email: '',
-            password: ''
+        nombre:'',
+        zonaVivienda:'',
+        numDocumento:'',
+        email: '',
+        password: ''
         };
     },
     // metodo para que cada 5 segundos el circle cambie de posicion sin salirse de la pantalla
@@ -55,19 +59,23 @@ export default {
             }, 4000);
 
         },
-        async login() {
+        async registrarUsuario() {
             try {
-                const res = await this.$axios.post('http://localhost:3000/api/auth/login', {
-                    email: this.email,
-                    password: this.password
+                const response = await axios.post('http://localhost:3000/api/registro', {
+                nombre: this.nombre,
+                zonaVivienda: this.zonaVivienda,
+                numDocumento: this.numDocumento,
+                email: this.email,
+                password: this.password
                 });
-                console.log(res.data);
-                this.$router.push('/dashboard');
+                console.log(response.data);
+                // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
             } catch (error) {
-                console.log(error);
+                console.error('Error al registrar el usuario:', error);
+                // Aquí podrías mostrar un mensaje de error al usuario
+            }
             }
         }
-    }
 
 };
 

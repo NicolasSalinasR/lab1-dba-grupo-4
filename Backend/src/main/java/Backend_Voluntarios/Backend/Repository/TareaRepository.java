@@ -1,6 +1,8 @@
 package Backend_Voluntarios.Backend.Repository;
 
 import Backend_Voluntarios.Backend.Entity.TareaEntity;
+import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
+import Backend_Voluntarios.Backend.Entity.RankingEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,12 +20,23 @@ public interface TareaRepository extends JpaRepository<TareaEntity, Long> {
     @Query("SELECT t FROM TareaEntity t")
     List<TareaEntity> findAllTareas();
 
+    @Query("SELECT v FROM TareaEntity v WHERE v.idEmergencia = ?1")
+    public List<TareaEntity> buscarIdEmergencia(@Param("v") Long idEmergencia);
+
     // Guardar
-    @Query("INSERT INTO TareaEntity (idTarea, idEstadoTarea, idEmergencia,nombreTarea, descripcionTarea, tipoTarea) VALUES (:idTarea, :idEstadoTarea, :idEmergencia, :descripcionTarea, :tipoTarea)")
+    @Query("INSERT INTO TareaEntity (idTarea, idEstadoTarea, nombreTarea, descripcionTarea, tipoTarea) VALUES (:idTarea, :idEstadoTarea, :descripcionTarea, :tipoTarea)")
     TareaEntity saveTarea(@Param("idTarea") Long idTarea,
                           @Param("idEstadoTarea") Long idEstadoTarea,
-                          @Param("idEmergencia") Long idEmergencia,
                           @Param("nombreTarea") String nombreTarea,
                           @Param("descripcionTarea") String descripcionTarea,
                           @Param("tipoTarea") String tipoTarea);
+
+    // Crear en pantalla un listado de voluntarios por ranking para una tarea específica
+
+    @Query("SELECT t.nombreTarea, v.nombreVoluntario, r.nivelRanking " +
+            "FROM VoluntarioEntity v, TareaEntity t, RankingEntity r " +
+            "WHERE t.nombreTarea = :nombreTarea AND v.idVoluntario = r.idVoluntario AND t.idTarea = r.idTarea " +
+            "GROUP BY t.nombreTarea, v.nombreVoluntario, r.nivelRanking " +
+            "ORDER BY r.nivelRanking DESC")
+    List<TareaEntity> listRankingTarea(@Param("nombreTarea") String nombreTarea);
 }
