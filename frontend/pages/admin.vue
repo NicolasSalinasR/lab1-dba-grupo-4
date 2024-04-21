@@ -12,26 +12,28 @@
         <div v-if="!mostrarCard && !mostrarListCard2" style="display: flex;">
             <!-- Columna 1 -->
             <div style="flex: 1;">
-                <div class="colum" >
-                    <button class="big-button">Crear Emergencia  +  </button>
+                <div class="column" >
+                    <div class = "boton">
+                        <button class="big-button">Crear Emergencia  +  </button>
+                    </div>
                 </div>
 
             </div>
 
             <!-- Columna 2 -->
             <div style="flex: 1;">
-                <button class="big-button">Otro botón</button>
+                <Card title1="SIMBOLOGÍA"></Card>
             </div>
         </div>
 
         <Card v-if= "mostrarCard" @change-component="mostrarComponente" title1="EMERGENCIA" :description1="[
-              {text1:'Primeros Auxilios',text2:'Incencio en Valparaíso' ,buttonLabel:'Ver tareas'},
-              {text1:'Recoger escombros',text2:'Incendio en Valparaíso', buttonLabel:'Ver tareas'},
-              {text1:'Primeros Auxilios',text2:'Incencio en Valparaíso' ,buttonLabel:'Ver tareas'},
-              {text1:'Primeros Auxilios',text2:'Incencio en Valparaíso' ,buttonLabel:'Ver tareas'},
-              {text1:'Primeros Auxilios',text2:'Incencio en Valparaíso' ,buttonLabel:'Ver tareas'},
-              {text1:'Primeros Auxilios',text2:'Incencio en Valparaíso' ,buttonLabel:' Ver tareas'}]"  />
-        <ListCard2 v-if="mostrarTareas" @volver="mostrarComponente('Card')" />
+              {text1:'Incencio en Valparaíso' ,buttonLabel:'Ver tareas'},
+              {text1:'Incencio en Valparaíso', buttonLabel:'Ver tareas'},
+              {text1:'Incencio en Valparaíso' ,buttonLabel:'Ver tareas'},
+              {text1:'Incencio en Valparaíso' ,buttonLabel:'Ver tareas'},
+              {text1:'Incencio en Valparaíso' ,buttonLabel:'Ver tareas'},
+              {text1:'Incencio en Valparaíso' ,buttonLabel:' Ver tareas'}]"  />
+        <ListCard2 v-if="mostrarTareas" @volver="mostrarComponente('Card')" title1="cuál es esta?" />
         <ListCard2 v-if="mostrarListCard2" 
         :description1="[
               {text1:'Incencio - Valparaíso',buttonLabel:'Ver Voluntarios'},
@@ -189,7 +191,7 @@
   font-size: 24px; /* Tamaño del texto */
   padding: 20px 40px; /* Espacio interno del botón */
   border: none; /* Sin borde */
-  background-color: #007bff; /* Color de fondo del botón */
+  background-color: #347355; /* Color de fondo del botón */
   color: white; /* Color del texto */
   border-radius: 10px; /* Borde redondeado */
   cursor: pointer; /* Cursor al pasar el ratón */
@@ -200,5 +202,18 @@
 .big-button:hover {
   background-color: #000000; /* Cambio de color de fondo */
 }
+
+.column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 10px; /* Añade un poco de espacio entre las columnas */
+    }
+
+    .boton{
+        display: flex;
+        justify-content: center;
+        padding: 0 10px; /* Añade un poco de espacio entre las columnas */
+    margin-top: 75px;}
 
   </style>
