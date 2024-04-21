@@ -1,5 +1,7 @@
 package Backend_Voluntarios.Backend.Repository;
 
+import Backend_Voluntarios.Backend.Entity.EmeHabilidadEntity;
+import Backend_Voluntarios.Backend.Entity.TareaEntity;
 import Backend_Voluntarios.Backend.Entity.TareaHabilidadEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,6 +26,7 @@ public interface TareaHabilidadRepository extends JpaRepository<TareaHabilidadEn
     // Guardar
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO TareaHabilidadEntity (idTarea, idHabilidad, habilidadRequerida) VALUES (:idTarea, :idEstadoTarea, :habilidadRequerida)")
-    void saveTareaHabilidad(@Param("habilidadRequerida") String habilidadRequerida);
+    @Query(value = "INSERT INTO TareaHabilidadEntity (tarea, emeHabilidad, habilidadRequerida) VALUES (:tarea, :emeHabilidad, :habilidadRequerida)")
+    void saveTareaHabilidad(@Param("tarea") TareaEntity tarea, @Param("emeHabilidad") EmeHabilidadEntity emeHabilidad,
+            @Param("habilidadRequerida") String habilidadRequerida);
 }

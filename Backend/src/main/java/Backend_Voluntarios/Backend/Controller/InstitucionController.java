@@ -58,15 +58,16 @@ public class InstitucionController {
         return institucion;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void Eliminar(@PathVariable Long id) {
-        InstitucionEntity institucionEliminada = institucionService.getInstitucionById(id);
-        institucionService.deleteInstitucion(institucionEliminada);
+    // @DeleteMapping("/delete/{id}")
+    // public void Eliminar(@PathVariable Long id) {
+    // InstitucionEntity institucionEliminada =
+    // institucionService.getInstitucionById(id);
+    // institucionService.deleteInstitucion(institucionEliminada);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
-        // pablo
-        // auditoriaService.registrarCambio(idUsuario, "Delete", "eliminio una
-        // institucion");
-    }
+    // // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+    // // pablo
+    // // auditoriaService.registrarCambio(idUsuario, "Delete", "eliminio una
+    // // institucion");
+    // }
 
 }

@@ -68,4 +68,20 @@ public class TareaHabilidadEntity {
     public void setHabilidadRequerida(String habilidadRequerida) {
         this.habilidadRequerida = habilidadRequerida;
     }
+
+    public TareaEntity getTarea() {
+        return tarea;
+    }
+
+    public void setTarea(TareaEntity tarea) {
+        this.tarea = tarea;
+    }
+
+    public EmeHabilidadEntity getEmeHabilidad() {
+        return emeHabilidad;
+    }
+
+    public void setEmeHabilidad(EmeHabilidadEntity emeHabilidad) {
+        this.emeHabilidad = emeHabilidad;
+    }
 }

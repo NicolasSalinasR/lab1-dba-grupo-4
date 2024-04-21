@@ -11,7 +11,7 @@ public class VoluntarioHabilidadEntity {
 
     @ManyToOne
     @JoinColumn(name = "idVoluntario")
-    private VoluntarioEntity voluntario ;
+    private VoluntarioEntity voluntario;
 
     @ManyToOne
     @JoinColumn(name = "idHabilidad")
@@ -45,5 +45,13 @@ public class VoluntarioHabilidadEntity {
 
     public void setIdHabilidad(HabilidadEntity idHabilidad) {
         this.habilidad = idHabilidad;
+    }
+
+    public VoluntarioEntity getVoluntario() {
+        return this.voluntario;
+    }
+
+    public HabilidadEntity getHabilidad() {
+        return this.habilidad;
     }
 }

@@ -10,7 +10,6 @@ public class EmeHabilidadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long idEmergenciaHabilidad;
 
     @ManyToOne
@@ -49,6 +48,14 @@ public class EmeHabilidadEntity {
 
     public Long getIdEmergencia() {
         return emergencia.getIdEmergencia();
+    }
+
+    public EmergenciaEntity getEmergencia() {
+        return emergencia;
+    }
+
+    public HabilidadEntity getHabilidad() {
+        return habilidad;
     }
 
     // Setters

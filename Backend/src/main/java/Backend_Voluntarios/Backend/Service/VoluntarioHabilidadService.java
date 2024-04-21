@@ -20,7 +20,7 @@ public class VoluntarioHabilidadService {
     }
 
     public void addVoluntarioHabilidad(VoluntarioHabilidadEntity voluntarioHabilidad) {
-         voluntarioHabilidadRepository.saveVoluntarioHabilidad(voluntarioHabilidad.getIdVoluntario(),
-                voluntarioHabilidad.getIdHabilidad());
+        voluntarioHabilidadRepository.saveVoluntarioHabilidad(voluntarioHabilidad.getVoluntario(),
+                voluntarioHabilidad.getHabilidad());
     }
 }

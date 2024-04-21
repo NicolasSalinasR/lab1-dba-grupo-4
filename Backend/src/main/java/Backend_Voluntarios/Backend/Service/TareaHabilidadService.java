@@ -21,6 +21,7 @@ public class TareaHabilidadService {
     }
 
     public void addTareaHabilidad(TareaHabilidadEntity tareaHabilidad) {
-         tareaHabilidadRepository.saveTareaHabilidad(tareaHabilidad.getHabilidadRequerida());
+        tareaHabilidadRepository.saveTareaHabilidad(tareaHabilidad.getTarea(), tareaHabilidad.getEmeHabilidad(),
+                tareaHabilidad.getHabilidadRequerida());
     }
 }

@@ -21,7 +21,6 @@ import Backend_Voluntarios.Backend.Service.EmeHabilidadService;
 
 public class EmeHabilidadController {
 
-
     private EmeHabilidadService emeHabilidadService;
     @Autowired
     private EmergenciaService emergenciaService;
@@ -58,20 +57,24 @@ public class EmeHabilidadController {
         EmergenciaEntity emergenciaNew = emergenciaService.getEmergenciaById(idEmergencia);
         HabilidadEntity habilidadNew = habilidadService.findById(idHabilidad);
 
-
-        EmeHabilidadEntity emeHabilidad = new EmeHabilidadEntity(emergenciaNew,habilidadNew);
+        EmeHabilidadEntity emeHabilidad = new EmeHabilidadEntity(emergenciaNew, habilidadNew);
         emeHabilidadService.addEmeHabilidad(emeHabilidad);
-      //  Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-      //  auditoriaService.registrarCambio(idUsuario, "Add", "añadio una emergencia Habilidad");
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "Add", "añadio una emergencia
+        // Habilidad");
         return emeHabilidad;
     }
 
-    @DeleteMapping("delete/{id}")
-    public void Eliminar(@PathVariable Long id) {
-        EmeHabilidadEntity emeHabilidadEliminada = emeHabilidadService.getEmeHabilidadById(id);
-        emeHabilidadService.deleteEmeHabilidad(emeHabilidadEliminada);
-    //    Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-      //          auditoriaService.registrarCambio(idUsuario, "delete", "borro una emergencia Habilidad");
-    }
+    // @DeleteMapping("delete/{id}")
+    // public void Eliminar(@PathVariable Long id) {
+    // EmeHabilidadEntity emeHabilidadEliminada =
+    // emeHabilidadService.getEmeHabilidadById(id);
+    // emeHabilidadService.deleteEmeHabilidad(emeHabilidadEliminada);
+    // // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+    // pablo
+    // // auditoriaService.registrarCambio(idUsuario, "delete", "borro una
+    // emergencia Habilidad");
+    // }
 
 }

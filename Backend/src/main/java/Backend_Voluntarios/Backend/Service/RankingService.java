@@ -30,8 +30,9 @@ public class RankingService {
     }
 
     public void nuevoRanking(RankingEntity rankingEntity) {
-         repositoryRanking.crearRanking(rankingEntity.getIdTarea(),
-                rankingEntity.getIdVoluntario(),
+        repositoryRanking.crearRanking(rankingEntity.getTarea(),
+                rankingEntity.getVoluntario(),
+                rankingEntity.getNumeroDocumentoVoluntario(),
                 rankingEntity.getNivelRanking(),
                 rankingEntity.getTareaRanking());
     }
@@ -49,7 +50,8 @@ public class RankingService {
         if (repositoryRanking.matchZona(zona) != null) {
             contador = contador + 1;
         }
-        contador = contador + repositoryRanking.matchEquipo(idVoluntario, idTarea) + repositoryRanking.matchHabilidad(idVoluntario);
+        contador = contador + repositoryRanking.matchEquipo(idVoluntario, idTarea)
+                + repositoryRanking.matchHabilidad(idVoluntario);
         return contador;
     }
 }

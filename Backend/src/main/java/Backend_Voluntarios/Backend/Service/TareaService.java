@@ -29,8 +29,7 @@ public class TareaService {
     }
 
     public void addTarea(TareaEntity tarea) {
-         tareaRepository.saveTarea(tarea.getNombreTarea(),
-                tarea.getDescripcionTarea(),
-                tarea.getTipoTarea());
+        tareaRepository.saveTarea(tarea.getNombreTarea(), tarea.getDescripcionTarea(), tarea.getTipoTarea(),
+                tarea.getEmergencia());
     }
 }

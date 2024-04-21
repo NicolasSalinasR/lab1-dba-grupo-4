@@ -1,5 +1,6 @@
 package Backend_Voluntarios.Backend.Repository;
 
+import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
 import Backend_Voluntarios.Backend.Entity.TareaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -27,10 +28,11 @@ public interface TareaRepository extends JpaRepository<TareaEntity, Long> {
         // Guardar
         @Transactional
         @Modifying
-        @Query(value = "INSERT INTO TareaEntity (nombreTarea, descripcionTarea, tipoTarea) VALUES (:descripcionTarea, :tipoTarea)")
+        @Query(value = "INSERT INTO TareaEntity (nombreTarea, descripcionTarea, tipoTarea, emergencia) VALUES (:nombreTarea, :descripcionTarea, :tipoTarea, :emergencia)")
         void saveTarea(@Param("nombreTarea") String nombreTarea,
                         @Param("descripcionTarea") String descripcionTarea,
-                        @Param("tipoTarea") String tipoTarea);
+                        @Param("tipoTarea") String tipoTarea,
+                        @Param("emergencia") EmergenciaEntity emergencia);
 
         // Crear en pantalla un listado de voluntarios por ranking para una tarea
         // específica

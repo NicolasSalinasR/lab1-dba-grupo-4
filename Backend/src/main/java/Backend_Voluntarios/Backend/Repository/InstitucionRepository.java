@@ -24,12 +24,13 @@ public interface InstitucionRepository extends JpaRepository<InstitucionEntity, 
     // save
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO InstitucionEntity(nombreInstitucion) VALUES (:nombreInstitucion)")
+    @Query(value = "INSERT INTO InstitucionEntity (nombreInstitucion) VALUES (:nombreInstitucion)")
     void saveInstitucion(@Param("nombreInstitucion") String nombreInstitucion);
 
     // delete
-    @Query("DELETE FROM InstitucionEntity WHERE InstitucionEntity.idInstitucion= :id")
-    InstitucionEntity deleteInstitucion(@Param("id") Long id);
+    // @Query("DELETE FROM InstitucionEntity WHERE InstitucionEntity.idInstitucion=
+    // :id")
+    // InstitucionEntity deleteInstitucion(@Param("id") Long id);
 
     // search
     @Query("SELECT palabra FROM InstitucionEntity palabra WHERE"

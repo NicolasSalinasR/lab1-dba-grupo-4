@@ -1,30 +1,26 @@
 package Backend_Voluntarios.Backend.Entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="ranking")
+@Table(name = "ranking")
 public class RankingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long idRanking;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "idTarea")
     private TareaEntity tarea;
-   // private Long idTarea;
+    // private Long idTarea;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "idVoluntario")
     private VoluntarioEntity voluntario;
 
     @Column(nullable = false, length = 100)
     private String nombreVoluntario;
-
 
     @Column(unique = true, nullable = false, length = 100)
     private String numeroDocumentoVoluntario;
@@ -34,7 +30,8 @@ public class RankingEntity {
     @Column(nullable = false, length = 100)
     private String tareaRanking;
 
-    public RankingEntity(TareaEntity idTarea, VoluntarioEntity idVoluntario, String nombreVoluntario, String numeroDocumentoVoluntario, Integer nivelRanking, String tareaRanking){
+    public RankingEntity(TareaEntity idTarea, VoluntarioEntity idVoluntario, String nombreVoluntario,
+            String numeroDocumentoVoluntario, Integer nivelRanking, String tareaRanking) {
         this.tarea = idTarea;
         this.voluntario = idVoluntario;
         this.nombreVoluntario = nombreVoluntario;
@@ -43,7 +40,7 @@ public class RankingEntity {
         this.tareaRanking = tareaRanking;
     }
 
-    public RankingEntity(){
+    public RankingEntity() {
         super();
     }
 

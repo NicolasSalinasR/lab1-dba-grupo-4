@@ -1,5 +1,7 @@
 package Backend_Voluntarios.Backend.Repository;
 
+import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
+import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
 import Backend_Voluntarios.Backend.Entity.VoluntarioHabilidadEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -23,7 +25,7 @@ public interface VoluntarioHabilidadRepository extends JpaRepository<VoluntarioH
     // save
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO VoluntarioHabilidadEntity (idVoluntario, idHabilidad) VALUES (:idVoluntario, :idHabilidad)")
-    void saveVoluntarioHabilidad(@Param("idVoluntario") Long idVoluntario,
-            @Param("idHabilidad") Long idHabilidad);
+    @Query(value = "INSERT INTO VoluntarioHabilidadEntity (voluntario, habilidad) VALUES (:voluntario, :habilidad)")
+    void saveVoluntarioHabilidad(@Param("voluntario") VoluntarioEntity voluntario,
+            @Param("habilidad") HabilidadEntity habilidad);
 }

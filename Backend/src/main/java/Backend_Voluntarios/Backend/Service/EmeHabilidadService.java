@@ -22,16 +22,18 @@ public class EmeHabilidadService {
     }
 
     public void addEmeHabilidad(EmeHabilidadEntity emeHabilidad) {
-         emeHabilidadRepository.saveEmeHabilidad(emeHabilidad.getIdHabilidad(),
-                emeHabilidad.getIdEmergencia());
+        emeHabilidadRepository.saveEmeHabilidad(emeHabilidad.getHabilidad(),
+                emeHabilidad.getEmergencia());
     }
 
     public List<EmeHabilidadEntity> listaFiltro(String palabraClave) {
         return emeHabilidadRepository.findAll(palabraClave);
     }
 
-    public EmeHabilidadEntity deleteEmeHabilidad(EmeHabilidadEntity emeHabilidad) {
-        return emeHabilidadRepository.deleteEmeHabilidad(emeHabilidad.getIdEmergenciaHabilidad());
-    }
+    // public EmeHabilidadEntity deleteEmeHabilidad(EmeHabilidadEntity emeHabilidad)
+    // {
+    // return
+    // emeHabilidadRepository.deleteEmeHabilidad(emeHabilidad.getIdEmergenciaHabilidad());
+    // }
 
 }

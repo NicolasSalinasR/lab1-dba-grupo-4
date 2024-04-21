@@ -28,7 +28,8 @@ public class InstitucionService {
         return institucionRepository.findAll(palabraClave);
     }
 
-    public InstitucionEntity deleteInstitucion(InstitucionEntity institucion) {
-        return institucionRepository.deleteInstitucion(institucion.getIdInstitucion());
-    }
+    // public InstitucionEntity deleteInstitucion(InstitucionEntity institucion) {
+    // return
+    // institucionRepository.deleteInstitucion(institucion.getIdInstitucion());
+    // }
 }

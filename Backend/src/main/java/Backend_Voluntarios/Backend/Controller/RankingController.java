@@ -70,13 +70,15 @@ public class RankingController {
             String tareaRanking = nombreTarea.getNombreTarea();
             VoluntarioEntity buscarVoluntario = voluntarioService.buscarId(idVoluntario);
             String zona = buscarVoluntario.getZonaViviendaVoluntario();
-            int nivelRanking = rankingService.puntajeRanking(zona, idVoluntario, idTarea);
+            int nivelRanking = rankingService.puntajeRanking(zona, idVoluntario,
+                    idTarea);
             String nombreVoluntario = buscarVoluntario.getNombreVoluntario();
             String numeroDocumentoVoluntario = buscarVoluntario.getNumeroDocumentoVoluntario();
-            RankingEntity ranking = new RankingEntity(nombreTarea, buscarVoluntario, nombreVoluntario, numeroDocumentoVoluntario, nivelRanking, tareaRanking);
+            RankingEntity ranking = new RankingEntity(nombreTarea, buscarVoluntario,
+                    nombreVoluntario,
+                    numeroDocumentoVoluntario, nivelRanking, tareaRanking);
             rankingService.nuevoRanking(ranking);
-            // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
-            // pablo
+            // Long idUsuario = metodo para obtener id de usuario ya listo, esperar a pablo
             // auditoriaService.registrarCambio(idUsuario, "Add", "añadio un ranking");
         }
     }
@@ -91,16 +93,16 @@ public class RankingController {
         // auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un ranking");
     }
 
-    //@PutMapping("editar/{idVoluntario}")
-    //public void actualizar(@PathVariable Long idVoluntario) {
-        //VoluntarioEntity update = voluntarioService.buscarId(idVoluntario);
-        //String zona = update.getZonaViviendaVoluntario();
-        //RankingEntity updateUser = rankingService.buscarId(idVoluntario);
-        //updateUser.setNivelRanking(rankingService.puntajeRanking(zona, idVoluntario));
-        //rankingService.nuevoRanking(updateUser);
+    // @PutMapping("editar/{idVoluntario}")
+    // public void actualizar(@PathVariable Long idVoluntario) {
+    // VoluntarioEntity update = voluntarioService.buscarId(idVoluntario);
+    // String zona = update.getZonaViviendaVoluntario();
+    // RankingEntity updateUser = rankingService.buscarId(idVoluntario);
+    // updateUser.setNivelRanking(rankingService.puntajeRanking(zona,
+    // idVoluntario));
+    // rankingService.nuevoRanking(updateUser);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
-        // pablo
-        // auditoriaService.registrarCambio(idUsuario, "update", "modifico un Ranking");
-        //}
+    // Long idUsuario = metodo para obtener id de usuario ya listo, esperar a pablo
+    // auditoriaService.registrarCambio(idUsuario, "update", "modifico un Ranking");
+    // }
 }
