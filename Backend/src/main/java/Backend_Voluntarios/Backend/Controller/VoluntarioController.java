@@ -18,18 +18,18 @@ public class VoluntarioController {
     private VoluntarioService voluntarioService;
 
     @GetMapping()
-    public String conectado(){
+    public String conectado() {
         return "CONECTADO";
     }
 
     @GetMapping("/all")
-    public List<VoluntarioEntity> tabla(){
+    public List<VoluntarioEntity> tabla() {
         return voluntarioService.tablaCompleta();
     }
 
     @GetMapping("/{palabraClave}")
-    public ResponseEntity<List<VoluntarioEntity>> buscarVoluntarios(@PathVariable String palabraClave){
-        List<VoluntarioEntity> voluntariosEncontrados =  voluntarioService.listaFiltro(palabraClave);
+    public ResponseEntity<List<VoluntarioEntity>> buscarVoluntarios(@PathVariable String palabraClave) {
+        List<VoluntarioEntity> voluntariosEncontrados = voluntarioService.listaFiltro(palabraClave);
         if (voluntariosEncontrados.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -56,15 +56,25 @@ public class VoluntarioController {
         String equipamientoVoluntario = body.get("equipamientoVoluntario");
         String zonaViviendaVoluntario = body.get("zonaViviendaVoluntario");
 
-        VoluntarioEntity voluntario = new VoluntarioEntity(nombreVoluntario, correoVoluntario, numeroDocumentoVoluntario, Collections.singletonList(equipamientoVoluntario), zonaViviendaVoluntario);
+        VoluntarioEntity voluntario = new VoluntarioEntity(nombreVoluntario, correoVoluntario,
+                numeroDocumentoVoluntario, Collections.singletonList(equipamientoVoluntario), zonaViviendaVoluntario);
         voluntarioService.nuevoVoluntario(voluntario);
         return voluntario; // ! Se debe cambiar al terminar el front por seguridad de que no devuelva
         // ! datos, solo debe devolver una respuesta de que se guardo correctamente
     }
 
     @DeleteMapping("/delete/{idVoluntario}")
-    public void eliminar(@PathVariable Long idVoluntario){
+    public void eliminar(@PathVariable Long idVoluntario) {
         VoluntarioEntity voluntarioBorrado = voluntarioService.buscarId(idVoluntario);
         voluntarioService.borrarVoluntario(voluntarioBorrado);
     }
+
+    @PutMapping("/login")
+    public ResponseEntity<VoluntarioEntity> login(@RequestBody Map<String, String> body){
+        // Se confirma que el usuario y contraseña sean correctos, si lo son se genera un JWT y se devuelve
+        // Si no son correctos se devuelve un error
+        String correoVoluntario = body.get("correoVoluntario");
+        String contrasenaVoluntario = body.get("contrasenaVoluntario");
+
+        VoluntarioEntity voluntario = voluntarioService.login(correoVoluntario, contrasenaVoluntario);
 }
