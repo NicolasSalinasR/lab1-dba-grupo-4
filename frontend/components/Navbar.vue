@@ -13,8 +13,9 @@
           <a href="#">Estadísticas <span>&#9662;</span></a>
           <!-- Submenú desplegable -->
           <ul class="dropdown-content" v-show="isDropdownVisible">
-            <li><a href="#">Ranking Voluntario por Tarea</a></li>
-            <li><nuxt-link to="/voluntario/rankingEmergencia">Ranking Voluntario por Emergencia</nuxt-link></li>
+            <li @click="changeComponent(true)">Ranking Voluntario por Tarea</li>
+            <li @click="changeComponent(false)">Ranking Voluntario por Emergencia</li>
+            
           </ul>
         </li>
         <li><a href="#">Contacto</a></li>
@@ -36,6 +37,13 @@ export default {
     },
     hideDropdown() {
       this.isDropdownVisible = false;
+    },
+    toggleComponent() {
+      // Cambia el estado para mostrar el componente contrario
+      this.mostrarComponenteA = !this.mostrarComponenteA;
+    },
+    changeComponent(value) {
+      this.$emit('change-component', value);
     }
   }
 };
