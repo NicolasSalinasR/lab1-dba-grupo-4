@@ -1,3 +1,20 @@
+CREATE DATABASE "laboratorio 1 bda"
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Spanish_Latin America.1252'
+    LC_CTYPE = 'Spanish_Latin America.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+create table auditoria (
+	idAuditoria serial primary key,
+	modificacion Varchar(200),
+	descripcion Varchar(200)
+);
+
 create table voluntario(
 	idVoluntario serial primary key,
 	condicionVoluntario varchar(200),
@@ -76,3 +93,74 @@ create table tareaHabilidad(
 	FOREIGN KEY (idHabilidad) REFERENCES habilidad(idHabilidad)
 );
 
+
+CREATE OR REPLACE FUNCTION auditar_operacion()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO auditoria (id_usuario, tipo_operacion, descripcion, fecha, hora)
+    VALUES (CURRENT_USER, TG_OP);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON emergencia
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON emergenciahabilidad
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON estadotarea
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON habilidad
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON institucion
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON ranking
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
+
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON tarea
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON tareahabilidad
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON voluntario
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
+
+
+CREATE TRIGGER trigger_auditoria
+AFTER INSERT OR UPDATE OR DELETE ON voluntariohabilidad
+FOR EACH ROW
+EXECUTE FUNCTION auditar_operacion();
