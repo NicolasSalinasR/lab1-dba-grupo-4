@@ -3,7 +3,9 @@ package Backend_Voluntarios.Backend.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "voluntario")
@@ -27,6 +29,12 @@ public class VoluntarioEntity {
 
     @ElementCollection
     private List<String> equipamientoVoluntario;
+
+    @OneToMany(mappedBy = "voluntario")
+    private Set<RankingEntity> Ranking= new HashSet<>();
+
+    @OneToMany(mappedBy = "voluntario")
+    private Set<VoluntarioHabilidadEntity> VoluntarioHabilidad= new HashSet<>();
 
     public VoluntarioEntity(String nombreVoluntario, String correoVoluntario, String numeroDocumentoVoluntario, List<String> equipamientoVoluntario, String zonaViviendaVoluntario){
         this.nombreVoluntario = nombreVoluntario;

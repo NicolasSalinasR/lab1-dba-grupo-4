@@ -11,15 +11,16 @@ public class RankingEntity {
     @Column(unique = true, nullable = false)
     private Long idRanking;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long idTarea;
+
+    @ManyToOne
+    @JoinColumn(name = "idTarea")
+    private TareaEntity tarea;
+   // private Long idTarea;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long idVoluntario;
+    @ManyToOne
+    @JoinColumn(name = "idVoluntario")
+    private VoluntarioEntity voluntario;
 
     @Column(nullable = false)
     private Integer nivelRanking;
@@ -27,9 +28,9 @@ public class RankingEntity {
     @Column(nullable = false, length = 100)
     private String tareaRanking;
 
-    public RankingEntity( Long idTarea, Long idVoluntario, Integer nivelRanking, String tareaRanking){
-        this.idTarea = idTarea;
-        this.idVoluntario = idVoluntario;
+    public RankingEntity(TareaEntity idTarea, VoluntarioEntity idVoluntario, Integer nivelRanking, String tareaRanking){
+        this.tarea = idTarea;
+        this.voluntario = idVoluntario;
         this.nivelRanking = nivelRanking;
         this.tareaRanking = tareaRanking;
     }
@@ -59,19 +60,19 @@ public class RankingEntity {
     }
 
     public Long getIdVoluntario() {
-        return idVoluntario;
+        return voluntario.getIdVoluntario();
     }
 
-    public void setIdVoluntario(Long idVoluntario) {
-        this.idVoluntario = idVoluntario;
+    public void setIdVoluntario(VoluntarioEntity Voluntario) {
+        this.voluntario = Voluntario;
     }
 
     public Long getIdTarea() {
-        return idTarea;
+        return tarea.getIdTarea();
     }
 
-    public void setIdTarea(Long idTarea) {
-        this.idTarea = idTarea;
+    public void setIdTarea(TareaEntity tarea) {
+        this.tarea = tarea;
     }
 
     public void setIdRanking(Long idRanking) {

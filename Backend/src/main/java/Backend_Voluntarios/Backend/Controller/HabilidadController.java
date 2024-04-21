@@ -39,10 +39,9 @@ public class HabilidadController {
 
     @PostMapping("/add")
     public HabilidadEntity addHabilidad(@RequestBody Map<String, String> body){
-        Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
         String nombreHabilidad = body.get("nombreHabilidad");
 
-        HabilidadEntity habilidad = new HabilidadEntity(idHabilidad, nombreHabilidad);
+        HabilidadEntity habilidad = new HabilidadEntity(nombreHabilidad);
         habilidadService.crearHabilidad(habilidad);
         return habilidad;
     }

@@ -11,18 +11,18 @@ public class InstitucionEntity {
     @Column(unique = true, nullable = false)
     private Long idInstitucion;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long idEmergencia;
+    @ManyToOne
+    @JoinColumn(name = "idEmergencia")
+    private EmergenciaEntity emergencia;
+
 
     private String nombreInstitucion;
 
 
     // Constructor all
-    public InstitucionEntity( Long idEmergencia, String nombreInstitucion){
+    public InstitucionEntity( EmergenciaEntity idEmergencia, String nombreInstitucion){
         super();
-        this.idEmergencia = idEmergencia;
+        this.emergencia = idEmergencia;
         this.nombreInstitucion = nombreInstitucion;
     }
 
@@ -37,7 +37,7 @@ public class InstitucionEntity {
     }
 
     public Long getIdEmergencia() {
-        return idEmergencia;
+        return emergencia.getIdEmergencia();
     }
 
     public String getNombreInstitucion(){
@@ -45,8 +45,8 @@ public class InstitucionEntity {
     }
 
     //Setters
-    public void setIdEmergencia(Long idEmergencia){
-        this.idEmergencia= idEmergencia;
+    public void setIdEmergencia(EmergenciaEntity idEmergencia){
+        this.emergencia= idEmergencia;
     }
     public void setNombreInstitucion(String nombreInstitucion){
         this.nombreInstitucion= nombreInstitucion;

@@ -73,7 +73,9 @@ public class RankingController {
             String zona = buscarZona.getZonaViviendaVoluntario();
             List<String> equipamiento = buscarZona.getEquipamientoVoluntario();
             int nivelRanking = rankingService.puntajeRanking(zona, equipamiento);
-            RankingEntity ranking = new RankingEntity(idTarea, idVoluntario, nivelRanking, tareaRanking);
+
+
+            RankingEntity ranking = new RankingEntity(nombreTarea, buscarZona, nivelRanking, tareaRanking);
             rankingService.nuevoRanking(ranking);
         }
     }

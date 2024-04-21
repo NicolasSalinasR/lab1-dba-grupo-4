@@ -12,20 +12,21 @@ public class TareaHabilidadEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTareaHabilidad;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTarea;
+    @ManyToOne
+    @JoinColumn(name = "idTarea")
+    private TareaEntity tarea;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idHabilidad;
+    @ManyToOne
+    @JoinColumn(name = "idHabilidad")
+    private HabilidadEntity habilidad;
+
 
     private List<String> habilidadRequerida;
 
     // Constructor
-    public TareaHabilidadEntity(Long idTarea, Long idHabilidad, List<String> habilidad_requerida) {
-        this.idTarea = idTarea;
-        this.idHabilidad = idHabilidad;
+    public TareaHabilidadEntity(TareaEntity idTarea, HabilidadEntity idHabilidad, List<String> habilidad_requerida) {
+        this.tarea = idTarea;
+        this.habilidad = idHabilidad;
         this.habilidadRequerida = habilidad_requerida;
     }
 
@@ -44,19 +45,19 @@ public class TareaHabilidadEntity {
     }
 
     public Long getIdTarea() {
-        return idTarea;
+        return tarea.getIdTarea();
     }
 
-    public void setIdTarea(Long idTarea) {
-        this.idTarea = idTarea;
+    public void setIdTarea(TareaEntity idTarea) {
+        this.tarea = idTarea;
     }
 
     public Long getIdHabilidad() {
-        return idHabilidad;
+        return habilidad.getIdhabilidad();
     }
 
-    public void setIdHabilidad(Long idHabilidad) {
-        this.idHabilidad = idHabilidad;
+    public void setIdHabilidad(HabilidadEntity idHabilidad) {
+        this.habilidad = idHabilidad;
     }
 
     public List<String> getHabilidadRequerida() {

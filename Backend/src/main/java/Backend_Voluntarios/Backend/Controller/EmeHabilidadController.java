@@ -3,6 +3,10 @@ package Backend_Voluntarios.Backend.Controller;
 import java.util.List;
 import java.util.Map;
 
+import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
+import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
+import Backend_Voluntarios.Backend.Service.EmergenciaService;
+import Backend_Voluntarios.Backend.Service.HabilidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +15,18 @@ import Backend_Voluntarios.Backend.Entity.EmeHabilidadEntity;
 import Backend_Voluntarios.Backend.Service.EmeHabilidadService;
 
 @RestController
-@RequestMapping("/voluntario_habilidad")
+@RequestMapping("/emeHabilidad")
 @CrossOrigin(origins = "*")
 
 public class EmeHabilidadController {
 
     @Autowired
     private EmeHabilidadService emeHabilidadService;
+    @Autowired
+    private EmergenciaService emergenciaService;
+
+    @Autowired
+    private HabilidadService habilidadService;
 
     @GetMapping("/{id}")
     public EmeHabilidadEntity getEmeHabilidadById(@PathVariable Long id){
@@ -42,8 +51,11 @@ public class EmeHabilidadController {
     public EmeHabilidadEntity addEmeHabilidad(@RequestBody Map<String, String> body){
         Long idEmergencia = Long.parseLong(body.get("idEmergencia"));
         Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
+        EmergenciaEntity emergenciaNew = emergenciaService.getEmergenciaById(idEmergencia);
+        HabilidadEntity habilidadNew = habilidadService.findById(idHabilidad);
 
-        EmeHabilidadEntity emeHabilidad = new EmeHabilidadEntity(idEmergencia,idHabilidad);
+
+        EmeHabilidadEntity emeHabilidad = new EmeHabilidadEntity(emergenciaNew,habilidadNew);
         emeHabilidadService.addEmeHabilidad(emeHabilidad);
         return emeHabilidad;
     }

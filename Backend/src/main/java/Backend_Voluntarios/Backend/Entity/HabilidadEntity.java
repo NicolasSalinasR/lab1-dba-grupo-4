@@ -2,6 +2,9 @@ package Backend_Voluntarios.Backend.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "habilidad")
@@ -13,8 +16,16 @@ public class HabilidadEntity {
 
     private String nombreHabilidad;
 
-    public HabilidadEntity(Long idHabilidad, String nombreHabilidad) {
-        this.idHabilidad = idHabilidad;
+    @OneToMany(mappedBy = "habilidad")
+    private Set<VoluntarioHabilidadEntity> VoluntarioHabilidad= new HashSet<>();
+
+    @OneToMany(mappedBy = "habilidad")
+    private Set<EmeHabilidadEntity> EmergenciaHabilidad= new HashSet<>();
+
+    @OneToMany(mappedBy = "habilidad")
+    private Set<TareaHabilidadEntity> TareaHabilidad= new HashSet<>();
+
+    public HabilidadEntity( String nombreHabilidad) {
         this.nombreHabilidad = nombreHabilidad;
     }
     // constructor vacio

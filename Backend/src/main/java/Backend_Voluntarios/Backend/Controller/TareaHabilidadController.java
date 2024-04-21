@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
+import Backend_Voluntarios.Backend.Entity.TareaEntity;
+import Backend_Voluntarios.Backend.Service.HabilidadService;
+import Backend_Voluntarios.Backend.Service.TareaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +27,8 @@ public class TareaHabilidadController {
 
     @Autowired
     private TareaHabilidadService tareaHabilidadService;
+    private TareaService tareaService;
+    private HabilidadService habilidadService;
 
     @GetMapping("/{id}")
     public TareaHabilidadEntity getTareaHabilidadById(@PathVariable Long id) {
@@ -40,7 +46,10 @@ public class TareaHabilidadController {
         Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
         List <String> habilidadRequerida = Collections.singletonList(body.get("habilidadRequerida"));
 
-        TareaHabilidadEntity tareaHabilidad = new TareaHabilidadEntity(idTarea, idHabilidad, habilidadRequerida);
+        TareaEntity tareaNew = tareaService.getTareaById(idTarea);
+        HabilidadEntity habilidadNew = habilidadService.findById(idHabilidad);
+
+        TareaHabilidadEntity tareaHabilidad = new TareaHabilidadEntity(tareaNew, habilidadNew, habilidadRequerida);
 
         tareaHabilidadService.addTareaHabilidad(tareaHabilidad);
 
