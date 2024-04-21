@@ -1,10 +1,7 @@
 package Backend_Voluntarios.Backend.Controller;
 
-
 import Backend_Voluntarios.Backend.Entity.EstadoTareaEntity;
-import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
 import Backend_Voluntarios.Backend.Service.EstadoTareaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,26 +12,26 @@ import java.util.Map;
 @RequestMapping("/EstadoTarea")
 @CrossOrigin(origins = "*")
 public class EstadoTareaController {
-
-    @Autowired
     private EstadoTareaService estadoTareaService;
 
     @GetMapping("/{id}")
-    public EstadoTareaEntity getEstadoTareaById(@PathVariable Long id){
-       return estadoTareaService.findById(id);
+    public EstadoTareaEntity getEstadoTareaById(@PathVariable Long id) {
+        return estadoTareaService.findById(id);
     }
 
     @GetMapping("/{All}")
-    public List<EstadoTareaEntity> getAllEstadoTarea() {return estadoTareaService.getAllEstadoHabilidad();}
+    public List<EstadoTareaEntity> getAllEstadoTarea() {
+        return estadoTareaService.getAllEstadoHabilidad();
+    }
 
     @GetMapping("/Tarea/{id}")
-    public EstadoTareaEntity getEstadoTareaIdTarea(@PathVariable Long id){
+    public EstadoTareaEntity getEstadoTareaIdTarea(@PathVariable Long id) {
         return estadoTareaService.findByIdTarea(id);
     }
 
     @GetMapping("/{PalabraClave}")
-    public ResponseEntity<List<EstadoTareaEntity>> BuscarEstadoTarea(@PathVariable String PalabraClave){
-        List<EstadoTareaEntity> estadoTareaEncontradas =  estadoTareaService.listAll(PalabraClave);
+    public ResponseEntity<List<EstadoTareaEntity>> BuscarEstadoTarea(@PathVariable String PalabraClave) {
+        List<EstadoTareaEntity> estadoTareaEncontradas = estadoTareaService.listAll(PalabraClave);
         if (estadoTareaEncontradas.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -42,7 +39,7 @@ public class EstadoTareaController {
     }
 
     @PostMapping("/add")
-    public EstadoTareaEntity addEstadoTarea(@RequestBody Map<String, String> body){
+    public EstadoTareaEntity addEstadoTarea(@RequestBody Map<String, String> body) {
         Long idEstadoTarea = Long.parseLong(body.get("idEstadoTarea"));
         Long idTarea = Long.parseLong(body.get("idTarea"));
         Boolean estadoTarea = Boolean.parseBoolean(body.get("estadoTarea")); // Cambio realizado aquí
@@ -53,7 +50,7 @@ public class EstadoTareaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void Eliminar(@PathVariable Long id){
+    public void Eliminar(@PathVariable Long id) {
         estadoTareaService.eliminarEstadoTarea(id);
     }
 

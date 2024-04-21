@@ -14,7 +14,7 @@ import Backend_Voluntarios.Backend.Entity.VoluntarioHabilidadEntity;
 import Backend_Voluntarios.Backend.Service.VoluntarioHabilidadService;
 
 @RestController
-@RequestMapping("/voluntario_habilidad")
+@RequestMapping("/voluntarioHabilidad")
 public class VoluntarioHabilidadController {
     @Autowired
     private VoluntarioHabilidadService voluntarioHabilidadService;
