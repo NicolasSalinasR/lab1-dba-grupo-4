@@ -6,7 +6,13 @@
             {{ title1 }}
           </div>
           <div class="card-body" style="max-height: 400px; overflow: auto;">
-            {{ description1 }}
+            <div v-for="(item, index) in description1" :key="index" class="item-container">
+                <p>{{ item.text1 }}</p>
+                <p>{{ item.text2 }}</p>
+                <div :style="{ backgroundColor: getButtonColor(item.buttonLabel) }" class="color-rectangle">
+                    <span>{{ item.buttonLabel }}</span>
+                </div>
+            </div>
           </div>
         </div>
       </div>
@@ -15,8 +21,12 @@
           <div class="card-header">
             {{ title2 }}
           </div>
-          <div class="card-body" style="max-height: 200px; overflow: auto;">
-            {{ description2 }}
+          <div class="card-body" style="max-height: 400px; overflow: auto;">
+            <div v-for="(item, index) in description2" :key="index" class="item-container">
+                <p>{{ item.text1 }}</p>
+                <p>{{ item.text2 }}</p>
+                <button>{{ item.buttonLabel }}</button>
+            </div>
           </div>
         </div>
       </div>
@@ -31,7 +41,7 @@
         required: true
       },
       description1:{
-        type: String,
+        type: Array,
         required:true
       },
       title2:{
@@ -42,7 +52,18 @@
         type: String,
         required:true
       }
-    }
+    },
+    methods:{
+        getButtonColor(buttonLabel) {
+      // Lógica para determinar el color basado en el texto del botón
+      if (buttonLabel === 'En proceso') {
+        return '#4b9bf7'; // Color verde si el botón dice "Aceptar"
+      } else if (buttonLabel === 'Terminada') {
+        return '#4ed12e'; // Color rojo si el botón dice "Rechazar"
+      } else {
+        return '#d5e388'; // Otro color por defecto
+      }
+    }}
   };
   </script>
   
@@ -73,12 +94,40 @@
     background-color: #347355;
     padding: 10px;
     font-weight: bold;
-    color:#FFFFFF
+    color:#ffffff
   }
   
   .card-body {
     padding: 10px;
     background-color: #fcfcfc;
   }
+  .item-container {
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  margin-bottom: 30px; /* Espacio separador entre cada iteración */
+}
+
+.item-container p {
+  flex: 1; /* El texto ocupará todo el espacio restante */
+  margin-right: 10px; /* Añade un poco de espacio entre el texto y el botón */
+}
+
+/* .item-container button {
+   Estilos para el botón 
+} */
+
+.color-rectangle {
+  width: 100px; /* Ancho del rectángulo */
+  height: 30px; /* Altura del rectángulo */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-top: 10px; /* Margen superior */
+  display: flex; /* Hace que el contenido se centre verticalmente */
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: center; /* Centra horizontalmente el contenido */
+}
+
+.color-rectangle span {
+  color: white; /* Color del texto */
+}
   </style>
   

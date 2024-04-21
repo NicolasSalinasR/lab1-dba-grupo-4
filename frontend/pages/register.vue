@@ -59,19 +59,23 @@ export default {
             }, 4000);
 
         },
-        async login() {
+        async registrarUsuario() {
             try {
-                const res = await this.$axios.post('http://localhost:3000/api/auth/login', {
-                    email: this.email,
-                    password: this.password
+                const response = await axios.post('http://localhost:3000/api/registro', {
+                nombre: this.nombre,
+                zonaVivienda: this.zonaVivienda,
+                numDocumento: this.numDocumento,
+                email: this.email,
+                password: this.password
                 });
-                console.log(res.data);
-                this.$router.push('/dashboard');
+                console.log(response.data);
+                // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
             } catch (error) {
-                console.log(error);
+                console.error('Error al registrar el usuario:', error);
+                // Aquí podrías mostrar un mensaje de error al usuario
+            }
             }
         }
-    }
 
 };
 
