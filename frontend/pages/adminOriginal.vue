@@ -22,12 +22,8 @@
 
             <!-- Columna 2 -->
             <div style="flex: 1;">
-                <CardSimbologia title1="SIMBOLOGÍA" :description1="[
-              {text1:'Neutralizándose' },
-              {text1:'En proceso'},
-              {text1:'Incencio en Valparaíso' }]" ></CardSimbologia>
+                <Card title1="SIMBOLOGÍA"></Card>
             </div>
-            
         </div>
 
         <Card v-if= "mostrarCard" @change-component="mostrarComponente" title1="EMERGENCIA" :description1="[
@@ -89,7 +85,6 @@
     import Card from '@/components/Card.vue';
   import NavbarVoluntario from '@/components/NavbarVoluntario.vue';
   import Footer  from '@/components/Footer.vue';
-  import CardSimbologia from '@/components/CardSimbologia.vue';
   
   export default {
   

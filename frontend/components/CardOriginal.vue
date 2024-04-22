@@ -9,8 +9,8 @@
             <div v-for="(item, index) in description1" :key="index" class="item-container">
                 <p>{{ item.text1 }}</p>
                 <p>{{ item.text2 }}</p>
-                <button @click="verTareas" :style="{ backgroundColor: getButtonColor(item.buttonLabel) }" class="color-rectangle">
-                    <span>Ver tareas</span>
+                <button @click="emitChangeComponent(item.buttonLabel)" :style="{ backgroundColor: getButtonColor(item.buttonLabel) }" class="color-rectangle">
+                    <span>{{ item.buttonLabel }}</span>
                 </button>
             </div>
           </div>
@@ -40,9 +40,7 @@
       description2:{
         type: String,
         required:true
-      },
-      title: String,
-      item:Object
+      }
     },
     methods:{
         getButtonColor(buttonLabel) {
@@ -55,45 +53,27 @@
         return '#d5e388'; // Otro color por defecto
       }
     },
-    emitChangeComponent(item) {
-      // Emitir un evento personalizado con la información adicional del item
-      this.$emit('mostrar-tareas', item);
+    emitChangeComponent(buttonLabel) {
+      // Emitir un evento personalizado con el nombre del botón como argumento
+      this.$emit('change-component', buttonLabel);
     },
     // Función para obtener datos del backend utilizando axios
-    getNombresEmergencias() {
+    fetchDataFromBackend() {
       axios.get('URL_DEL_BACKEND')
         .then(response => {
           // Asignar los datos recibidos a la propiedad description1-------------------------
-          this.description1 = response.data.map(item =>({
-            text1: item.tipo_emergencia,
-           // buttonLabel:this.getButtonLabel(item.estado)
-          }));
-
+          this.description1 = response.data;
         })
         .catch(error => {
           console.error('Error al obtener los datos del backend:', error);
         });
     },
-    verTareas() {
-      // Emitir un evento personalizado para mostrar las tareas
-      this.$emit('ver-tareas', this.item);
-    }
-    /* // Función para obtener el texto del botón basado en el estado
-    getButtonLabel(estado) {
-      if (estado === 'En proceso') {
-        return 'Aceptar';
-      } else if (estado === 'Terminada') {
-        return 'Rechazar';
-      } else {
-        return 'Otro';
-      }
-    } */
-    },
     // Llamar a la función para obtener datos del backend cuando el componente se monta
     mounted() {
-        this.getNombresEmergencias();
+        this.fetchDataFromBackend();
     }
-};
+}
+  };
   </script>
   
   <style>
