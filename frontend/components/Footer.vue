@@ -22,8 +22,13 @@
         </div>
         <div class="column">
           <div class="footer-section">
-            <h3>Otra sección</h3>
-            <p>Contenido de la tercera columna del footer.</p>
+            <h3>Integrantes</h3>
+            <p>Pablo Macuada Rozas</p>
+            <p>Nicolas Muñoz</p>
+            <p>Nicolas Saavedra</p>
+            <p>Nicolas Salinas</p>
+            <p>Macarena Soto Herrera</p>
+            
           </div>
         </div>
       </div>

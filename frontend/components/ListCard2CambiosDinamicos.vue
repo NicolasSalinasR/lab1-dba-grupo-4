@@ -8,10 +8,9 @@
           <div class="card-body" style="max-height: 400px; overflow: auto;">
             <div v-for="(item, index) in description1" :key="index" class="item-container">
                 <p>{{ item.text1 }}</p>
-                <p>{{ item.text2 }}</p>
-                <div :style="{ backgroundColor: getButtonColor(item.buttonLabel) }" class="color-rectangle">
-                    <span>{{ item.buttonLabel }}</span>
-                </div>
+                <button @click="verVoluntarios" :style="{ backgroundColor: getButtonColor(item.buttonLabel) }" class="color-rectangle">
+                    <span>Ver voluntarios</span>
+                </button>
             </div>
           </div>
         </div>
@@ -57,13 +56,18 @@
         getButtonColor(buttonLabel) {
       // Lógica para determinar el color basado en el texto del botón
       if (buttonLabel === 'En proceso') {
-        return '#4b9bf7'; // Color verde si el botón dice "Aceptar"
+        return 'blue'; // Color verde si el botón dice "Aceptar"
       } else if (buttonLabel === 'Terminada') {
-        return '#4ed12e'; // Color rojo si el botón dice "Rechazar"
+        return 'green'; // Color rojo si el botón dice "Rechazar"
       } else {
-        return '#d5e388'; // Otro color por defecto
+        return 'yellow'; // Otro color por defecto
       }
-    }}
+    },
+    verVoluntarios() {
+      // Emitir un evento personalizado para mostrar las tareas
+      this.$emit('ver-voluntarios', this.item);
+    }
+  }
   };
   </script>
   
@@ -94,7 +98,7 @@
     background-color: #347355;
     padding: 10px;
     font-weight: bold;
-    color:#ffffff
+    color:#FFFFFF
   }
   
   .card-body {

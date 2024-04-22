@@ -9,31 +9,20 @@
             <div v-for="(item, index) in description1" :key="index" class="item-container">
                 <p>{{ item.text1 }}</p>
                 <p>{{ item.text2 }}</p>
-                <div :style="{ backgroundColor: getButtonColor(item.buttonLabel) }" class="color-rectangle">
+                <button @click="emitChangeComponent(item.buttonLabel)" :style="{ backgroundColor: getButtonColor(item.buttonLabel) }" class="color-rectangle">
                     <span>{{ item.buttonLabel }}</span>
-                </div>
+                </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="column">
-        <div class="card">
-          <div class="card-header">
-            {{ title2 }}
-          </div>
-          <div class="card-body" style="max-height: 400px; overflow: auto;">
-            <div v-for="(item, index) in description2" :key="index" class="item-container">
-                <p>{{ item.text1 }}</p>
-                <p>{{ item.text2 }}</p>
-                <button>{{ item.buttonLabel }}</button>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
   </template>
   
   <script>
+  import axios from 'axios';
+
   export default {
     props: {
       title1: {
@@ -63,7 +52,27 @@
       } else {
         return '#d5e388'; // Otro color por defecto
       }
-    }}
+    },
+    emitChangeComponent(buttonLabel) {
+      // Emitir un evento personalizado con el nombre del botón como argumento
+      this.$emit('change-component', buttonLabel);
+    },
+    // Función para obtener datos del backend utilizando axios
+    fetchDataFromBackend() {
+      axios.get('URL_DEL_BACKEND')
+        .then(response => {
+          // Asignar los datos recibidos a la propiedad description1-------------------------
+          this.description1 = response.data;
+        })
+        .catch(error => {
+          console.error('Error al obtener los datos del backend:', error);
+        });
+    },
+    // Llamar a la función para obtener datos del backend cuando el componente se monta
+    mounted() {
+        this.fetchDataFromBackend();
+    }
+}
   };
   </script>
   
