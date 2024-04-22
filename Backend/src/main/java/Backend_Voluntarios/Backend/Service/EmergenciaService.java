@@ -20,9 +20,8 @@ public class EmergenciaService {
         return emergenciaRepository.findAllEmergencias();
     }
 
-    public EmergenciaEntity addEmergencia(EmergenciaEntity emergencia) {
-        return emergenciaRepository.saveEmergencia(emergencia.getIdEmergencia(),
-                emergencia.getTipoEmergencia(),
+    public void addEmergencia(EmergenciaEntity emergencia) {
+         emergenciaRepository.saveEmergencia(emergencia.getTipoEmergencia(),
                 emergencia.getZonaEmergencia(),
                 emergencia.getCondicionFisica(),
                 emergencia.getCantidadVoluntariosMinimo(),

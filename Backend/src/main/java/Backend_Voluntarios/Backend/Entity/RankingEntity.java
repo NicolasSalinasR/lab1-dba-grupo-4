@@ -1,47 +1,83 @@
 package Backend_Voluntarios.Backend.Entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="ranking")
+@Table(name = "ranking")
 public class RankingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long idRanking;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long idTarea;
+    @ManyToOne
+    @JoinColumn(name = "idTarea")
+    private TareaEntity tarea;
+    // private Long idTarea;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long idVoluntario;
+    @ManyToOne
+    @JoinColumn(name = "idVoluntario")
+    private VoluntarioEntity voluntario;
 
+    @Column(nullable = false, length = 100)
+    private String nombreVoluntario;
+
+    @Column(unique = true, nullable = false, length = 100)
+    private String numeroDocumentoVoluntario;
     @Column(nullable = false)
     private Integer nivelRanking;
 
     @Column(nullable = false, length = 100)
     private String tareaRanking;
 
-    public RankingEntity(Long idRanking, Long idTarea, Long idVoluntario, Integer nivelRanking, String tareaRanking){
-        super();
-        this.idRanking = idRanking;
-        this.idTarea = idTarea;
-        this.idVoluntario = idVoluntario;
+    public RankingEntity(TareaEntity idTarea, VoluntarioEntity idVoluntario, String nombreVoluntario,
+            String numeroDocumentoVoluntario, Integer nivelRanking, String tareaRanking) {
+        this.tarea = idTarea;
+        this.voluntario = idVoluntario;
+        this.nombreVoluntario = nombreVoluntario;
+        this.numeroDocumentoVoluntario = numeroDocumentoVoluntario;
         this.nivelRanking = nivelRanking;
         this.tareaRanking = tareaRanking;
     }
 
-    public RankingEntity(){
+    public RankingEntity() {
         super();
     }
 
     public Long getIdRanking() {
         return idRanking;
+    }
+
+    public VoluntarioEntity getVoluntario() {
+        return voluntario;
+    }
+
+    public String getNumeroDocumentoVoluntario() {
+        return numeroDocumentoVoluntario;
+    }
+
+    public void setNumeroDocumentoVoluntario(String numeroDocumentoVoluntario) {
+        this.numeroDocumentoVoluntario = numeroDocumentoVoluntario;
+    }
+
+    public String getNombreVoluntario() {
+        return nombreVoluntario;
+    }
+
+    public void setNombreVoluntario(String nombreVoluntario) {
+        this.nombreVoluntario = nombreVoluntario;
+    }
+
+    public void setVoluntario(VoluntarioEntity voluntario) {
+        this.voluntario = voluntario;
+    }
+
+    public TareaEntity getTarea() {
+        return tarea;
+    }
+
+    public void setTarea(TareaEntity tarea) {
+        this.tarea = tarea;
     }
 
     public String getTareaRanking() {
@@ -61,19 +97,19 @@ public class RankingEntity {
     }
 
     public Long getIdVoluntario() {
-        return idVoluntario;
+        return voluntario.getIdVoluntario();
     }
 
-    public void setIdVoluntario(Long idVoluntario) {
-        this.idVoluntario = idVoluntario;
+    public void setIdVoluntario(VoluntarioEntity Voluntario) {
+        this.voluntario = Voluntario;
     }
 
     public Long getIdTarea() {
-        return idTarea;
+        return tarea.getIdTarea();
     }
 
-    public void setIdTarea(Long idTarea) {
-        this.idTarea = idTarea;
+    public void setIdTarea(TareaEntity tarea) {
+        this.tarea = tarea;
     }
 
     public void setIdRanking(Long idRanking) {

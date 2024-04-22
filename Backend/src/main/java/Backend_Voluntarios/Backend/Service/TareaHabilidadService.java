@@ -1,6 +1,8 @@
 package Backend_Voluntarios.Backend.Service;
 
 import java.util.List;
+
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Backend_Voluntarios.Backend.Repository.TareaHabilidadRepository;
@@ -8,7 +10,6 @@ import Backend_Voluntarios.Backend.Entity.TareaHabilidadEntity;
 
 @Service
 public class TareaHabilidadService {
-
     @Autowired
     private TareaHabilidadRepository tareaHabilidadRepository;
 
@@ -19,11 +20,9 @@ public class TareaHabilidadService {
     public List<TareaHabilidadEntity> getAllTareaHabilidades() {
         return tareaHabilidadRepository.findAllTareaHabilidad();
     }
-
-    public TareaHabilidadEntity addTareaHabilidad(TareaHabilidadEntity tareaHabilidad) {
-        return tareaHabilidadRepository.saveTareaHabilidad(tareaHabilidad.getIdTareaHabilidad(),
-                tareaHabilidad.getIdTarea(),
-                tareaHabilidad.getIdHabilidad(),
+    @Transactional
+    public void addTareaHabilidad(TareaHabilidadEntity tareaHabilidad) {
+        tareaHabilidadRepository.saveTareaHabilidad(tareaHabilidad.getIdTarea(), tareaHabilidad.getIdEmeHabilidad(),
                 tareaHabilidad.getHabilidadRequerida());
     }
 }

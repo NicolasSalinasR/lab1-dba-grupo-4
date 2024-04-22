@@ -10,22 +10,24 @@ public class TareaHabilidadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long idTareaHabilidad;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTarea;
+    @ManyToOne
+    @JoinColumn(name = "idTarea")
+    private TareaEntity tarea;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idHabilidad;
+    @ManyToOne
+    @JoinColumn(name = "idEmeHabilidad")
+    private EmeHabilidadEntity emeHabilidad;
 
-    private List<String> habilidadRequerida;
+    @Column(nullable = false)
+    private String habilidadRequerida;
 
     // Constructor
-    public TareaHabilidadEntity(Long idTarea, Long idHabilidad, List<String> habilidad_requerida) {
-        this.idTarea = idTarea;
-        this.idHabilidad = idHabilidad;
+    public TareaHabilidadEntity(TareaEntity idTarea, EmeHabilidadEntity emeHabilidad, String habilidad_requerida) {
+        this.tarea = idTarea;
+        this.emeHabilidad = emeHabilidad;
         this.habilidadRequerida = habilidad_requerida;
     }
 
@@ -44,26 +46,42 @@ public class TareaHabilidadEntity {
     }
 
     public Long getIdTarea() {
-        return idTarea;
+        return tarea.getIdTarea();
     }
 
-    public void setIdTarea(Long idTarea) {
-        this.idTarea = idTarea;
+    public void setIdTarea(TareaEntity idTarea) {
+        this.tarea = idTarea;
     }
 
-    public Long getIdHabilidad() {
-        return idHabilidad;
+    public Long getIdEmeHabilidad() {
+        return emeHabilidad.getIdEmergenciaHabilidad();
     }
 
-    public void setIdHabilidad(Long idHabilidad) {
-        this.idHabilidad = idHabilidad;
+    public void setIdEmeHabilidad(EmeHabilidadEntity emeHabilidad) {
+        this.emeHabilidad = emeHabilidad;
     }
 
-    public List<String> getHabilidadRequerida() {
+    public String getHabilidadRequerida() {
         return habilidadRequerida;
     }
 
-    public void setHabilidadRequerida(List<String> habilidadRequerida) {
+    public void setHabilidadRequerida(String habilidadRequerida) {
         this.habilidadRequerida = habilidadRequerida;
+    }
+
+    public TareaEntity getTarea() {
+        return tarea;
+    }
+
+    public void setTarea(TareaEntity tarea) {
+        this.tarea = tarea;
+    }
+
+    public EmeHabilidadEntity getEmeHabilidad() {
+        return emeHabilidad;
+    }
+
+    public void setEmeHabilidad(EmeHabilidadEntity emeHabilidad) {
+        this.emeHabilidad = emeHabilidad;
     }
 }
