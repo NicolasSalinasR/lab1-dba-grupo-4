@@ -7,6 +7,7 @@ import Backend_Voluntarios.Backend.Service.AuditoriaService;
 import Backend_Voluntarios.Backend.Service.VoluntarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import Backend_Voluntarios.Backend.Service.AuthService;
 
@@ -27,6 +28,9 @@ public class VoluntarioController {
     @Autowired
     private AuditoriaService auditoriaService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @GetMapping()
     public String conectado() {
         return "CONECTADO";
@@ -37,7 +41,7 @@ public class VoluntarioController {
         return voluntarioService.tablaCompleta();
     }
 
-    @GetMapping("/{palabraClave}")
+    @GetMapping("/palabra/{palabraClave}")
     public ResponseEntity<List<VoluntarioEntity>> buscarVoluntarios(@PathVariable String palabraClave) {
         List<VoluntarioEntity> voluntariosEncontrados = voluntarioService.listaFiltro(palabraClave);
         if (voluntariosEncontrados.isEmpty()) {
@@ -69,7 +73,9 @@ public class VoluntarioController {
 
         VoluntarioEntity voluntario = new VoluntarioEntity(nombreVoluntario, correoVoluntario,
                 numeroDocumentoVoluntario, equipamientoVoluntario, zonaViviendaVoluntario,
-                contrasenaVoluntario);
+                // Se encripta la contraseña
+                passwordEncoder.encode(contrasenaVoluntario));
+
         voluntarioService.nuevoVoluntario(voluntario);
 
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
@@ -91,7 +97,7 @@ public class VoluntarioController {
         // voluntario");
     }
 
-    @PutMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody Map<String, String> body) {
         // Se confirma que el usuario y contraseña sean correctos, si lo son se genera
         // un JWT y se devuelve

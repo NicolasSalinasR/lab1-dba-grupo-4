@@ -39,11 +39,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(customizeRequests -> {
                     customizeRequests
                             .requestMatchers("/authenticate/**").permitAll()
-                            .requestMatchers(HttpMethod.GET, "/voluntario").authenticated()
-                            .anyRequest()
-                            .permitAll();
+                            .requestMatchers(HttpMethod.GET, "/voluntario", "/tarea/**").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/voluntario/guardar").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/voluntario/login").permitAll()
+                            .anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable)
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
