@@ -38,12 +38,12 @@ public class VoluntarioHabilidadController {
         return voluntarioHabilidadService.getVoluntarioHabilidadById(id);
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/all")
     public List<VoluntarioHabilidadEntity> getAllVoluntarioHabilidades() {
         return voluntarioHabilidadService.getAllVoluntarioHabilidades();
     }
 
-    @PostMapping("/agregar")
+    @PostMapping("/add")
     public VoluntarioHabilidadEntity addVoluntarioHabilidad(@RequestBody Map<String, String> body) {
         Long idVoluntario = Long.parseLong(body.get("voluntario"));
         Long idHabilidad = Long.parseLong(body.get("habilidad"));

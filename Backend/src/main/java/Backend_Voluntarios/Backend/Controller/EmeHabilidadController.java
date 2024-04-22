@@ -36,7 +36,7 @@ public class EmeHabilidadController {
         return emeHabilidadService.getEmeHabilidadById(id);
     }
 
-    @GetMapping("/All")
+    @GetMapping("/all")
     public List<EmeHabilidadEntity> getAllEmeHabilidades() {
         return emeHabilidadService.getAllEmeHabilidades();
     }

@@ -46,7 +46,7 @@ public class CoordinadorController {
         return ResponseEntity.ok(idCoordinadoresEncontrados);
     }
 
-    @PostMapping("/guardar")
+    @PostMapping("/add")
     public CoordinadorEntity crearCoordinador(@RequestBody Map<String, String> body) {
         String nombre = body.get("nombre");
         String contrasenaCoordinador = body.get("contrasenaCoordinador");

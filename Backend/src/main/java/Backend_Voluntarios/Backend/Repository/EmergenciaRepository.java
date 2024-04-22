@@ -30,3 +30,4 @@ public interface EmergenciaRepository extends JpaRepository<EmergenciaEntity, Lo
             @Param("cantidadVoluntariosMinimo") String cantidadVoluntariosMinimo,
             @Param("cantidadVoluntariosMaximo") String cantidadVoluntariosMaximo);
 }
+

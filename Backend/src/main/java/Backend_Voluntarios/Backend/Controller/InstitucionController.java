@@ -31,7 +31,7 @@ public class InstitucionController {
         return institucionService.getInstitucionById(id);
     }
 
-    @GetMapping("/All")
+    @GetMapping("/all")
     public List<InstitucionEntity> getAllInstituciones() {
         return institucionService.getAllInstituciones();
     }
