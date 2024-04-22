@@ -50,14 +50,16 @@ public class TareaHabilidadController {
     @PostMapping("/add")
     public TareaHabilidadEntity addTareaHabilidad(@RequestBody Map<String, String> body) {
         Long idTarea = Long.parseLong(body.get("tarea"));
+
+
         Long idEmeHabilidad = Long.parseLong(body.get("emeHabilidad"));
+        
         String habilidadRequerida = body.get("habilidadRequerida");
-        System.out.println("EMERGENCIA "+ idEmeHabilidad);
-        System.out.println("EMERGENCIA "+ idTarea);
+
+
         TareaEntity tareaNew = tareaService.getTareaById(idTarea);
         EmeHabilidadEntity emeHabilidadNew = emeHabilidadService.getEmeHabilidadById(idEmeHabilidad);
-        System.out.println("EMERGENCIA "+ emeHabilidadNew.getIdHabilidad());
-        System.out.println("EMERGENCIA "+ tareaNew.getIdTarea());
+
         TareaHabilidadEntity tareaHabilidad = new TareaHabilidadEntity(tareaNew, emeHabilidadNew, habilidadRequerida);
 
         tareaHabilidadService.addTareaHabilidad(tareaHabilidad);

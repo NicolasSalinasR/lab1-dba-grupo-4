@@ -30,15 +30,16 @@ public class RankingService {
     }
 
     public void nuevoRanking(RankingEntity rankingEntity) {
-        repositoryRanking.crearRanking(rankingEntity.getTarea(),
-                rankingEntity.getVoluntario(),
+        repositoryRanking.crearRanking(rankingEntity.getIdTarea(),
+                rankingEntity.getIdVoluntario(),
+                rankingEntity.getNombreVoluntario(),
                 rankingEntity.getNumeroDocumentoVoluntario(),
                 rankingEntity.getNivelRanking(),
                 rankingEntity.getTareaRanking());
     }
 
-    public RankingEntity borrarRanking(RankingEntity rankingEntity) {
-        return repositoryRanking.borrarRanking(rankingEntity.getIdRanking());
+    public void borrarRanking(RankingEntity rankingEntity) {
+        repositoryRanking.borrarRanking(rankingEntity.getIdRanking());
     }
 
     public RankingEntity buscarId(Long idRanking) {

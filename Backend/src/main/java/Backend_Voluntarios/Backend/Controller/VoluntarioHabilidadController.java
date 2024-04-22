@@ -45,19 +45,19 @@ public class VoluntarioHabilidadController {
 
     @PostMapping("/agregar")
     public VoluntarioHabilidadEntity addVoluntarioHabilidad(@RequestBody Map<String, String> body) {
-        Long idVoluntario = Long.parseLong(body.get("idVoluntario"));
-        Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
+        Long idVoluntario = Long.parseLong(body.get("voluntario"));
+        Long idHabilidad = Long.parseLong(body.get("habilidad"));
 
         HabilidadEntity habilidadNew = habilidadService.findByIds(idVoluntario);
         VoluntarioEntity voluntarioNew = voluntarioService.buscarId(idHabilidad);
 
-        VoluntarioHabilidadEntity voluntario_habilidad = new VoluntarioHabilidadEntity(voluntarioNew, habilidadNew);
-        voluntarioHabilidadService.addVoluntarioHabilidad(voluntario_habilidad);
+        VoluntarioHabilidadEntity voluntarioHabilidad = new VoluntarioHabilidadEntity(voluntarioNew, habilidadNew);
+        voluntarioHabilidadService.addVoluntarioHabilidad(voluntarioHabilidad);
 
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
         // pablo
         // auditoriaService.registrarCambio(idUsuario, "Add", "añadio una voluntario
         // Habilidad");
-        return voluntario_habilidad;
+        return voluntarioHabilidad;
     }
 }

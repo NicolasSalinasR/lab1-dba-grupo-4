@@ -36,7 +36,7 @@ public class InstitucionController {
         return institucionService.getAllInstituciones();
     }
 
-    @GetMapping("/{PalabraClave}")
+    @GetMapping("/palabra/{PalabraClave}")
     public ResponseEntity<List<InstitucionEntity>> Buscar_rankings(@PathVariable String PalabraClave) {
         List<InstitucionEntity> rankings_encontrados = institucionService.listaFiltro(PalabraClave);
         if (rankings_encontrados.isEmpty()) {

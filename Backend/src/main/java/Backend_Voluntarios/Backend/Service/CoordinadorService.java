@@ -2,6 +2,7 @@ package Backend_Voluntarios.Backend.Service;
 
 import Backend_Voluntarios.Backend.Entity.CoordinadorEntity;
 import Backend_Voluntarios.Backend.Repository.CoordinadorRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -29,9 +30,9 @@ public class CoordinadorService {
                 coordinadorEntity.getContrasenaCoodinador(),
                 coordinadorEntity.getCorreoCoordinador());
     }
-
-    public CoordinadorEntity borrarCoordinador(CoordinadorEntity coordinadorEntity) {
-        return coordinadorRepository.borrarCoordinador(coordinadorEntity.getIdCoordinador());
+    @Transactional
+    public void borrarCoordinador(CoordinadorEntity coordinadorEntity) {
+        coordinadorRepository.borrarCoordinador(coordinadorEntity.getIdCoordinador());
     }
 
     public CoordinadorEntity buscarId(Long idCoordinador) {

@@ -33,8 +33,10 @@ public interface CoordinadorRepository extends JpaRepository<CoordinadorEntity, 
                         @Param("contrasena") String contrasenaCoordinador,
                         @Param("correo") String correoCoordinador);
 
-        @Query("DELETE FROM CoordinadorEntity WHERE idCoordinador = :id")
-        CoordinadorEntity borrarCoordinador(@Param("id") Long idCoordinador);
+        @Transactional
+        @Modifying
+        @Query("DELETE FROM CoordinadorEntity v WHERE v.idCoordinador = :id")
+        void borrarCoordinador(@Param("id") Long id);
 
         @Query("SELECT v FROM CoordinadorEntity v WHERE v.idCoordinador = ?1")
         CoordinadorEntity idCoordinador(@Param("v") Long idCoordinador);

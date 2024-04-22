@@ -29,7 +29,7 @@ public class EstadoTareaController {
         return estadoTareaService.findById(id);
     }
 
-    @GetMapping("/{All}")
+    @GetMapping("/All")
     public List<EstadoTareaEntity> getAllEstadoTarea() {
         return estadoTareaService.getAllEstadoHabilidad();
     }
@@ -50,7 +50,7 @@ public class EstadoTareaController {
 
     @PostMapping("/add")
     public EstadoTareaEntity addEstadoTarea(@RequestBody Map<String, String> body) {
-        Long idTarea = Long.parseLong(body.get("idTarea"));
+        Long idTarea = Long.parseLong(body.get("tarea"));
         Boolean estadoTarea = Boolean.parseBoolean(body.get("estadoTarea"));
         TareaEntity tareaNew = tareaService.getTareaById(idTarea);
 

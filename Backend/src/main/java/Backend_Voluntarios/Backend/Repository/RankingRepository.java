@@ -34,17 +34,20 @@ public interface RankingRepository extends JpaRepository<RankingEntity, Long> {
 
         @Transactional
         @Modifying
-        @Query(value = "INSERT INTO RankingEntity (tarea, voluntario, numeroDocumentoVoluntario, nivelRanking, tareaRanking) "
+        @Query(value = "INSERT INTO ranking (id_tarea, id_voluntario, nombre_voluntario, numero_documento_voluntario, nivel_ranking, tarea_ranking) "
                         +
-                        "VALUES (:tarea, :voluntario, :numeroDocumentoVoluntario, :nivelRanking, :tareaRanking)")
-        void crearRanking(@Param("tarea") TareaEntity tarea,
-                        @Param("voluntario") VoluntarioEntity voluntario,
-                        @Param("numeroDocumentoVoluntario") String numeroDocumentoVoluntario,
-                        @Param("nivelRanking") Integer nivelRanking,
-                        @Param("tareaRanking") String tareaRanking);
+                        "VALUES (:id_tarea, :id_voluntario, :nombre_voluntario, :numero_documento_voluntario, :nivel_ranking, :tarea_ranking)", nativeQuery = true)
+        void crearRanking(@Param("id_tarea") Long tarea,
+                        @Param("id_voluntario") Long voluntario,
+                        @Param("nombre_voluntario") String nombreVoluntario,
+                        @Param("numero_documento_voluntario") String numeroDocumentoVoluntario,
+                        @Param("nivel_ranking") Integer nivelRanking,
+                        @Param("tarea_ranking") String tareaRanking);
 
-        @Query("DELETE FROM RankingEntity WHERE idRanking = :id")
-        RankingEntity borrarRanking(@Param("id") Long idRanking);
+        @Transactional
+        @Modifying
+        @Query("DELETE FROM RankingEntity v WHERE v.idRanking = :id")
+        void borrarRanking(@Param("id") Long id);
 
         @Query("SELECT v FROM RankingEntity v WHERE v.idRanking = ?1")
         RankingEntity idRanking(@Param("v") Long idRanking);

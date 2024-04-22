@@ -25,7 +25,7 @@ public class CoordinadorController {
         return coordinadorService.tablaCompleta();
     }
 
-    @GetMapping("/{palabraClave}")
+    @GetMapping("/palabra/{palabraClave}")
     public ResponseEntity<List<CoordinadorEntity>> buscarCoordinador(@PathVariable String palabraClave) {
         List<CoordinadorEntity> coordinadoresEncontrados = coordinadorService.listaFiltro(palabraClave);
         if (coordinadoresEncontrados.isEmpty()) {

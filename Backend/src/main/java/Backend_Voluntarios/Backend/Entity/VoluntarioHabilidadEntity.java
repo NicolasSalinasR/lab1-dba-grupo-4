@@ -3,7 +3,7 @@ package Backend_Voluntarios.Backend.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "voluntarioHabilidad")
+@Table(name = "voluntario_habilidad")
 public class VoluntarioHabilidadEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
