@@ -21,7 +21,7 @@ import Backend_Voluntarios.Backend.Service.VoluntarioHabilidadService;
 @RestController
 @RequestMapping("/voluntarioHabilidad")
 public class VoluntarioHabilidadController {
-
+    @Autowired
     private VoluntarioHabilidadService voluntarioHabilidadService;
 
     @Autowired
@@ -48,7 +48,7 @@ public class VoluntarioHabilidadController {
         Long idVoluntario = Long.parseLong(body.get("idVoluntario"));
         Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
 
-        HabilidadEntity habilidadNew = habilidadService.findById(idVoluntario);
+        HabilidadEntity habilidadNew = habilidadService.findByIds(idVoluntario);
         VoluntarioEntity voluntarioNew = voluntarioService.buscarId(idHabilidad);
 
         VoluntarioHabilidadEntity voluntario_habilidad = new VoluntarioHabilidadEntity(voluntarioNew, habilidadNew);

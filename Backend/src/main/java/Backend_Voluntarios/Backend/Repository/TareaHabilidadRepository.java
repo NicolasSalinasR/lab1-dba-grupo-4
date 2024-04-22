@@ -26,7 +26,8 @@ public interface TareaHabilidadRepository extends JpaRepository<TareaHabilidadEn
     // Guardar
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO TareaHabilidadEntity (tarea, emeHabilidad, habilidadRequerida) VALUES (:tarea, :emeHabilidad, :habilidadRequerida)")
-    void saveTareaHabilidad(@Param("tarea") TareaEntity tarea, @Param("emeHabilidad") EmeHabilidadEntity emeHabilidad,
-            @Param("habilidadRequerida") String habilidadRequerida);
+    @Query(value = "INSERT INTO tarea_habilidad (id_tarea, id_eme_habilidad, habilidad_requerida) " +
+            "VALUES (:id_tarea, :id_eme_habilidad, :habilidad_requerida)", nativeQuery = true)
+    void saveTareaHabilidad(@Param("id_tarea") Long tarea, @Param("id_eme_habilidad") Long emeHabilidad,
+            @Param("habilidad_requerida") String habilidadRequerida);
 }

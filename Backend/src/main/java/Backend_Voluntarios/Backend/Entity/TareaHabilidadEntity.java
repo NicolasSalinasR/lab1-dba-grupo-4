@@ -10,7 +10,7 @@ public class TareaHabilidadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+
     private Long idTareaHabilidad;
 
     @ManyToOne

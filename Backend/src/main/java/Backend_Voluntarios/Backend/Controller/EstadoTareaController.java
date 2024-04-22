@@ -6,6 +6,7 @@ import Backend_Voluntarios.Backend.Entity.TareaEntity;
 import Backend_Voluntarios.Backend.Service.AuditoriaService;
 import Backend_Voluntarios.Backend.Service.EstadoTareaService;
 import Backend_Voluntarios.Backend.Service.TareaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +17,11 @@ import java.util.Map;
 @RequestMapping("/EstadoTarea")
 @CrossOrigin(origins = "*")
 public class EstadoTareaController {
+    @Autowired
     private EstadoTareaService estadoTareaService;
-
+    @Autowired
     private AuditoriaService auditoriaService;
-
+    @Autowired
     private TareaService tareaService;
 
     @GetMapping("/{id}")

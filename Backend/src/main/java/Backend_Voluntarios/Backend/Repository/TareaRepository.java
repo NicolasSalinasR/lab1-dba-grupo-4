@@ -1,6 +1,5 @@
 package Backend_Voluntarios.Backend.Repository;
 
-import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
 import Backend_Voluntarios.Backend.Entity.TareaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,17 +21,18 @@ public interface TareaRepository extends JpaRepository<TareaEntity, Long> {
         @Query("SELECT t FROM TareaEntity t")
         List<TareaEntity> findAllTareas();
 
-        @Query("SELECT v FROM TareaEntity v WHERE v.emergencia.idEmergencia = ?1")
-        public List<TareaEntity> buscarIdEmergencia(@Param("v") Long idEmergencia);
+        @Query("SELECT v FROM TareaEntity v WHERE v.emergencia.idEmergencia = :id")
+        public List<TareaEntity> buscarIdTarea(@Param("id") Long id);
 
         // Guardar
         @Transactional
         @Modifying
-        @Query(value = "INSERT INTO TareaEntity (nombreTarea, descripcionTarea, tipoTarea, emergencia) VALUES (:nombreTarea, :descripcionTarea, :tipoTarea, :emergencia)")
-        void saveTarea(@Param("nombreTarea") String nombreTarea,
-                        @Param("descripcionTarea") String descripcionTarea,
-                        @Param("tipoTarea") String tipoTarea,
-                        @Param("emergencia") EmergenciaEntity emergencia);
+        @Query(value = "INSERT INTO tarea (nombre_tarea, descripcion_tarea, tipo_tarea, id_emergencia)" +
+                " VALUES (:nombre_tarea, :descripcion_tarea, :tipo_tarea, :id_emergencia)", nativeQuery = true)
+        void saveTarea(@Param("nombre_tarea") String nombreTarea,
+                        @Param("descripcion_tarea") String descripcionTarea,
+                        @Param("tipo_tarea") String tipoTarea,
+                        @Param("id_emergencia") Long emergencia);
 
         // Crear en pantalla un listado de voluntarios por ranking para una tarea
         // específica

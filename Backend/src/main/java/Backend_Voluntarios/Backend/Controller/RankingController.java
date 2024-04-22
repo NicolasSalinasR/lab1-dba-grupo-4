@@ -16,9 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/ranking")
 public class RankingController {
-
+    @Autowired
     private RankingService rankingService;
+    @Autowired
     private VoluntarioService voluntarioService;
+    @Autowired
     private TareaService tareaService;
 
     @Autowired
@@ -34,7 +36,7 @@ public class RankingController {
         return rankingService.tablaCompleta();
     }
 
-    @GetMapping("/{palabraClave}")
+    @GetMapping("/palabra/{palabraClave}")
     public ResponseEntity<List<RankingEntity>> buscarRankings(@PathVariable String palabraClave) {
         List<RankingEntity> rankingsEncontrados = rankingService.listaFiltro(palabraClave);
         if (rankingsEncontrados.isEmpty()) {

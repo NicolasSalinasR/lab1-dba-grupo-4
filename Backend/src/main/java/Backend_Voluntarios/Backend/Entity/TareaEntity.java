@@ -90,4 +90,8 @@ public class TareaEntity {
     public void setEmergencia(EmergenciaEntity emergencia) {
         this.emergencia = emergencia;
     }
+
+    public Long getIdEmergencia(){
+        return emergencia.getIdEmergencia();
+    }
 }

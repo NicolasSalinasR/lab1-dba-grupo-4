@@ -37,7 +37,7 @@ public class VoluntarioController {
         return voluntarioService.tablaCompleta();
     }
 
-    @GetMapping("/{palabraClave}")
+    @GetMapping("/palabra/{palabraClave}")
     public ResponseEntity<List<VoluntarioEntity>> buscarVoluntarios(@PathVariable String palabraClave) {
         List<VoluntarioEntity> voluntariosEncontrados = voluntarioService.listaFiltro(palabraClave);
         if (voluntariosEncontrados.isEmpty()) {

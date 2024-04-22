@@ -2,8 +2,6 @@ package Backend_Voluntarios.Backend.Controller;
 
 
 import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
-import Backend_Voluntarios.Backend.Entity.InstitucionEntity;
-import Backend_Voluntarios.Backend.Entity.RankingEntity;
 import Backend_Voluntarios.Backend.Service.AuditoriaService;
 import Backend_Voluntarios.Backend.Service.HabilidadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ import java.util.Map;
 @RequestMapping("/Habilidad")
 @CrossOrigin(origins = "*")
 public class HabilidadController {
-
+    @Autowired
     private HabilidadService habilidadService;
 
     @Autowired
@@ -25,13 +23,13 @@ public class HabilidadController {
 
     @GetMapping("/{id}")
     public HabilidadEntity getHabilidadById(@PathVariable Long id){
-        return habilidadService.findById(id);
+        return habilidadService.findByIds(id);
     }
 
-   @GetMapping("/{All}")
+   @GetMapping("/all")
     public List<HabilidadEntity>getAllHabilidad() {return habilidadService.getAllHabilidades();}
 
-    @GetMapping("/{PalabraClave}")
+    @GetMapping("/palabra/{PalabraClave}")
     public ResponseEntity<List<HabilidadEntity>> BuscarHabilidades(@PathVariable String PalabraClave){
         List<HabilidadEntity> habilidadEncontradas =  habilidadService.listaHabilidades(PalabraClave);
         if (habilidadEncontradas.isEmpty()) {
@@ -53,7 +51,7 @@ public class HabilidadController {
     }
     @DeleteMapping("/delete/{id}")
     public void Eliminar(@PathVariable Long id){
-        HabilidadEntity habilidadEliminada = habilidadService.findById(id);
+        HabilidadEntity habilidadEliminada = habilidadService.findByIds(id);
         habilidadService.borrarHabilidad(habilidadEliminada);
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
         //         auditoriaService.registrarCambio(idUsuario, "Delete", "borro una Habilidad");
