@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
 @Repository
 public interface EstadoTareaRepository extends JpaRepository<EstadoTareaEntity, Long> {
         @Query("SELECT palabra FROM EstadoTareaEntity palabra WHERE"
@@ -39,14 +40,8 @@ public interface EstadoTareaRepository extends JpaRepository<EstadoTareaEntity, 
         void guardarEstadoTarea(@Param("idTarea") Long idTarea,
                         @Param("estadoTarea") Boolean estadoTarea);
 
-    @Transactional
-    @Modifying
-    @Query(value = "INSERT INTO estado_tarea (id_tarea, estado_tarea) " +
-            "VALUES (:id_tarea, :estado_tarea)", nativeQuery = true)
-    void guardarEstadoTarea(@Param("id_tarea") Long idTarea,
-                                         @Param("estado_tarea") Boolean estadoTarea);
+        @Query(value = "SELECT v FROM EstadoTareaEntity v")
+        List<EstadoTareaEntity> findAlls();
 
-    @Query(value = "SELECT v FROM EstadoTareaEntity v")
-    List<EstadoTareaEntity> findAlls();
         EstadoTareaEntity save(EstadoTareaEntity estadoTareaEntity);
 }
