@@ -2,6 +2,7 @@ package Backend_Voluntarios.Backend.Service;
 
 import Backend_Voluntarios.Backend.Entity.RankingEntity;
 import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
+import Backend_Voluntarios.Backend.Repository.EmergenciaRepository;
 import Backend_Voluntarios.Backend.Repository.RankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,5 +67,9 @@ public class RankingService {
             contador = contador + 1;
         }
         return contador;
+    }
+
+    public List<Object[]> obtenerVoluntariosPorEmergencia() {
+        return repositoryRanking.obtenerVoluntariosPorEmergencia();
     }
 }

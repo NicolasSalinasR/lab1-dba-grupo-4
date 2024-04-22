@@ -26,9 +26,9 @@ public class RankingController {
     @Autowired
     private AuditoriaService auditoriaService;
 
-    @GetMapping()
-    public String conectado() {
-        return "CONECTADO";
+    @GetMapping("/voluntariosPorEmergencia")
+    public List<Object[]> obtenerVoluntariosPorEmergencia() {
+        return rankingService.obtenerVoluntariosPorEmergencia();
     }
 
     @GetMapping("/all")
@@ -94,6 +94,8 @@ public class RankingController {
         // pablo
         // auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un ranking");
     }
+
+
 
     // @PutMapping("editar/{idVoluntario}")
     // public void actualizar(@PathVariable Long idVoluntario) {

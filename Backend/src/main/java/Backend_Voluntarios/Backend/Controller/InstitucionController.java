@@ -52,9 +52,10 @@ public class InstitucionController {
         InstitucionEntity institucion = new InstitucionEntity(nombreInstitucion);
         institucionService.addInstitucion(institucion);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+         Long idUsuario = 1L;
+        //metodo para obtener id de usuario ya listo, esperar a
         // pablo
-        // auditoriaService.registrarCambio(idUsuario, "Add", "añadio una institucion");
+         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una institucion");
         return institucion;
     }
 
