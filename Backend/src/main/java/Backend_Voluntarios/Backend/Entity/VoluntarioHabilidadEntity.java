@@ -1,26 +1,26 @@
 package Backend_Voluntarios.Backend.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "voluntarioHabilidad")
+@Table(name = "voluntario_habilidad")
 public class VoluntarioHabilidadEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idVoluntarioHabilidad;
 
-    private Long idVoluntario;
+    @ManyToOne
+    @JoinColumn(name = "idVoluntario")
+    private VoluntarioEntity voluntario;
 
-    private Long idHabilidad;
+    @ManyToOne
+    @JoinColumn(name = "idHabilidad")
+    private HabilidadEntity habilidad;
 
-    public VoluntarioHabilidadEntity(Long idVoluntario, Long idHabilidad) {
+    public VoluntarioHabilidadEntity(VoluntarioEntity idVoluntario, HabilidadEntity idHabilidad) {
         super();
-        this.idVoluntario = idVoluntario;
-        this.idHabilidad = idHabilidad;
+        this.voluntario = idVoluntario;
+        this.habilidad = idHabilidad;
     }
 
     public VoluntarioHabilidadEntity() {
@@ -32,18 +32,26 @@ public class VoluntarioHabilidadEntity {
     }
 
     public Long getIdVoluntario() {
-        return idVoluntario;
+        return voluntario.getIdVoluntario();
     }
 
     public Long getIdHabilidad() {
-        return idHabilidad;
+        return habilidad.getIdhabilidad();
     }
 
-    public void setIdVoluntario(Long idVoluntario) {
-        this.idVoluntario = idVoluntario;
+    public void setIdVoluntario(VoluntarioEntity idVoluntario) {
+        this.voluntario = idVoluntario;
     }
 
-    public void setIdHabilidad(Long idHabilidad) {
-        this.idHabilidad = idHabilidad;
+    public void setIdHabilidad(HabilidadEntity idHabilidad) {
+        this.habilidad = idHabilidad;
+    }
+
+    public VoluntarioEntity getVoluntario() {
+        return this.voluntario;
+    }
+
+    public HabilidadEntity getHabilidad() {
+        return this.habilidad;
     }
 }

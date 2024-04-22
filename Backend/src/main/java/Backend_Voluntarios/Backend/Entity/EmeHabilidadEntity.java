@@ -1,6 +1,8 @@
 package Backend_Voluntarios.Backend.Entity;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "eme_habilidad")
@@ -8,28 +10,25 @@ public class EmeHabilidadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+
     private Long idEmergenciaHabilidad;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long idEmergencia;
+    @ManyToOne
+    @JoinColumn(name = "idEmergencia")
+    private EmergenciaEntity emergencia;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long idHabilidad;
+    @ManyToOne
+    @JoinColumn(name = "idHabilidad")
+    private HabilidadEntity habilidad;
 
-
-
+    @OneToMany(mappedBy = "emeHabilidad")
+    private Set<TareaHabilidadEntity> TareaHabilidad = new HashSet<>();
 
     // Constructor all
 
-    public EmeHabilidadEntity(  Long idEmergencia, Long idHabilidad){
-        super();
-        this.idEmergencia = idEmergencia;
-        this.idHabilidad = idHabilidad;
+    public EmeHabilidadEntity(EmergenciaEntity idEmergencia, HabilidadEntity idHabilidad) {
+        this.emergencia = idEmergencia;
+        this.habilidad = idHabilidad;
 
     }
 
@@ -38,28 +37,39 @@ public class EmeHabilidadEntity {
         super();
     }
 
-
     // Getters
-    public Long getIdEmergenciaHabilidad(){
+    public Long getIdEmergenciaHabilidad() {
         return idEmergenciaHabilidad;
     }
 
+    public void setIdEmergenciaHabilidad(Long idEmergenciaHabilidad) {
+        this.idEmergenciaHabilidad = idEmergenciaHabilidad;
+    }
+
     public Long getIdHabilidad() {
-        return idHabilidad;
+        return habilidad.getIdhabilidad();
     }
 
-    public Long getIdEmergencia(){
-        return idEmergencia;
+    public Long getIdEmergencia() {
+        return emergencia.getIdEmergencia();
     }
 
-    //Setters
-
-    public void setIdHabilidad(Long idHabilidad){
-        this.idHabilidad = idHabilidad;
+    public EmergenciaEntity getEmergencia() {
+        return emergencia;
     }
 
-    public void setIdEmergencia(Long idEmergencia){
-        this.idEmergencia= idEmergencia;
+    public HabilidadEntity getHabilidad() {
+        return habilidad;
+    }
+
+    // Setters
+
+    public void setIdHabilidad(HabilidadEntity idHabilidad) {
+        this.habilidad = idHabilidad;
+    }
+
+    public void setIdEmergencia(EmergenciaEntity idEmergencia) {
+        this.emergencia = idEmergencia;
     }
 
 }

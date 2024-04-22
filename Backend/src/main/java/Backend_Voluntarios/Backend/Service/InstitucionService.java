@@ -12,26 +12,24 @@ public class InstitucionService {
     @Autowired
     private InstitucionRepository institucionRepository;
 
-    public InstitucionEntity getInstitucionById(Long id){
+    public InstitucionEntity getInstitucionById(Long id) {
         return institucionRepository.findInstitucionById(id);
     }
 
-    public List<InstitucionEntity> getAllInstituciones(){
+    public List<InstitucionEntity> getAllInstituciones() {
         return institucionRepository.findAllInstituciones();
     }
 
-    public InstitucionEntity addInstitucion(InstitucionEntity institucion){
-        return institucionRepository.saveInstitucion(
-                institucion.getIdInstitucion(),
-                institucion.getIdEmergencia(),
-                institucion.getNombreInstitucion());
+    public void addInstitucion(InstitucionEntity institucion) {
+        institucionRepository.saveInstitucion(institucion.getNombreInstitucion());
     }
 
-    public List<InstitucionEntity> listaFiltro(String palabraClave){
+    public List<InstitucionEntity> listaFiltro(String palabraClave) {
         return institucionRepository.findAll(palabraClave);
     }
 
-    public InstitucionEntity deleteInstitucion( InstitucionEntity institucion){
-        return institucionRepository.deleteInstitucion(institucion.getIdInstitucion());
-    }
+    // public InstitucionEntity deleteInstitucion(InstitucionEntity institucion) {
+    // return
+    // institucionRepository.deleteInstitucion(institucion.getIdInstitucion());
+    // }
 }

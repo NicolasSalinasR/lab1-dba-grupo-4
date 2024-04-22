@@ -1,6 +1,14 @@
 package Backend_Voluntarios.Backend.Entity;
 
-import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "institucion")
@@ -8,21 +16,17 @@ public class InstitucionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long idInstitucion;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long idEmergencia;
+
+    @OneToMany(mappedBy = "institucion")
+    private Set<EmergenciaEntity> emergencia = new HashSet<>();
 
     private String nombreInstitucion;
 
-
     // Constructor all
-    public InstitucionEntity( Long idEmergencia, String nombreInstitucion){
+    public InstitucionEntity(String nombreInstitucion) {
         super();
-        this.idEmergencia = idEmergencia;
         this.nombreInstitucion = nombreInstitucion;
     }
 
@@ -32,29 +36,16 @@ public class InstitucionEntity {
     }
 
     // Getters
-    public Long getIdInstitucion(){
+    public Long getIdInstitucion() {
         return idInstitucion;
     }
 
-    public Long getIdEmergencia() {
-        return idEmergencia;
-    }
-
-    public String getNombreInstitucion(){
+    public String getNombreInstitucion() {
         return nombreInstitucion;
     }
 
-    //Setters
-    public void setIdEmergencia(Long idEmergencia){
-        this.idEmergencia= idEmergencia;
-    }
-    public void setNombreInstitucion(String nombreInstitucion){
-        this.nombreInstitucion= nombreInstitucion;
+    public void setNombreInstitucion(String nombreInstitucion) {
+        this.nombreInstitucion = nombreInstitucion;
     }
 
-    }
-
-
-
-    
-
+}

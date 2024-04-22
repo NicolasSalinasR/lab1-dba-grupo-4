@@ -1,55 +1,91 @@
 package Backend_Voluntarios.Backend.Entity;
 
-
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "voluntario")
 public class VoluntarioEntity {
+    // Se crea el id del voluntario de tipo serial
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long idVoluntario;
 
     @Column(nullable = false, length = 100)
-    private String condicionVoluntario;
-
-    @Column(nullable = false)
-    private boolean disponibilidadVoluntario;
+    private String nombreVoluntario;
 
     @Column(nullable = false, length = 100)
+    private String correoVoluntario;
+
+    @Column(unique = true, nullable = false, length = 100)
+    private String numeroDocumentoVoluntario;
+
+    @Column(nullable = false)
     private String zonaViviendaVoluntario;
 
     @Column(nullable = false, length = 100)
+    private String contrasenaVoluntario;
+
+    @Column(nullable = false)
     private String equipamientoVoluntario;
 
+    @OneToMany(mappedBy = "voluntario")
+    private Set<RankingEntity> Ranking = new HashSet<>();
 
-    public VoluntarioEntity(Long idVoluntario, String condicionVoluntario, boolean disponibilidadVoluntario, String zonaViviendaVoluntario, String equipamientoVoluntario){
-        super();
-        this.idVoluntario = idVoluntario;
-        this.condicionVoluntario = condicionVoluntario;
-        this.disponibilidadVoluntario = disponibilidadVoluntario;
+    @OneToMany(mappedBy = "voluntario")
+    private Set<VoluntarioHabilidadEntity> VoluntarioHabilidad = new HashSet<>();
+
+    public VoluntarioEntity(String nombreVoluntario, String correoVoluntario, String numeroDocumentoVoluntario,
+            String equipamientoVoluntario, String zonaViviendaVoluntario, String contrasenaVoluntario) {
+        this.nombreVoluntario = nombreVoluntario;
+        this.contrasenaVoluntario = contrasenaVoluntario;
+        this.correoVoluntario = correoVoluntario;
+        this.numeroDocumentoVoluntario = numeroDocumentoVoluntario;
         this.equipamientoVoluntario = equipamientoVoluntario;
         this.zonaViviendaVoluntario = zonaViviendaVoluntario;
     }
-    public VoluntarioEntity(){
+
+    public VoluntarioEntity() {
         super();
+    }
+
+    public String getContrasenaVoluntario() {
+        return contrasenaVoluntario;
+    }
+
+    public void setContrasenaVoluntario(String contrasenaVoluntario) {
+        this.contrasenaVoluntario = contrasenaVoluntario;
     }
 
     public Long getIdVoluntario() {
         return idVoluntario;
     }
 
-    public void setCondicionVoluntario(String condicion_voluntario) {
-        this.condicionVoluntario = condicion_voluntario;
+    public String getNombreVoluntario() {
+        return nombreVoluntario;
     }
 
-    public boolean isDisponibilidadVoluntario() {
-        return disponibilidadVoluntario;
+    public void setNombreVoluntario(String nombreVoluntario) {
+        this.nombreVoluntario = nombreVoluntario;
     }
 
-    public void setDisponibilidadVoluntario(boolean disponibilidad_voluntario) {
-        this.disponibilidadVoluntario = disponibilidad_voluntario;
+    public String getCorreoVoluntario() {
+        return correoVoluntario;
+    }
+
+    public String getNumeroDocumentoVoluntario() {
+        return numeroDocumentoVoluntario;
+    }
+
+    public void setNumeroDocumentoVoluntario(String numeroDocumentoVoluntario) {
+        this.numeroDocumentoVoluntario = numeroDocumentoVoluntario;
+    }
+
+    public void setCorreoVoluntario(String correoVoluntario) {
+        this.correoVoluntario = correoVoluntario;
     }
 
     public String getZonaViviendaVoluntario() {
@@ -70,9 +106,5 @@ public class VoluntarioEntity {
 
     public void setIdVoluntario(Long idVoluntario) {
         this.idVoluntario = idVoluntario;
-    }
-
-    public String getCondicionVoluntario() {
-        return condicionVoluntario;
     }
 }
