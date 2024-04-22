@@ -26,7 +26,7 @@ public interface RankingRepository extends JpaRepository<RankingEntity, Long> {
                         "ORDER BY r.nivelRanking DESC")
         public List<RankingEntity> listRanking();
 
-        @Query("SELECT v FROM RankingEntity v")
+        @Query("SELECT v FROM RankingEntity v ORDER BY v.nivelRanking DESC")
         public List<RankingEntity> listAll();
 
         @Query("SELECT v FROM RankingEntity v WHERE v.idRanking = ?1")
@@ -62,12 +62,12 @@ public interface RankingRepository extends JpaRepository<RankingEntity, Long> {
         public int matchHabilidad(@Param("id") Long id);
 
         @Query("SELECT e.idEmergencia, v.numeroDocumentoVoluntario, v.nombreVoluntario, " +
-                "COUNT(DISTINCT t.idTarea) AS cantidad_tareas " +
-                "FROM EmergenciaEntity e " +
-                "INNER JOIN TareaEntity t ON t.emergencia.idEmergencia = e.idEmergencia " +
-                "INNER JOIN RankingEntity tv ON tv.tarea.idTarea = t.idTarea " +
-                "INNER JOIN VoluntarioEntity v ON tv.voluntario.idVoluntario = v.idVoluntario " +
-                "GROUP BY e.idEmergencia, v.idVoluntario, v.numeroDocumentoVoluntario, v.nombreVoluntario")
+                        "COUNT(DISTINCT t.idTarea) AS cantidad_tareas " +
+                        "FROM EmergenciaEntity e " +
+                        "INNER JOIN TareaEntity t ON t.emergencia.idEmergencia = e.idEmergencia " +
+                        "INNER JOIN RankingEntity tv ON tv.tarea.idTarea = t.idTarea " +
+                        "INNER JOIN VoluntarioEntity v ON tv.voluntario.idVoluntario = v.idVoluntario " +
+                        "GROUP BY e.idEmergencia, v.idVoluntario, v.numeroDocumentoVoluntario, v.nombreVoluntario")
         List<Object[]> obtenerVoluntariosPorEmergencia();
 
         RankingEntity save(RankingEntity rankingEntity);

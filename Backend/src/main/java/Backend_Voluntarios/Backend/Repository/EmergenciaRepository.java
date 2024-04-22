@@ -25,14 +25,13 @@ public interface EmergenciaRepository extends JpaRepository<EmergenciaEntity, Lo
     // save
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO EmergenciaEntity (tipoEmergencia, zonaEmergencia, condicionFisica, cantidadVoluntariosMinimo, cantidadVoluntariosMaximo, institucion) VALUES (:tipoEmergencia, :zonaEmergencia, :condicionFisica, :cantidadVoluntariosMinimo, :cantidadVoluntariosMaximo, :institucion)")
+    @Query(value = "INSERT INTO emergencia (tipo_emergencia, zona_emergencia, condicion_fisica, cantidad_voluntarios_minimo, cantidad_voluntarios_maximo, id_institucion) VALUES (:tipoEmergencia, :zonaEmergencia, :condicionFisica, :cantidadVoluntariosMinimo, :cantidadVoluntariosMaximo, :institucion)", nativeQuery = true)
     void saveEmergencia(@Param("tipoEmergencia") String tipoEmergencia,
             @Param("zonaEmergencia") String zonaEmergencia,
             @Param("condicionFisica") String condicionFisica,
             @Param("cantidadVoluntariosMinimo") String cantidadVoluntariosMinimo,
             @Param("cantidadVoluntariosMaximo") String cantidadVoluntariosMaximo,
-            @Param("institucion") InstitucionEntity institucion);
+            @Param("institucion") Long institucion);
 
     EmergenciaEntity save(EmergenciaEntity emergenciaEntity);
 }
-

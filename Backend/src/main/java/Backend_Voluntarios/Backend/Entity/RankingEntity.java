@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class RankingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long idRanking;
 
     @ManyToOne
@@ -19,15 +18,12 @@ public class RankingEntity {
     @JoinColumn(name = "idVoluntario")
     private VoluntarioEntity voluntario;
 
-    @Column(nullable = false, length = 100)
     private String nombreVoluntario;
 
-    @Column(unique = true, nullable = false, length = 100)
     private String numeroDocumentoVoluntario;
-    @Column(nullable = false)
+
     private Integer nivelRanking;
 
-    @Column(nullable = false, length = 100)
     private String tareaRanking;
 
     public RankingEntity(TareaEntity idTarea, VoluntarioEntity idVoluntario, String nombreVoluntario,

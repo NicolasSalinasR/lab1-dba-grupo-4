@@ -26,7 +26,7 @@ public class EmergenciaService {
                 emergencia.getCondicionFisica(),
                 emergencia.getCantidadVoluntariosMinimo(),
                 emergencia.getCantidadVoluntariosMaximo(),
-                emergencia.getInstitucion());
+                emergencia.getInstitucion().getIdInstitucion());
     }
 
 }

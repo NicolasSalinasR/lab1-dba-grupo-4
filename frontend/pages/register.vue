@@ -63,7 +63,7 @@ export default {
         },
         registrarUsuario(event) {
             event.preventDefault();
-            axios.post('http://localhost:8080/voluntario/guardar', {
+            axios.post('http://localhost:8080/voluntario/add', {
                 nombreVoluntario: this.nombre,
                 zonaViviendaVoluntario: this.zonaVivienda,
                 numeroDocumentoVoluntario: this.numDocumento,

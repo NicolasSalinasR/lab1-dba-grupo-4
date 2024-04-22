@@ -39,7 +39,7 @@ public class TareaController {
         return tareaService.getAllTareas();
     }
 
-    @GetMapping("/{nombreTarea}")
+    @GetMapping("/nombre/{nombreTarea}")
     public List<TareaEntity> getRankingTarea(@PathVariable String nombreTarea) {
         return tareaService.getRankingTarea(nombreTarea);
     }
@@ -55,7 +55,6 @@ public class TareaController {
         Long idUsuario = 1L;
         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una tarea");
         tareaService.addTarea(tarea);
-
 
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
         // pablo

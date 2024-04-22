@@ -24,7 +24,7 @@
 
       <!-- Mostrar ComponenteB si mostrarComponenteA es falso -->
       <!-- <ListCard2 v-else /> -->
-      <ListCard v-if="mostrarListCard" title1="Tareas de Emergencias inscritas" :description1="[
+      <ListCard v-if="mostrarListCard" title1="Emergencias" :description1="[
         { text1: 'Primeros Auxilios', text2: 'Incencio en Valparaíso', buttonLabel: 'En proceso' },
         { text1: 'Recoger escombros', text2: 'Incendio en Valparaíso', buttonLabel: 'En proceso' },
         { text1: 'Primeros Auxilios', text2: 'Incencio en Valparaíso', buttonLabel: 'Terminada' },
@@ -71,7 +71,7 @@ export default {
   },
   data() {
     return {
-      backendData: null,
+      backendData: [],
       mostrarComponenteA: true,// Mostrar ListCard por defecto// Mostrar ComponenteA por defecto
       mostrarListCard: true
     };
@@ -85,8 +85,16 @@ export default {
       this.mostrarListCard = value;
     },
     getEmergenciasUsuario() {
-      axios.get("http://localhost:3000/api/v1/emergencias/usuario/1").then((response) => {
+      // agregar token en el header
+      axios.get('http://localhost:8080/voluntario/emergencias', {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      }).then(response => {
         this.backendData = response.data;
+        console.log("backendData", this.backendData);
+      }).catch(error => {
+        console.log(error);
       });
     }
   }
