@@ -50,12 +50,13 @@ public class InstitucionController {
         String nombreInstitucion = body.get("nombreInstitucion");
 
         InstitucionEntity institucion = new InstitucionEntity(nombreInstitucion);
-        institucionService.addInstitucion(institucion);
-
-         Long idUsuario = 1L;
+        Long idUsuario = 1L;
         //metodo para obtener id de usuario ya listo, esperar a
         // pablo
-         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una institucion");
+        auditoriaService.registrarCambio(idUsuario, "Add", "añadio una institucion");
+        institucionService.addInstitucion(institucion);
+
+
         return institucion;
     }
 

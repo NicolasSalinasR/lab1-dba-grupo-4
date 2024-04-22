@@ -44,6 +44,8 @@ public class HabilidadController {
         String nombreHabilidad = body.get("nombreHabilidad");
 
         HabilidadEntity habilidad = new HabilidadEntity(nombreHabilidad);
+        Long idUsuario = 1L;
+        auditoriaService.registrarCambio(idUsuario, "Add", "añadio una Habilidad");
         habilidadService.crearHabilidad(habilidad);
         // Long idUsuario = //metodo para obtener id de usuario, esperar a pablo
         //         auditoriaService.registrarCambio(idUsuario, "Add", "añadio una Habilidad");
@@ -52,9 +54,10 @@ public class HabilidadController {
     @DeleteMapping("/delete/{id}")
     public void Eliminar(@PathVariable Long id){
         HabilidadEntity habilidadEliminada = habilidadService.findByIds(id);
+        Long idUsuario = 1L;//metodo para obtener id de usuario ya listo, esperar a pablo
+        auditoriaService.registrarCambio(idUsuario, "Delete", "borro una Habilidad");
         habilidadService.borrarHabilidad(habilidadEliminada);
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //         auditoriaService.registrarCambio(idUsuario, "Delete", "borro una Habilidad");
+
     }
 
 }

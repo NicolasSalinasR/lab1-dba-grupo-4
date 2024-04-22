@@ -79,6 +79,8 @@ public class RankingController {
             RankingEntity ranking = new RankingEntity(nombreTarea, buscarVoluntario,
                     nombreVoluntario,
                     numeroDocumentoVoluntario, nivelRanking, tareaRanking);
+            Long idUsuario = 1L;
+            auditoriaService.registrarCambio(idUsuario, "Add", "añadio un ranking");
             rankingService.nuevoRanking(ranking);
             // Long idUsuario = metodo para obtener id de usuario ya listo, esperar a pablo
             // auditoriaService.registrarCambio(idUsuario, "Add", "añadio un ranking");
@@ -88,11 +90,12 @@ public class RankingController {
     @DeleteMapping("/delete/{idRanking}")
     public void eliminar(@PathVariable Long idRanking) {
         RankingEntity rankingEntity = rankingService.buscarId(idRanking);
+        Long idUsuario = 1L;//metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un ranking");
         rankingService.borrarRanking(rankingEntity);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
-        // pablo
-        // auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un ranking");
+
     }
 
 

@@ -57,6 +57,8 @@ public class EmeHabilidadController {
         EmergenciaEntity emergenciaNew = emergenciaService.getEmergenciaById(idEmergencia);
         HabilidadEntity habilidadNew = habilidadService.findByIds(idHabilidad);
         EmeHabilidadEntity emeHabilidad = new EmeHabilidadEntity(emergenciaNew, habilidadNew);
+        Long idUsuario = 1L;
+        auditoriaService.registrarCambio(idUsuario, "Add", "añadio una emergencia Habilidad");
         emeHabilidadService.addEmeHabilidad(emeHabilidad);
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
         // pablo

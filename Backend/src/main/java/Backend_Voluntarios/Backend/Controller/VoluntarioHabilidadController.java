@@ -52,6 +52,8 @@ public class VoluntarioHabilidadController {
         VoluntarioEntity voluntarioNew = voluntarioService.buscarId(idHabilidad);
 
         VoluntarioHabilidadEntity voluntarioHabilidad = new VoluntarioHabilidadEntity(voluntarioNew, habilidadNew);
+        Long idUsuario = 2L;
+        auditoriaService.registrarCambio(idUsuario, "Add", "añadio una voluntario Habilidad");
         voluntarioHabilidadService.addVoluntarioHabilidad(voluntarioHabilidad);
 
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a

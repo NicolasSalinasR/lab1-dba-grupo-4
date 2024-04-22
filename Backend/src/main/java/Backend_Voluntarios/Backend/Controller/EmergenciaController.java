@@ -46,6 +46,8 @@ public class EmergenciaController {
 
         EmergenciaEntity emergencia = new EmergenciaEntity(tipoEmergencia, zonaEmergencia, condicionFisica,
                 cantidadVoluntariosMinimo, cantidadVoluntariosMaximo);
+        Long idUsuario = 1L;
+        auditoriaService.registrarCambio(idUsuario, "Add", "añadio una emergencia");
         emergenciaService.addEmergencia(emergencia);
 
        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
