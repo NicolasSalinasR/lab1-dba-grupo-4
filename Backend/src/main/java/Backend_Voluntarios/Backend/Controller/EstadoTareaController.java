@@ -29,7 +29,7 @@ public class EstadoTareaController {
         return estadoTareaService.findById(id);
     }
 
-    @GetMapping("/All")
+    @GetMapping("/all")
     public List<EstadoTareaEntity> getAllEstadoTarea() {
         return estadoTareaService.getAllEstadoHabilidad();
     }

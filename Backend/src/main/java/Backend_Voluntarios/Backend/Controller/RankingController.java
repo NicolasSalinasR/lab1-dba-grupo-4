@@ -62,7 +62,7 @@ public class RankingController {
         return ResponseEntity.ok(idRankingsEncontrados);
     }
 
-    @PostMapping("/guardar/{idVoluntario}/{idEmergencia}")
+    @PostMapping("/add/{idVoluntario}/{idEmergencia}")
     public void crearRanking(@PathVariable Long idVoluntario,
             @PathVariable Long idEmergencia) {
         List<TareaEntity> tareas = tareaService.tablaIds(idEmergencia);

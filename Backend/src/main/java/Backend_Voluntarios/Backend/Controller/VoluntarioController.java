@@ -62,7 +62,7 @@ public class VoluntarioController {
         return ResponseEntity.ok(idVoluntariosEncontrados);
     }
 
-    @PostMapping("/guardar")
+    @PostMapping("/add")
     public VoluntarioEntity crearVoluntario(@RequestBody Map<String, String> body) {
         String nombreVoluntario = body.get("nombreVoluntario");
         String contrasenaVoluntario = body.get("contrasenaVoluntario");

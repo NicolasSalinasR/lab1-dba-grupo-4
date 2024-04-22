@@ -35,3 +35,4 @@ public interface EmergenciaRepository extends JpaRepository<EmergenciaEntity, Lo
 
     EmergenciaEntity save(EmergenciaEntity emergenciaEntity);
 }
+
