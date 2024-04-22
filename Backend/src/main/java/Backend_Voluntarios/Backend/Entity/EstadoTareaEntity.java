@@ -8,7 +8,6 @@ public class EstadoTareaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long idEstadoTarea;
 
     @ManyToOne
@@ -20,6 +19,10 @@ public class EstadoTareaEntity {
     public EstadoTareaEntity(TareaEntity idTarea, boolean estadoTarea) {
         this.tarea = idTarea;
         this.estadoTarea = estadoTarea;
+    }
+
+    public EstadoTareaEntity() {
+        super();
     }
     // getters
 

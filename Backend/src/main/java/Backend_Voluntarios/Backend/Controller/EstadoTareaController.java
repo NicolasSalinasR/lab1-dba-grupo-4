@@ -29,7 +29,7 @@ public class EstadoTareaController {
         return estadoTareaService.findById(id);
     }
 
-    @GetMapping("/{All}")
+    @GetMapping("/All")
     public List<EstadoTareaEntity> getAllEstadoTarea() {
         return estadoTareaService.getAllEstadoHabilidad();
     }
@@ -50,11 +50,13 @@ public class EstadoTareaController {
 
     @PostMapping("/add")
     public EstadoTareaEntity addEstadoTarea(@RequestBody Map<String, String> body) {
-        Long idTarea = Long.parseLong(body.get("idTarea"));
+        Long idTarea = Long.parseLong(body.get("tarea"));
         Boolean estadoTarea = Boolean.parseBoolean(body.get("estadoTarea"));
         TareaEntity tareaNew = tareaService.getTareaById(idTarea);
 
         EstadoTareaEntity estadoTareaNew = new EstadoTareaEntity(tareaNew, estadoTarea);
+        Long idUsuario = 1L;
+        auditoriaService.registrarCambio(idUsuario, "Add", "añadio un estado tarea");
         estadoTareaService.guardarEstadoTarea(estadoTareaNew);
         return estadoTareaNew;
 
@@ -65,6 +67,8 @@ public class EstadoTareaController {
 
     @DeleteMapping("/delete/{id}")
     public void Eliminar(@PathVariable Long id) {
+        Long idUsuario = 1L;//metodo para obtener id de usuario ya listo, esperar a
+        auditoriaService.registrarCambio(idUsuario, "delete", "elimino un estadotarea");
         estadoTareaService.eliminarEstadoTarea(id);
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
         // pablo

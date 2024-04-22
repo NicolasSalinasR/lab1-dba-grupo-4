@@ -25,9 +25,10 @@ public interface VoluntarioHabilidadRepository extends JpaRepository<VoluntarioH
     // save
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO VoluntarioHabilidadEntity (voluntario, habilidad) VALUES (:voluntario, :habilidad)")
-    void saveVoluntarioHabilidad(@Param("voluntario") VoluntarioEntity voluntario,
-            @Param("habilidad") HabilidadEntity habilidad);
+    @Query(value = "INSERT INTO voluntario_habilidad (id_voluntario, id_habilidad) " +
+            "VALUES (:id_voluntario, :id_habilidad)", nativeQuery = true)
+    void saveVoluntarioHabilidad(@Param("id_voluntario") Long voluntario,
+            @Param("id_habilidad") Long habilidad);
 
     VoluntarioHabilidadEntity save(VoluntarioHabilidadEntity voluntarioHabilidadEntity);
 }

@@ -36,7 +36,7 @@ public class InstitucionController {
         return institucionService.getAllInstituciones();
     }
 
-    @GetMapping("/{PalabraClave}")
+    @GetMapping("/palabra/{PalabraClave}")
     public ResponseEntity<List<InstitucionEntity>> Buscar_rankings(@PathVariable String PalabraClave) {
         List<InstitucionEntity> rankings_encontrados = institucionService.listaFiltro(PalabraClave);
         if (rankings_encontrados.isEmpty()) {
@@ -50,11 +50,13 @@ public class InstitucionController {
         String nombreInstitucion = body.get("nombreInstitucion");
 
         InstitucionEntity institucion = new InstitucionEntity(nombreInstitucion);
+        Long idUsuario = 1L;
+        //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        auditoriaService.registrarCambio(idUsuario, "Add", "añadio una institucion");
         institucionService.addInstitucion(institucion);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
-        // pablo
-        // auditoriaService.registrarCambio(idUsuario, "Add", "añadio una institucion");
+
         return institucion;
     }
 

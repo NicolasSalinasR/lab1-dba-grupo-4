@@ -2,6 +2,7 @@ package Backend_Voluntarios.Backend.Service;
 
 import Backend_Voluntarios.Backend.Entity.EstadoTareaEntity;
 import Backend_Voluntarios.Backend.Repository.EstadoTareaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -35,13 +36,13 @@ public class EstadoTareaService {
     public void eliminarEstadoTarea(Long idEstadoTarea) {
         estadoTareaRepository.borrarEstadoTarea(idEstadoTarea);
     }
-
+    @Transactional
     public void guardarEstadoTarea(EstadoTareaEntity estadoTarea) {
         estadoTareaRepository.guardarEstadoTarea(estadoTarea.getIdTarea(),
                 estadoTarea.isEstadoTarea());
     }
 
     public List<EstadoTareaEntity> getAllEstadoHabilidad() {
-        return estadoTareaRepository.findAll();
+        return estadoTareaRepository.findAlls();
     }
 }

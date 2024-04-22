@@ -73,9 +73,9 @@ public class VoluntarioController {
 
         VoluntarioEntity voluntario = new VoluntarioEntity(nombreVoluntario, correoVoluntario,
                 numeroDocumentoVoluntario, equipamientoVoluntario, zonaViviendaVoluntario,
-                // Se encripta la contraseña
                 passwordEncoder.encode(contrasenaVoluntario));
-
+        Long idUsuario = 2L;
+        auditoriaService.registrarCambio(idUsuario, "Add", "añadio un voluntario");
         voluntarioService.nuevoVoluntario(voluntario);
 
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
@@ -88,12 +88,12 @@ public class VoluntarioController {
     @DeleteMapping("/delete/{idVoluntario}")
     public void eliminar(@PathVariable Long idVoluntario) {
         VoluntarioEntity voluntarioBorrado = voluntarioService.buscarId(idVoluntario);
+        Long idUsuario = 2L;//metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        auditoriaService.registrarCambio(idUsuario, "Delete", "elimino unvoluntario");
         voluntarioService.borrarVoluntario(voluntarioBorrado);
 
-        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
-        // pablo
-        // auditoriaService.registrarCambio(idUsuario, "Delete", "elimino un
-        // voluntario");
+
     }
 
     @PostMapping("/login")

@@ -52,6 +52,8 @@ public class TareaController {
         Long emergencia = Long.parseLong(body.get("emergencia"));
         EmergenciaEntity emergencia1 = emergenciaService.getEmergenciaById(emergencia);
         TareaEntity tarea = new TareaEntity(nombreTarea, descripcionTarea, tipoTarea, emergencia1);
+        Long idUsuario = 1L;
+        auditoriaService.registrarCambio(idUsuario, "Add", "añadio una tarea");
         tareaService.addTarea(tarea);
 
 

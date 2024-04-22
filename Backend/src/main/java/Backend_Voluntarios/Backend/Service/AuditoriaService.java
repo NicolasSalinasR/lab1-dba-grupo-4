@@ -10,7 +10,7 @@ public class AuditoriaService {
     private JdbcTemplate jdbcTemplate;
 
     public void registrarCambio(Long idUsuario, String tipoOperacion, String descripcion) {
-        String sql = "INSERT INTO auditoria (id_usuario, tipo_operacion, descripcion) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO parametros_trigger (id_usuario, tipo_operacion, descripcion) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, idUsuario, tipoOperacion, descripcion);
     }
 }
