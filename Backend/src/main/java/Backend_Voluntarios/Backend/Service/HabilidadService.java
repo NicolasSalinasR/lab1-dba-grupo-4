@@ -17,7 +17,7 @@ public class HabilidadService {
         return interfaceHabilidad.findAll(palabraClave);
     }
 
-    public HabilidadEntity findById(Long idHabilidad) {
+    public HabilidadEntity findByIds(Long idHabilidad) {
         return interfaceHabilidad.encontrarPorId(idHabilidad);
     }
 
@@ -34,7 +34,7 @@ public class HabilidadService {
     }
 
     public List<HabilidadEntity> getAllHabilidades() {
-        return interfaceHabilidad.findAll();
+        return interfaceHabilidad.findtodos();
     }
 
 }

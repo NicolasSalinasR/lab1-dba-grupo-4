@@ -18,7 +18,7 @@ public interface HabilidadRepository extends JpaRepository<HabilidadEntity, Long
             + " LIKE %?1%")
     public List<HabilidadEntity> findAll(String palabraClave);
 
-    @Query(value = "SELECT * FROM HabilidadEntity  WHERE HabilidadEntity.idHabilidad = :idHabilidad", nativeQuery = true)
+    @Query(value = "SELECT v FROM HabilidadEntity v WHERE v.idHabilidad = :idHabilidad")
     HabilidadEntity encontrarPorId(@Param("idHabilidad") Long idHabilidad);
 
     @Query(value = "SELECT nombreHabilidad FROM HabilidadEntity WHERE HabilidadEntity.idHabilidad = :idHabilidad", nativeQuery = true)
@@ -27,14 +27,14 @@ public interface HabilidadRepository extends JpaRepository<HabilidadEntity, Long
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO HabilidadEntity ( nombreHabilidad) " +
-            "VALUES (:nombreHabilidad)", nativeQuery = true)
+            "VALUES (:nombreHabilidad)")
     void crearHabilidad(@Param("nombreHabilidad") String nombreHabilidad);
 
     @Query(value = "DELETE FROM HabilidadEntity WHERE HabilidadEntity.idHabilidad = :idHabilidad", nativeQuery = true)
     HabilidadEntity borrarHabilidad(@Param("idHabilidad") Long idHabilidad);
 
-    @Query(value = "SELECT * FROM HabilidadEntity", nativeQuery = true)
-    List<HabilidadEntity> findAll();
+    @Query(value = "SELECT v FROM HabilidadEntity v")
+    List<HabilidadEntity> findtodos();
 
 
 }

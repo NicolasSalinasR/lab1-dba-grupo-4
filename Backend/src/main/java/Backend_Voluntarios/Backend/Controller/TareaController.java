@@ -3,7 +3,9 @@ package Backend_Voluntarios.Backend.Controller;
 import java.util.List;
 import java.util.Map;
 
+import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
 import Backend_Voluntarios.Backend.Service.AuditoriaService;
+import Backend_Voluntarios.Backend.Service.EmergenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,9 +22,10 @@ import Backend_Voluntarios.Backend.Entity.TareaEntity;
 @RequestMapping("/tarea")
 @CrossOrigin(origins = "*")
 public class TareaController {
-
+    @Autowired
     private TareaService tareaService;
-
+    @Autowired
+    private EmergenciaService emergenciaService;
     @Autowired
     private AuditoriaService auditoriaService;
 
@@ -46,10 +49,11 @@ public class TareaController {
         String nombreTarea = body.get("nombreTarea");
         String descripcionTarea = body.get("descripcionTarea");
         String tipoTarea = body.get("tipoTarea");
-
-        TareaEntity tarea = new TareaEntity(nombreTarea, descripcionTarea, tipoTarea);
-
+        Long emergencia = Long.parseLong(body.get("emergencia"));
+        EmergenciaEntity emergencia1 = emergenciaService.getEmergenciaById(emergencia);
+        TareaEntity tarea = new TareaEntity(nombreTarea, descripcionTarea, tipoTarea, emergencia1);
         tareaService.addTarea(tarea);
+
 
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
         // pablo

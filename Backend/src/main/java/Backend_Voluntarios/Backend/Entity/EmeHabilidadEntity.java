@@ -10,6 +10,7 @@ public class EmeHabilidadEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long idEmergenciaHabilidad;
 
     @ManyToOne
@@ -26,7 +27,6 @@ public class EmeHabilidadEntity {
     // Constructor all
 
     public EmeHabilidadEntity(EmergenciaEntity idEmergencia, HabilidadEntity idHabilidad) {
-        super();
         this.emergencia = idEmergencia;
         this.habilidad = idHabilidad;
 
@@ -40,6 +40,10 @@ public class EmeHabilidadEntity {
     // Getters
     public Long getIdEmergenciaHabilidad() {
         return idEmergenciaHabilidad;
+    }
+
+    public void setIdEmergenciaHabilidad(Long idEmergenciaHabilidad) {
+        this.idEmergenciaHabilidad = idEmergenciaHabilidad;
     }
 
     public Long getIdHabilidad() {

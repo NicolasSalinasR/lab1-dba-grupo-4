@@ -1,8 +1,6 @@
 package Backend_Voluntarios.Backend.Repository;
 
 import Backend_Voluntarios.Backend.Entity.EmeHabilidadEntity;
-import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
-import Backend_Voluntarios.Backend.Entity.HabilidadEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -27,9 +25,10 @@ public interface EmeHabilidadRepository extends JpaRepository<EmeHabilidadEntity
         // save
         @Transactional
         @Modifying
-        @Query(value = "INSERT INTO EmeHabilidadEntity (habilidad, emergencia) VALUES (:habilidad, :emergencia)")
-        void saveEmeHabilidad(@Param("habilidad") HabilidadEntity habilidad,
-                        @Param("emergencia") EmergenciaEntity emergencia);
+        @Query(value = "INSERT INTO eme_habilidad (id_habilidad, id_emergencia)" +
+                " VALUES (:id_habilidad, :id_emergencia)", nativeQuery = true)
+        void saveEmeHabilidad(@Param("id_habilidad") Long habilidad,
+                        @Param("id_emergencia") Long emergencia);
 
         // delete
         // @Query("DELETE FROM EmeHabilidadEntity WHERE

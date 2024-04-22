@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 @CrossOrigin(origins = "*")
 
 public class InstitucionController {
-
+    @Autowired
     private InstitucionService institucionService;
 
     @Autowired

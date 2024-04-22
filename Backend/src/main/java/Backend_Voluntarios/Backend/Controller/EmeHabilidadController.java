@@ -20,7 +20,7 @@ import Backend_Voluntarios.Backend.Service.EmeHabilidadService;
 @CrossOrigin(origins = "*")
 
 public class EmeHabilidadController {
-
+    @Autowired
     private EmeHabilidadService emeHabilidadService;
     @Autowired
     private EmergenciaService emergenciaService;
@@ -41,7 +41,7 @@ public class EmeHabilidadController {
         return emeHabilidadService.getAllEmeHabilidades();
     }
 
-    @GetMapping("/{PalabraClave}")
+    @GetMapping("/palabra/{PalabraClave}")
     public ResponseEntity<List<EmeHabilidadEntity>> Buscar_rankings(@PathVariable String PalabraClave) {
         List<EmeHabilidadEntity> rankings_encontrados = emeHabilidadService.listaFiltro(PalabraClave);
         if (rankings_encontrados.isEmpty()) {
@@ -52,11 +52,10 @@ public class EmeHabilidadController {
 
     @PostMapping("/add")
     public EmeHabilidadEntity addEmeHabilidad(@RequestBody Map<String, String> body) {
-        Long idEmergencia = Long.parseLong(body.get("idEmergencia"));
-        Long idHabilidad = Long.parseLong(body.get("idHabilidad"));
+        Long idEmergencia = Long.parseLong(body.get("emergencia"));
+        Long idHabilidad = Long.parseLong(body.get("habilidad"));
         EmergenciaEntity emergenciaNew = emergenciaService.getEmergenciaById(idEmergencia);
-        HabilidadEntity habilidadNew = habilidadService.findById(idHabilidad);
-
+        HabilidadEntity habilidadNew = habilidadService.findByIds(idHabilidad);
         EmeHabilidadEntity emeHabilidad = new EmeHabilidadEntity(emergenciaNew, habilidadNew);
         emeHabilidadService.addEmeHabilidad(emeHabilidad);
         // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a

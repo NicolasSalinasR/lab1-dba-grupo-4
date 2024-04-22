@@ -19,7 +19,7 @@ import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
 @RequestMapping("/emergencia")
 @CrossOrigin(origins = "*")
 public class EmergenciaController {
-
+    @Autowired
     private EmergenciaService emergenciaService;
 
     @Autowired
