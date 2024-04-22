@@ -53,3 +53,9 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
+// para los roles los permisos son:
+// Coordinador:
+// .requestMatchers(HttpMethod.GET, "/voluntario/**").hasRole("COORDINADOR")
+// Voluntario:
+// .requestMatchers(HttpMethod.POST, "/voluntario/**").hasRole("VOLUNTARIO")

@@ -1,10 +1,8 @@
 package Backend_Voluntarios.Backend.Entity;
 
 import jakarta.persistence.*;
-import java.security.Key;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

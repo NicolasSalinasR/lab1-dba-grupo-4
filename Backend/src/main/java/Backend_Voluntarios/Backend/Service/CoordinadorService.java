@@ -26,8 +26,8 @@ public class CoordinadorService {
 
     public void nuevoCoordinador(CoordinadorEntity coordinadorEntity) {
         coordinadorRepository.crearCoordinador(coordinadorEntity.getNombre(),
-                coordinadorEntity.getContrasenaCoodinador(),
-                coordinadorEntity.getCorreoCoordinador());
+                coordinadorEntity.getContrasenaCoordinador(),
+                coordinadorEntity.getCorreoCoordinador(), coordinadorEntity.getNumeroDocumentoCoordinador());
     }
 
     public CoordinadorEntity borrarCoordinador(CoordinadorEntity coordinadorEntity) {
@@ -36,5 +36,9 @@ public class CoordinadorService {
 
     public CoordinadorEntity buscarId(Long idCoordinador) {
         return coordinadorRepository.idCoordinador(idCoordinador);
+    }
+
+    public CoordinadorEntity buscarPorCorreo(String correoCoordinador) {
+        return coordinadorRepository.findByCorreo(correoCoordinador);
     }
 }

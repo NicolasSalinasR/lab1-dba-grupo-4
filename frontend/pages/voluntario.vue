@@ -52,7 +52,7 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 
 import SideMenu from '@/components/SideMenu.vue';
 import ListCard from '@/components/ListCard.vue';
@@ -83,6 +83,11 @@ export default {
     },
     changeComponent(value) {
       this.mostrarListCard = value;
+    },
+    getEmergenciasUsuario() {
+      axios.get("http://localhost:3000/api/v1/emergencias/usuario/1").then((response) => {
+        this.backendData = response.data;
+      });
     }
   }
 };

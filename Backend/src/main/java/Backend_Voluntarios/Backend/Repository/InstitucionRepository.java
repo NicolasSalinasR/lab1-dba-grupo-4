@@ -37,4 +37,6 @@ public interface InstitucionRepository extends JpaRepository<InstitucionEntity, 
             + " CONCAT(palabra.idInstitucion, palabra.nombreInstitucion)"
             + " LIKE %?1%")
     public List<InstitucionEntity> findAll(String palabraClave);
+
+    InstitucionEntity save(InstitucionEntity institucionEntity);
 }

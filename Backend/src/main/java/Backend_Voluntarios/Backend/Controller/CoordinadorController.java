@@ -1,9 +1,13 @@
 package Backend_Voluntarios.Backend.Controller;
 
+import Backend_Voluntarios.Backend.Entity.AuthenticationResponse;
 import Backend_Voluntarios.Backend.Entity.CoordinadorEntity;
+import Backend_Voluntarios.Backend.Entity.LoginRequest;
+import Backend_Voluntarios.Backend.Service.AuthService;
 import Backend_Voluntarios.Backend.Service.CoordinadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +18,12 @@ import java.util.Map;
 public class CoordinadorController {
     @Autowired
     private CoordinadorService coordinadorService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthService authService;
 
     @GetMapping()
     public String conectado() {
@@ -51,15 +61,26 @@ public class CoordinadorController {
         String nombre = body.get("nombre");
         String contrasenaCoordinador = body.get("contrasenaCoordinador");
         String correoCoordinador = body.get("correoCoordinador");
-        CoordinadorEntity coordinador = new CoordinadorEntity(nombre, contrasenaCoordinador, correoCoordinador);
+        String numeroDocumentoCoordinador = body.get("numeroDocumentoCoordinador");
+        CoordinadorEntity coordinador = new CoordinadorEntity(nombre, passwordEncoder.encode(contrasenaCoordinador),
+                correoCoordinador,
+                numeroDocumentoCoordinador);
         coordinadorService.nuevoCoordinador(coordinador);
-        return coordinador; // ! Se debe cambiar al terminar el front por seguridad de que no devuelva
-        // ! datos, solo debe devolver una respuesta de que se guardo correctamente
+        return coordinador;
     }
 
     @DeleteMapping("/delete/{idCoordinador}")
     public void eliminar(@PathVariable Long idCoordinador) {
         CoordinadorEntity coordinadorBorrado = coordinadorService.buscarId(idCoordinador);
         coordinadorService.borrarCoordinador(coordinadorBorrado);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody Map<String, String> body) {
+        String correoCoordinador = body.get("correoCoordinador");
+        String contrasenaCoordinador = body.get("contrasenaCoordinador");
+
+        LoginRequest loginRequest = new LoginRequest(correoCoordinador, contrasenaCoordinador);
+        return ResponseEntity.ok(authService.login(loginRequest));
     }
 }

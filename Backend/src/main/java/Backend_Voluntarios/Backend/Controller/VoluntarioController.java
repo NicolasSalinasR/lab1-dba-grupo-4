@@ -82,8 +82,7 @@ public class VoluntarioController {
         // pablo
         // auditoriaService.registrarCambio(idUsuario, "Add", "añadio un voluntario");
 
-        return voluntario; // ! Se debe cambiar al terminar el front por seguridad de que no devuelva
-        // ! datos, solo debe devolver una respuesta de que se guardo correctamente
+        return voluntario;
     }
 
     @DeleteMapping("/delete/{idVoluntario}")

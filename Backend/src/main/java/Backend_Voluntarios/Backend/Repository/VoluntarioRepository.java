@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 
-import java.security.Key;
 import java.util.List;
 
 @Repository
@@ -48,4 +47,6 @@ public interface VoluntarioRepository extends JpaRepository<VoluntarioEntity, Lo
 
         @Query("SELECT v FROM VoluntarioEntity v WHERE v.correoVoluntario = ?1")
         VoluntarioEntity findByCorreo(@Param("correo") String correoVoluntario);
+
+        VoluntarioEntity save(VoluntarioEntity voluntarioEntity);
 }

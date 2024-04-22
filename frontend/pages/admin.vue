@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-            </div>
+              </div>
 
             <!-- Columna 2 -->
             <div style="flex: 1;">

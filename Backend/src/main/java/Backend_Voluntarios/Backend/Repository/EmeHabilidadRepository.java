@@ -26,7 +26,7 @@ public interface EmeHabilidadRepository extends JpaRepository<EmeHabilidadEntity
         @Transactional
         @Modifying
         @Query(value = "INSERT INTO eme_habilidad (id_habilidad, id_emergencia)" +
-                " VALUES (:id_habilidad, :id_emergencia)", nativeQuery = true)
+                        " VALUES (:id_habilidad, :id_emergencia)", nativeQuery = true)
         void saveEmeHabilidad(@Param("id_habilidad") Long habilidad,
                         @Param("id_emergencia") Long emergencia);
 
@@ -40,5 +40,7 @@ public interface EmeHabilidadRepository extends JpaRepository<EmeHabilidadEntity
                         + " CONCAT(palabra.idEmergenciaHabilidad, palabra.habilidad.idHabilidad, palabra.emergencia.idEmergencia)"
                         + " LIKE %?1%")
         public List<EmeHabilidadEntity> findAll(String palabraClave);
+
+        EmeHabilidadEntity save(EmeHabilidadEntity emeHabilidadEntity);
 
 }

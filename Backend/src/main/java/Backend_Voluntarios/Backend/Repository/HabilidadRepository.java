@@ -13,28 +13,29 @@ import java.util.List;
 @Repository
 public interface HabilidadRepository extends JpaRepository<HabilidadEntity, Long> {
 
-    @Query("SELECT palabra FROM HabilidadEntity palabra WHERE"
-            + " CONCAT(palabra.idHabilidad, palabra.nombreHabilidad)"
-            + " LIKE %?1%")
-    public List<HabilidadEntity> findAll(String palabraClave);
+        @Query("SELECT palabra FROM HabilidadEntity palabra WHERE"
+                        + " CONCAT(palabra.idHabilidad, palabra.nombreHabilidad)"
+                        + " LIKE %?1%")
+        public List<HabilidadEntity> findAll(String palabraClave);
 
-    @Query(value = "SELECT v FROM HabilidadEntity v WHERE v.idHabilidad = :idHabilidad")
-    HabilidadEntity encontrarPorId(@Param("idHabilidad") Long idHabilidad);
+        @Query(value = "SELECT v FROM HabilidadEntity v WHERE v.idHabilidad = :idHabilidad")
+        HabilidadEntity encontrarPorId(@Param("idHabilidad") Long idHabilidad);
 
-    @Query(value = "SELECT nombreHabilidad FROM HabilidadEntity WHERE HabilidadEntity.idHabilidad = :idHabilidad", nativeQuery = true)
-    String findNombreHabilidad(@Param("idHabilidad") Long idHabilidad);
+        @Query(value = "SELECT nombreHabilidad FROM HabilidadEntity WHERE HabilidadEntity.idHabilidad = :idHabilidad", nativeQuery = true)
+        String findNombreHabilidad(@Param("idHabilidad") Long idHabilidad);
 
-    @Transactional
-    @Modifying
-    @Query(value = "INSERT INTO HabilidadEntity ( nombreHabilidad) " +
-            "VALUES (:nombreHabilidad)")
-    void crearHabilidad(@Param("nombreHabilidad") String nombreHabilidad);
+        @Transactional
+        @Modifying
+        @Query(value = "INSERT INTO HabilidadEntity ( nombreHabilidad) " +
+                        "VALUES (:nombreHabilidad)")
+        void crearHabilidad(@Param("nombreHabilidad") String nombreHabilidad);
 
-    @Query(value = "DELETE FROM HabilidadEntity WHERE HabilidadEntity.idHabilidad = :idHabilidad", nativeQuery = true)
-    HabilidadEntity borrarHabilidad(@Param("idHabilidad") Long idHabilidad);
+        @Query(value = "DELETE FROM HabilidadEntity WHERE HabilidadEntity.idHabilidad = :idHabilidad", nativeQuery = true)
+        HabilidadEntity borrarHabilidad(@Param("idHabilidad") Long idHabilidad);
 
-    @Query(value = "SELECT v FROM HabilidadEntity v")
-    List<HabilidadEntity> findtodos();
+        @Query(value = "SELECT v FROM HabilidadEntity v")
+        List<HabilidadEntity> findtodos();
 
+        HabilidadEntity save(HabilidadEntity habilidadEntity);
 
 }

@@ -1,6 +1,5 @@
 package Backend_Voluntarios.Backend.Entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -17,10 +16,14 @@ public class CoordinadorEntity {
 
     private String nombre;
 
-    public CoordinadorEntity(String nombre, String contrasenaCoordinador, String correoCoordinador) {
+    private String numeroDocumentoCoordinador;
+
+    public CoordinadorEntity(String nombre, String contrasenaCoordinador, String correoCoordinador,
+            String numeroDocumentoCoordinador) {
         this.nombre = nombre;
         this.contrasenaCoordinador = contrasenaCoordinador;
         this.correoCoordinador = correoCoordinador;
+        this.numeroDocumentoCoordinador = numeroDocumentoCoordinador;
     }
 
     public String getCorreoCoordinador() {
@@ -35,11 +38,11 @@ public class CoordinadorEntity {
         this.nombre = nombre;
     }
 
-    public String getContrasenaCoodinador() {
+    public String getContrasenaCoordinador() {
         return contrasenaCoordinador;
     }
 
-    public void setContrasenaCoodinador(String contrasenaCoordinador) {
+    public void setContrasenaCoordinador(String contrasenaCoordinador) {
         this.contrasenaCoordinador = contrasenaCoordinador;
     }
 
@@ -51,9 +54,19 @@ public class CoordinadorEntity {
         this.idCoordinador = idCoordinador;
     }
 
-    public CoordinadorEntity(){super();}
+    public CoordinadorEntity() {
+        super();
+    }
 
-    public Long getIdCoordinador(){
+    public Long getIdCoordinador() {
         return idCoordinador;
+    }
+
+    public String getNumeroDocumentoCoordinador() {
+        return numeroDocumentoCoordinador;
+    }
+
+    public void setNumeroDocumentoCoordinador(String numeroDocumentoCoordinador) {
+        this.numeroDocumentoCoordinador = numeroDocumentoCoordinador;
     }
 }

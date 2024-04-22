@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import Backend_Voluntarios.Backend.Service.EmergenciaService;
 import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
+import Backend_Voluntarios.Backend.Service.InstitucionService;
+import Backend_Voluntarios.Backend.Entity.InstitucionEntity;
 
 @RestController
 @RequestMapping("/emergencia")
@@ -21,6 +23,9 @@ import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
 public class EmergenciaController {
     @Autowired
     private EmergenciaService emergenciaService;
+
+    @Autowired
+    private InstitucionService institucionService;
 
     @Autowired
     private AuditoriaService auditoriaService;
@@ -43,16 +48,17 @@ public class EmergenciaController {
         String condicionFisica = body.get("condicionFisica");
         String cantidadVoluntariosMinimo = body.get("cantidadVoluntariosMinimo");
         String cantidadVoluntariosMaximo = body.get("cantidadVoluntariosMaximo");
+        Long idInstitucion = Long.parseLong(body.get("idInstitucion"));
+
+        InstitucionEntity institucion = institucionService.getInstitucionById(idInstitucion);
 
         EmergenciaEntity emergencia = new EmergenciaEntity(tipoEmergencia, zonaEmergencia, condicionFisica,
-                cantidadVoluntariosMinimo, cantidadVoluntariosMaximo);
+                cantidadVoluntariosMinimo, cantidadVoluntariosMaximo, institucion);
         emergenciaService.addEmergencia(emergencia);
 
-       // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a pablo
-        //        auditoriaService.registrarCambio(idUsuario, "Add", "añadio una emergencia");
-
-
-
+        // Long idUsuario = //metodo para obtener id de usuario ya listo, esperar a
+        // pablo
+        // auditoriaService.registrarCambio(idUsuario, "Add", "añadio una emergencia");
 
         return emergencia; // ! Se debe cambiar al terminar el front por seguridad de que no devuelva
                            // ! datos, solo debe devolver una respuesta de que se guardo correctamente

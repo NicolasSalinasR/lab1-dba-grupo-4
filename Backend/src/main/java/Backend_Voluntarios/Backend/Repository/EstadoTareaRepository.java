@@ -11,34 +11,35 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface EstadoTareaRepository extends JpaRepository<EstadoTareaEntity, Long> {
-    @Query("SELECT palabra FROM EstadoTareaEntity palabra WHERE"
-            + " CONCAT(palabra.idEstadoTarea, palabra.estadoTarea)"
-            + " LIKE %?1%")
-    public List<EstadoTareaEntity> listAll(String palabraClave);
+        @Query("SELECT palabra FROM EstadoTareaEntity palabra WHERE"
+                        + " CONCAT(palabra.idEstadoTarea, palabra.estadoTarea)"
+                        + " LIKE %?1%")
+        public List<EstadoTareaEntity> listAll(String palabraClave);
 
-    @Query("SELECT v FROM EstadoTareaEntity v WHERE v.idEstadoTarea = :idEstadoTarea")
-    EstadoTareaEntity encontrarId(@Param("idEstadoTarea") Long idEstadoTarea);
+        @Query("SELECT v FROM EstadoTareaEntity v WHERE v.idEstadoTarea = :idEstadoTarea")
+        EstadoTareaEntity encontrarId(@Param("idEstadoTarea") Long idEstadoTarea);
 
-    @Query("SELECT v FROM EstadoTareaEntity v  WHERE v.tarea.idTarea = :idTarea")
-    EstadoTareaEntity findByIdTarea(@Param("idTarea") Long idTarea);
+        @Query("SELECT v FROM EstadoTareaEntity v  WHERE v.tarea.idTarea = :idTarea")
+        EstadoTareaEntity findByIdTarea(@Param("idTarea") Long idTarea);
 
+        @Query(value = "SELECT idEstadoTarea FROM EstadoTareaEntity  WHERE EstadoTareaEntity.estadoTarea = FALSE", nativeQuery = true)
+        List<Long> findTareasSinTerminar();
 
-    @Query(value = "SELECT idEstadoTarea FROM EstadoTareaEntity  WHERE EstadoTareaEntity.estadoTarea = FALSE", nativeQuery = true)
-    List<Long>  findTareasSinTerminar();
+        @Query(value = "SELECT idEstadoTarea FROM EstadoTareaEntity  WHERE EstadoTareaEntity.estadoTarea = TRUE", nativeQuery = true)
+        List<Long> findTareasTerminadas();
 
-    @Query(value = "SELECT idEstadoTarea FROM EstadoTareaEntity  WHERE EstadoTareaEntity.estadoTarea = TRUE", nativeQuery = true)
-    List<Long> findTareasTerminadas();
+        @Query(value = "DELETE FROM EstadoTareaEntity WHERE EstadoTareaEntity.idEstadoTarea = :idEstadoTarea", nativeQuery = true)
+        EstadoTareaEntity borrarEstadoTarea(@Param("idEstadoTarea") Long idEstadoTarea);
 
-    @Query(value = "DELETE FROM EstadoTareaEntity WHERE EstadoTareaEntity.idEstadoTarea = :idEstadoTarea", nativeQuery = true)
-    EstadoTareaEntity borrarEstadoTarea(@Param("idEstadoTarea") Long idEstadoTarea);
+        @Transactional
+        @Modifying
+        @Query(value = "INSERT INTO EstadoTareaEntity (idTarea, estadoTarea) " +
+                        "VALUES (:idTarea, :estadoTarea)", nativeQuery = true)
+        void guardarEstadoTarea(@Param("idTarea") Long idTarea,
+                        @Param("estadoTarea") Boolean estadoTarea);
 
-    @Transactional
-    @Modifying
-    @Query(value = "INSERT INTO EstadoTareaEntity (idTarea, estadoTarea) " +
-            "VALUES (:idTarea, :estadoTarea)", nativeQuery = true)
-    void guardarEstadoTarea(@Param("idTarea") Long idTarea,
-                                         @Param("estadoTarea") Boolean estadoTarea);
+        @Query(value = "SELECT * FROM EstadoTareaEntity", nativeQuery = true)
+        List<EstadoTareaEntity> findAll();
 
-    @Query(value = "SELECT * FROM EstadoTareaEntity", nativeQuery = true)
-    List<EstadoTareaEntity> findAll();
+        EstadoTareaEntity save(EstadoTareaEntity estadoTareaEntity);
 }

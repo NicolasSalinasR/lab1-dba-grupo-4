@@ -21,11 +21,12 @@ public class EmergenciaService {
     }
 
     public void addEmergencia(EmergenciaEntity emergencia) {
-         emergenciaRepository.saveEmergencia(emergencia.getTipoEmergencia(),
+        emergenciaRepository.saveEmergencia(emergencia.getTipoEmergencia(),
                 emergencia.getZonaEmergencia(),
                 emergencia.getCondicionFisica(),
                 emergencia.getCantidadVoluntariosMinimo(),
-                emergencia.getCantidadVoluntariosMaximo());
+                emergencia.getCantidadVoluntariosMaximo(),
+                emergencia.getInstitucion());
     }
 
 }

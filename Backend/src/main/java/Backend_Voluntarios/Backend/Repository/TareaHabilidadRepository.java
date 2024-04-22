@@ -15,19 +15,21 @@ import java.util.List;
 @Repository
 public interface TareaHabilidadRepository extends JpaRepository<TareaHabilidadEntity, Long> {
 
-    // Encontrar tarea_hablidades por Id
-    @Query("SELECT th FROM TareaHabilidadEntity th WHERE th.idTareaHabilidad = :id")
-    TareaHabilidadEntity findTareaHabilidadById(@Param("id") Long id);
+        // Encontrar tarea_hablidades por Id
+        @Query("SELECT th FROM TareaHabilidadEntity th WHERE th.idTareaHabilidad = :id")
+        TareaHabilidadEntity findTareaHabilidadById(@Param("id") Long id);
 
-    // Encontrar todas las tarea_habilidades
-    @Query("SELECT th FROM TareaHabilidadEntity th")
-    List<TareaHabilidadEntity> findAllTareaHabilidad();
+        // Encontrar todas las tarea_habilidades
+        @Query("SELECT th FROM TareaHabilidadEntity th")
+        List<TareaHabilidadEntity> findAllTareaHabilidad();
 
-    // Guardar
-    @Transactional
-    @Modifying
-    @Query(value = "INSERT INTO tarea_habilidad (id_tarea, id_eme_habilidad, habilidad_requerida) " +
-            "VALUES (:id_tarea, :id_eme_habilidad, :habilidad_requerida)", nativeQuery = true)
-    void saveTareaHabilidad(@Param("id_tarea") Long tarea, @Param("id_eme_habilidad") Long emeHabilidad,
-            @Param("habilidad_requerida") String habilidadRequerida);
+        // Guardar
+        @Transactional
+        @Modifying
+        @Query(value = "INSERT INTO tarea_habilidad (id_tarea, id_eme_habilidad, habilidad_requerida) " +
+                        "VALUES (:id_tarea, :id_eme_habilidad, :habilidad_requerida)", nativeQuery = true)
+        void saveTareaHabilidad(@Param("id_tarea") Long tarea, @Param("id_eme_habilidad") Long emeHabilidad,
+                        @Param("habilidad_requerida") String habilidadRequerida);
+
+        TareaHabilidadEntity save(TareaHabilidadEntity tareaHabilidadEntity);
 }

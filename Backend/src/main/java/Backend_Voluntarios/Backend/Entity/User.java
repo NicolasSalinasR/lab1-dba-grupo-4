@@ -4,7 +4,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.security.Key;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,7 @@ public class User implements UserDetails {
     private String nombre;
     private String contrasena;
     private String numeroDocumento;
-    private String ROL = "VOLUNTARIO";
+    private String ROL;
 
     public User(String correo, String nombre, String contrasena, String numeroDocumento) {
         this.correo = correo;
@@ -53,6 +52,22 @@ public class User implements UserDetails {
         this.nombre = nombre;
     }
 
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
+    public String getROL() {
+        return ROL;
+    }
+
+    public void setROL(String ROL) {
+        this.ROL = ROL;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(ROL));
@@ -83,8 +98,17 @@ public class User implements UserDetails {
     }
 
     public static User voluntarioToUser(VoluntarioEntity voluntario) {
-        return new User(voluntario.getCorreoVoluntario(), voluntario.getNombreVoluntario(),
+        User user = new User(voluntario.getCorreoVoluntario(), voluntario.getNombreVoluntario(),
                 voluntario.getContrasenaVoluntario(), voluntario.getNumeroDocumentoVoluntario());
+        user.setROL("VOLUNTARIO");
+        return user;
+    }
+
+    public static User coordinadorToUser(CoordinadorEntity coordinador) {
+        User user = new User(coordinador.getCorreoCoordinador(), coordinador.getNombre(),
+                coordinador.getContrasenaCoordinador(), coordinador.getNumeroDocumentoCoordinador());
+        user.setROL("COORDINADOR");
+        return user;
     }
 
     public Map<String, Object> generateExtraClaims() {

@@ -1,6 +1,8 @@
 package Backend_Voluntarios.Backend.Repository;
 
 import Backend_Voluntarios.Backend.Entity.EmergenciaEntity;
+import Backend_Voluntarios.Backend.Entity.InstitucionEntity;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,10 +25,13 @@ public interface EmergenciaRepository extends JpaRepository<EmergenciaEntity, Lo
     // save
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO EmergenciaEntity (tipoEmergencia, zonaEmergencia, condicionFisica, cantidadVoluntariosMinimo, cantidadVoluntariosMaximo) VALUES (:tipoEmergencia, :zonaEmergencia, :condicionFisica, :cantidadVoluntariosMinimo, :cantidadVoluntariosMaximo)")
+    @Query(value = "INSERT INTO EmergenciaEntity (tipoEmergencia, zonaEmergencia, condicionFisica, cantidadVoluntariosMinimo, cantidadVoluntariosMaximo, institucion) VALUES (:tipoEmergencia, :zonaEmergencia, :condicionFisica, :cantidadVoluntariosMinimo, :cantidadVoluntariosMaximo, :institucion)")
     void saveEmergencia(@Param("tipoEmergencia") String tipoEmergencia,
             @Param("zonaEmergencia") String zonaEmergencia,
             @Param("condicionFisica") String condicionFisica,
             @Param("cantidadVoluntariosMinimo") String cantidadVoluntariosMinimo,
-            @Param("cantidadVoluntariosMaximo") String cantidadVoluntariosMaximo);
+            @Param("cantidadVoluntariosMaximo") String cantidadVoluntariosMaximo,
+            @Param("institucion") InstitucionEntity institucion);
+
+    EmergenciaEntity save(EmergenciaEntity emergenciaEntity);
 }

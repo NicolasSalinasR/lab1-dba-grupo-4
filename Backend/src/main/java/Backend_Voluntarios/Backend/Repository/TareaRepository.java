@@ -28,7 +28,7 @@ public interface TareaRepository extends JpaRepository<TareaEntity, Long> {
         @Transactional
         @Modifying
         @Query(value = "INSERT INTO tarea (nombre_tarea, descripcion_tarea, tipo_tarea, id_emergencia)" +
-                " VALUES (:nombre_tarea, :descripcion_tarea, :tipo_tarea, :id_emergencia)", nativeQuery = true)
+                        " VALUES (:nombre_tarea, :descripcion_tarea, :tipo_tarea, :id_emergencia)", nativeQuery = true)
         void saveTarea(@Param("nombre_tarea") String nombreTarea,
                         @Param("descripcion_tarea") String descripcionTarea,
                         @Param("tipo_tarea") String tipoTarea,
@@ -44,4 +44,6 @@ public interface TareaRepository extends JpaRepository<TareaEntity, Long> {
                         "GROUP BY t.nombreTarea, v.nombreVoluntario, r.nivelRanking " +
                         "ORDER BY r.nivelRanking DESC")
         List<TareaEntity> listRankingTarea(@Param("nombreTarea") String nombreTarea);
+
+        TareaEntity save(TareaEntity tareaEntity);
 }

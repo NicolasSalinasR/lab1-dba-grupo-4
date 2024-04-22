@@ -58,4 +58,6 @@ public interface RankingRepository extends JpaRepository<RankingEntity, Long> {
         @Query("SELECT COUNT(v) FROM VoluntarioHabilidadEntity v WHERE v.voluntario.idVoluntario=:id")
         public int matchHabilidad(
                         @Param("id") Long idVoluntario);
+
+        RankingEntity save(RankingEntity rankingEntity);
 }

@@ -37,12 +37,13 @@ public class EmergenciaEntity {
 
     // Constructor all
     public EmergenciaEntity(String tipoEmergencia, String zonaEmergencia, String condicionFisica,
-            String cantidadVoluntariosMinimo, String cantidadVoluntariosMaximo) {
+            String cantidadVoluntariosMinimo, String cantidadVoluntariosMaximo, InstitucionEntity institucion) {
         this.tipoEmergencia = tipoEmergencia;
         this.zonaEmergencia = zonaEmergencia;
         this.condicionFisica = condicionFisica;
         this.cantidadVoluntariosMinimo = cantidadVoluntariosMinimo;
         this.cantidadVoluntariosMaximo = cantidadVoluntariosMaximo;
+        this.institucion = institucion;
     }
 
     // Constructor empty
@@ -93,5 +94,13 @@ public class EmergenciaEntity {
 
     public void setCantidadVoluntariosMaximo(String cantidadVoluntariosMaximo) {
         this.cantidadVoluntariosMaximo = cantidadVoluntariosMaximo;
+    }
+
+    public InstitucionEntity getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(InstitucionEntity institucion) {
+        this.institucion = institucion;
     }
 }
