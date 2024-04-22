@@ -39,12 +39,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(customizeRequests -> {
                     customizeRequests
                             .requestMatchers("/authenticate/**").permitAll()
-                            .requestMatchers(HttpMethod.GET, "/voluntario", "/tarea/**").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/voluntario").permitAll()
                             .requestMatchers(HttpMethod.POST, "/voluntario/guardar").permitAll()
                             .requestMatchers(HttpMethod.POST, "/voluntario/login").permitAll()
                             .anyRequest().authenticated();
                 })
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .logout(AbstractHttpConfigurer::disable)
