@@ -10,9 +10,12 @@ CREATE DATABASE "laboratorio 1 bda"
 
 
 create table auditoria (
-	idAuditoria serial primary key,
-	modificacion Varchar(200),
-	descripcion Varchar(200)
+    id SERIAL PRIMARY KEY,
+    id_usuario INTEGER NOT NULL,
+    tipo_operacion VARCHAR(10) NOT NULL,
+    descripcion varchar(200),
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL
 );
 
 create table voluntario(
@@ -94,14 +97,22 @@ create table tareaHabilidad(
 );
 
 
-CREATE OR REPLACE FUNCTION auditar_operacion()
+CREATE  FUNCTION auditar_operacion()
 RETURNS TRIGGER AS $$
+DECLARE
+    id_usuario INTEGER;
 BEGIN
+    -- Obtener el ID de usuario correspondiente al nombre de usuario actual
+    SELECT idVoluntario INTO id_usuario FROM voluntario WHERE nombreVoluntario = CURRENT_USER;
+    
+    -- Insertar en la tabla auditoria
     INSERT INTO auditoria (id_usuario, tipo_operacion, descripcion, fecha, hora)
-    VALUES (CURRENT_USER, TG_OP);
+    VALUES (id_usuario, TG_OP, 'Operacion realizada', current_date, current_time);
+    
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 
 
@@ -164,3 +175,62 @@ CREATE TRIGGER trigger_auditoria
 AFTER INSERT OR UPDATE OR DELETE ON voluntariohabilidad
 FOR EACH ROW
 EXECUTE FUNCTION auditar_operacion();
+
+
+
+
+CREATE FUNCTION public.mayores_consultas()
+    RETURNS integer[]
+    LANGUAGE 'plpgsql'
+    
+AS $BODY$
+declare id_usuario_actualizaciones INTEGER;
+declare    id_usuario_inserts INTEGER;
+declare    id_usuario_deletes INTEGER;
+declare    resultado INTEGER[];
+
+Begin
+ 
+     SELECT id_usuario INTO id_usuario_actualizaciones
+    FROM (
+        SELECT id_usuario, COUNT(*) AS num_actualizaciones
+        FROM auditoria
+        WHERE tipo_operacion = 'UPDATE'
+        GROUP BY id_usuario
+        ORDER BY COUNT(*) DESC
+        LIMIT 1
+    ) AS t1;
+    
+
+    SELECT id_usuario INTO id_usuario_inserts
+    FROM (
+        SELECT id_usuario, COUNT(*) AS num_inserts
+        FROM auditoria
+        WHERE tipo_operacion = 'INSERT'
+        GROUP BY id_usuario
+        ORDER BY COUNT(*) DESC
+        LIMIT 1
+    ) AS t2;
+    
+    
+    SELECT id_usuario INTO id_usuario_deletes
+    FROM (
+        SELECT id_usuario, COUNT(*) AS num_deletes
+        FROM auditoria
+        WHERE tipo_operacion = 'DELETE'
+        GROUP BY id_usuario
+        ORDER BY COUNT(*) DESC
+        LIMIT 1
+    ) AS t3;
+
+ 
+    resultado := ARRAY[id_usuario_actualizaciones, id_usuario_inserts, id_usuario_deletes];
+
+  
+    RETURN resultado;
+
+end;
+$BODY$;
+
+ALTER FUNCTION public.mayores_consultas()
+    OWNER TO postgres;
