@@ -39,9 +39,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(customizeRequests -> {
                     customizeRequests
                             .requestMatchers("/authenticate/**").permitAll()
-                            .requestMatchers(HttpMethod.GET, "/voluntario").permitAll()
-                            .requestMatchers(HttpMethod.POST, "/voluntario/guardar").permitAll()
-                            .requestMatchers(HttpMethod.POST, "/voluntario/login").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/voluntario/**").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/voluntario/**").permitAll()
                             .anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))

@@ -7,27 +7,30 @@
         <img src="../images/mundo.svg" alt="mundo">
         <div class="containerLogin">
             <h1>Iniciar Sesión</h1>
-            <form @submit.prevent="login" class="formLogin">
+            <form class="formLogin">
                 <input type="text" v-model="email" placeholder="Email">
                 <input type="password" v-model="password" placeholder="Contraseña">
-                <div class="register"   @click="$router.push(`/register`);" >
+
+                <button @click="logearUser">Ingresar</button>
+                <div class="register" @click="$router.push(`/register`);">
                     <a>Registrarse</a>
                 </div>
-                <button @click="$router.push(`/admin`);" type="submit">Ingresar</button>
-                
+
             </form>
+            <p>{{ error }}</p>
         </div>
     </main>
 
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
     data() {
         return {
             email: '',
-            password: ''
+            password: '',
+            error: ''
         };
     },
     // metodo para que cada 5 segundos el circle cambie de posicion sin salirse de la pantalla
@@ -55,17 +58,25 @@ export default {
             }, 4000);
 
         },
-        async login() {
-            try {
-                const res = await this.$axios.post('http://localhost:3000/api/auth/login', {
-                    email: this.email,
-                    password: this.password
+        logearUser(event) {
+            event.preventDefault();
+            axios.post('http://localhost:8080/voluntario/login', {
+                correoVoluntario: this.email,
+                contrasenaVoluntario: this.password
+            })
+                .then((response) => {
+                    console.log(response);
+                    if (response.data.token) {
+                        localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('id', response.data.id);
+                        localStorage.setItem('nombre', response.data.nombre);
+                        this.$router.push('/voluntario');
+                    }
+                })
+                .catch((error) => {
+                    this.error = 'Usuario o contraseña incorrectos';
+                    console.log(error);
                 });
-                console.log(res.data);
-                this.$router.push('/dashboard');
-            } catch (error) {
-                console.log(error);
-            }
         }
     }
 
@@ -100,6 +111,10 @@ img {
     align-items: center;
     justify-content: center;
     font-family: 'Roboto', sans-serif;
+}
+
+.containerLogin p {
+    color: red;
 }
 
 .formLogin {
@@ -138,21 +153,21 @@ form button {
     justify-content: center;
     width: 20vh;
     height: 30px;
-    border: 1px solid #60BF81;
+    border: 1px solid #9AEBA3;
     border-radius: 5px;
     padding: 10px;
     background-color: black;
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
     transition: all 0.3s;
-    color: #60BF81;
+    color: #9AEBA3;
     margin-top: 15px;
 }
 
 form button:hover {
-    background-color: #005C53;
-    border: 1px solid #005C53;
-    color: white;
+    background-color: #9AEBA3;
+    border: 1px solid #9AEBA3;
+    color: black;
 }
 
 .circle {
@@ -170,6 +185,9 @@ form button:hover {
 }
 
 .register {
-    color: #0281F6
+    color: #45C4B0;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
 }
 </style>

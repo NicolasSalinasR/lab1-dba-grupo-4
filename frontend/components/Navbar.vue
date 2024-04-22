@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="logo">
-      <h1>Nombre fabuloso</h1>
+      <img src="../images/RESQ.svg" alt="loga">
     </div>
     <div class="menu">
       <!-- Menú principal -->
@@ -15,7 +15,7 @@
           <ul class="dropdown-content" v-show="isDropdownVisible">
             <li @click="changeComponent('Card')">Ranking Voluntario por Tarea</li>
             <li @click="changeComponent('ListCard2')">Ranking Voluntario por Emergencia</li>
-            
+
           </ul>
         </li>
         <li><a href="#">Contacto</a></li>
@@ -49,7 +49,7 @@ export default {
       // Restablece las variables de estado a sus valores originales
       this.mostrarListCard = false; // o cualquier valor predeterminado que necesites
       this.mostrarListCard2 = false;
-      this.mostrarCard= false;
+      this.mostrarCard = false;
     }
   }
 };
@@ -92,7 +92,7 @@ nav {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 

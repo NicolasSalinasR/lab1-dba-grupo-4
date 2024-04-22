@@ -14,8 +14,8 @@
                 <input type="text" v-model="email" placeholder="Email">
                 <input type="password" v-model="password" placeholder="Contraseña">
                 <input type="password" v-model="password" placeholder="Repita contraseña">
-                <button type="submit">Registrarse</button>
-                
+                <button @click="registrarUsuario">Registrarse</button>
+
             </form>
         </div>
     </main>
@@ -23,15 +23,17 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     data() {
         return {
-        nombre:'',
-        zonaVivienda:'',
-        numDocumento:'',
-        email: '',
-        password: ''
+            nombre: '',
+            zonaVivienda: '',
+            numDocumento: '',
+            email: '',
+            password: '',
+            equipamientoVoluntario: ''
         };
     },
     // metodo para que cada 5 segundos el circle cambie de posicion sin salirse de la pantalla
@@ -59,23 +61,23 @@ export default {
             }, 4000);
 
         },
-        async registrarUsuario() {
-            try {
-                const response = await axios.post('http://localhost:3000/api/registro', {
-                nombre: this.nombre,
-                zonaVivienda: this.zonaVivienda,
-                numDocumento: this.numDocumento,
-                email: this.email,
-                password: this.password
-                });
-                console.log(response.data);
-                // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
-            } catch (error) {
-                console.error('Error al registrar el usuario:', error);
-                // Aquí podrías mostrar un mensaje de error al usuario
-            }
-            }
+        registrarUsuario(event) {
+            event.preventDefault();
+            axios.post('http://localhost:8080/voluntario/guardar', {
+                nombreVoluntario: this.nombre,
+                zonaViviendaVoluntario: this.zonaVivienda,
+                numeroDocumentoVoluntario: this.numDocumento,
+                correoVoluntario: this.email,
+                contrasenaVoluntario: this.password,
+                equipamientoVoluntario: this.equipamientoVoluntario
+            }).then(response => {
+                console.log(response);
+                this.$router.push('/login');
+            }).catch(error => {
+                console.log(error);
+            });
         }
+    }
 
 };
 
@@ -146,21 +148,21 @@ form button {
     justify-content: center;
     width: 20vh;
     height: 30px;
-    border: 1px solid #60BF81;
+    border: 1px solid #9AEBA3;
     border-radius: 5px;
     padding: 10px;
     background-color: black;
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
     transition: all 0.3s;
-    color: #60BF81;
+    color: #9AEBA3;
     margin-top: 15px;
 }
 
 form button:hover {
-    background-color: #005C53;
-    border: 1px solid #005C53;
-    color: white;
+    background-color: #9AEBA3;
+    border: 1px solid #9AEBA3;
+    color: black;
 }
 
 .circle {
