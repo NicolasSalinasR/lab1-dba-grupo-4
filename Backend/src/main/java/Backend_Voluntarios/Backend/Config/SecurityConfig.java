@@ -43,7 +43,7 @@ public class SecurityConfig {
                             .requestMatchers(HttpMethod.POST, "/voluntario/**").permitAll()
                             .anyRequest().authenticated();
                 })
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .logout(AbstractHttpConfigurer::disable)
@@ -53,9 +53,3 @@ public class SecurityConfig {
         return http.build();
     }
 }
-
-// para los roles los permisos son:
-// Coordinador:
-// .requestMatchers(HttpMethod.GET, "/voluntario/**").hasRole("COORDINADOR")
-// Voluntario:
-// .requestMatchers(HttpMethod.POST, "/voluntario/**").hasRole("VOLUNTARIO")

@@ -53,7 +53,7 @@ public class BackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			CoordinadorEntity coordinador = fakerService.generateCoordinador();
 			InstitucionEntity institucion = fakerService.generateInstitucion();
 			EmergenciaEntity emergencia = fakerService.generateEmergencia(institucion);
