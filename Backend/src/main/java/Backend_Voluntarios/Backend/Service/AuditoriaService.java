@@ -9,9 +9,15 @@ public class AuditoriaService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
+
+
+
+
     public void registrarCambio(Long idUsuario, String tipoOperacion, String descripcion) {
         String sql = "INSERT INTO parametros_trigger (id_usuario, tipo_operacion, descripcion) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, idUsuario, tipoOperacion, descripcion);
+
     }
 }
 

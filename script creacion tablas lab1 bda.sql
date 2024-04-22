@@ -9,13 +9,20 @@ CREATE DATABASE "laboratorio 1 bda"
     IS_TEMPLATE = False;
 
 
+
+create table parametros_trigger (
+    id_usuario INTEGER,
+    tipo_operacion VARCHAR(10),
+    descripcion VARCHAR(200)
+);
+
 create table auditoria (
     id SERIAL PRIMARY KEY,
-    id_usuario INTEGER NOT NULL,
-    tipo_operacion VARCHAR(10) NOT NULL,
+    id_usuario INTEGER L,
+    tipo_operacion VARCHAR(10) ,
     descripcion varchar(200),
-    fecha DATE NOT NULL,
-    hora TIME NOT NULL
+    fecha DATE ,
+    hora TIME 
 );
 
 create table voluntario(
@@ -101,18 +108,24 @@ CREATE  FUNCTION auditar_operacion()
 RETURNS TRIGGER AS $$
 DECLARE
     id_usuario INTEGER;
+    tipo_operacion VARCHAR(10);
+    descripcion VARCHAR(200);
 BEGIN
-    -- Obtener el ID de usuario correspondiente al nombre de usuario actual
-    SELECT idVoluntario INTO id_usuario FROM voluntario WHERE nombreVoluntario = CURRENT_USER;
-    
-    -- Insertar en la tabla auditoria
+
+    SELECT id_usuario, tipo_operacion, descripcion INTO id_usuario, tipo_operacion, descripcion
+    FROM parametros_trigger
+    WHERE id = 1; 
+
+   
     INSERT INTO auditoria (id_usuario, tipo_operacion, descripcion, fecha, hora)
-    VALUES (id_usuario, TG_OP, 'Operacion realizada', current_date, current_time);
+    VALUES (id_usuario, TG_OP, descripcion, current_date, current_time);
+
     
+    DELETE FROM parametros_trigger WHERE id = 1;
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
 
 
 
