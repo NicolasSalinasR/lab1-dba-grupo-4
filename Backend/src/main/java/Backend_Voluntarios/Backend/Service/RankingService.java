@@ -1,10 +1,12 @@
 package Backend_Voluntarios.Backend.Service;
 
 import Backend_Voluntarios.Backend.Entity.RankingEntity;
+import Backend_Voluntarios.Backend.Entity.VoluntarioEntity;
 import Backend_Voluntarios.Backend.Repository.RankingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -12,6 +14,8 @@ public class RankingService {
 
     @Autowired
     private RankingRepository repositoryRanking;
+    @Autowired
+    private VoluntarioService voluntarioService;
 
     public List<RankingEntity> listaFiltro(String palabraClave) {
         return repositoryRanking.findAll(palabraClave);
@@ -48,11 +52,19 @@ public class RankingService {
 
     public int puntajeRanking(String zona, Long idVoluntario, Long idTarea) {
         int contador = 0;
-        if (repositoryRanking.matchZona(zona) != null) {
+        VoluntarioEntity voluntarioEntity = voluntarioService.buscarId(idVoluntario);
+        String equipo = voluntarioEntity.getEquipamientoVoluntario();
+        String[] elementos = equipo.split("\\s*,\\s*");
+        for (String elemento : elementos) {
+            List<String> resultadoFuncion = repositoryRanking.matchEquipo(elemento);
+            if (!resultadoFuncion.isEmpty()) {
+                contador = contador + 1;
+            }
+        }
+        contador = contador + repositoryRanking.matchHabilidad(idVoluntario);
+        if (!repositoryRanking.matchZona(zona).isEmpty()) {
             contador = contador + 1;
         }
-        contador = contador + repositoryRanking.matchEquipo(idVoluntario, idTarea)
-                + repositoryRanking.matchHabilidad(idVoluntario);
         return contador;
     }
 }
